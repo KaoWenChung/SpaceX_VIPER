@@ -20,10 +20,6 @@ final class SpaceXDIContainer {
     }
 
     // MARK: - UseCase
-    func makeShowCompanyUseCase() -> ShowCompanyUseCaseType {
-        return ShowCompanyUseCase(repository: makeCompanyRepository())
-    }
-
     func makeShowLaunchListUseCase() -> ShowLaunchListUseCaseType {
         return ShowLaunchListUseCase(repository: makeLaunchListRepository())
     }
@@ -34,10 +30,6 @@ final class SpaceXDIContainer {
 
 
     // MARK: - Repositories
-    func makeCompanyRepository() -> CompanyRepositoryType {
-        return CompanyRepository(dataTransferService: dependencies.dataTransferService)
-    }
-
     func makeLaunchListRepository() -> LaunchListRepositoryType {
         return LaunchListRepository(dataTransferService: dependencies.dataTransferService)
     }
@@ -56,8 +48,7 @@ final class SpaceXDIContainer {
     }
     
     func makePostListViewModel(actions: SpaceXViewModelActions) -> SpaceXViewModel {
-        return SpaceXViewModel(showCompanyUseCase: makeShowCompanyUseCase(),
-                               showLaunchUseCase: makeShowLaunchListUseCase(),
+        return SpaceXViewModel(showLaunchUseCase: makeShowLaunchListUseCase(),
                                showRocketUseCase: makeShowRocketUseCase(),
                                actions: actions)
     }

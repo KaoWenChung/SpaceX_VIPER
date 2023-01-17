@@ -18,7 +18,6 @@ protocol SpaceXViewModelInput {
 }
 
 protocol SpaceXViewModelOutput {
-    var companyInformation: Observable<String> { get }
     var launches: Observable<[LaunchTableViewModel]> { get }
     var dialogViewModel: Observable<FilterDialogViewModel?> { get }
 }
@@ -26,8 +25,6 @@ protocol SpaceXViewModelOutput {
 protocol SpaceXViewModelType: SpaceXViewModelInput, SpaceXViewModelOutput {}
 
 final class SpaceXViewModel: SpaceXViewModelType {
-
-    private let showCompanyUseCase: ShowCompanyUseCaseType
     private let showRocketUseCase: ShowRocketUseCaseType
     private let showLaunchUseCase: ShowLaunchListUseCaseType
     private let actions: SpaceXViewModelActions?
@@ -43,15 +40,12 @@ final class SpaceXViewModel: SpaceXViewModelType {
     var nextPage: Int { hasMorePages ? currentPage + 1 : currentPage }
     
     // MARK: - Output
-    let companyInformation: Observable<String> = Observable("Loading...")
     let launches: Observable<[LaunchTableViewModel]> = Observable([])
     let dialogViewModel: Observable<FilterDialogViewModel?> = Observable(.none)
     
-    init(showCompanyUseCase: ShowCompanyUseCaseType,
-         showLaunchUseCase: ShowLaunchListUseCaseType,
+    init(showLaunchUseCase: ShowLaunchListUseCaseType,
          showRocketUseCase: ShowRocketUseCaseType,
          actions: SpaceXViewModelActions? = nil) {
-        self.showCompanyUseCase = showCompanyUseCase
         self.showLaunchUseCase = showLaunchUseCase
         self.showRocketUseCase = showRocketUseCase
         self.actions = actions
@@ -89,17 +83,20 @@ final class SpaceXViewModel: SpaceXViewModelType {
     }
 
     private func loadLaunch() {
-        Task.init {
+        let loadTask = Task {
             let sort = LaunchSortRequestModel(sort: (dialogViewModel.value?.isAscending ?? true) ? .asc : .desc)
             let options = LaunchOptionRequestModel(sort: sort, page: nextPage, limit: 10)
-
-            let (launches, loadTask) = try await getResult(options)
-            launchLoadTask = loadTask
+            let launches = try await getResult(options)
+            
             appendPage(launches)
+        }
+        launchLoadTask = loadTask
+        Task.init {
+            try await loadTask.value
         }
     }
     
-    private func getResult(_ options: LaunchOptionRequestModel) async throws -> (LaunchResponseModel, CancellableType) {
+    private func getResult(_ options: LaunchOptionRequestModel) async throws -> LaunchResponseModel {
         if dialogViewModel.value?.isPresentSuccessfulLaunchingOnly == true {
             return try await getLaunchResultWithSuccessQuery(options)
         } else {
@@ -107,14 +104,14 @@ final class SpaceXViewModel: SpaceXViewModelType {
         }
     }
 
-    private func getLaunchResultWithoutSuccessQuery(_ options: LaunchOptionRequestModel) async throws -> (LaunchResponseModel, CancellableType) {
+    private func getLaunchResultWithoutSuccessQuery(_ options: LaunchOptionRequestModel) async throws -> LaunchResponseModel {
         let query = getDateQuery()
         let request: LaunchRequestModel = LaunchRequestModel(query: query, options: options)
         let result = try await showLaunchUseCase.execute(request: request)
         return result
     }
 
-    private func getLaunchResultWithSuccessQuery(_ options: LaunchOptionRequestModel) async throws -> (LaunchResponseModel, CancellableType) {
+    private func getLaunchResultWithSuccessQuery(_ options: LaunchOptionRequestModel) async throws -> LaunchResponseModel {
         let query = getSuccessDateQuery()
         let request: LaunchRequestModel = LaunchRequestModel(query: query, options: options)
         let result = try await showLaunchUseCase.execute(request: request)
@@ -150,19 +147,11 @@ final class SpaceXViewModel: SpaceXViewModelType {
         launchList.removeAll()
         launches.value.removeAll()
     }
-
-    private func loadCompanyInfo() {
-        Task.init {
-            let companyData = try await showCompanyUseCase.execute()
-            companyInformation.value = "\(companyData.name ?? "") was founded by \(companyData.ceo ?? "") in \(companyData.founded ?? 0) years. It has now \(companyData.employees ?? 0) employees, \(companyData.launchSites ?? 0) launch sites, and is valued at USD \(companyData.valuation ?? 0)"
-        }
-    }
 }
 
 // MARK: - INPUT. View event methods
 extension SpaceXViewModel {
     func viewDidLoad() {
-        loadCompanyInfo()
         loadLaunch()
     }
 

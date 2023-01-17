@@ -8,13 +8,7 @@
 import Foundation
 
 struct APIEndpoints {
-    static func getCompany() -> Endpoint<CompanyResponseModel> {
-        return Endpoint(path: "v4/company",
-                        method: .get)
-    }
-
     static func getLaunchList<T>(request: LaunchRequestModel<T>) -> Endpoint<LaunchResponseModel> {
-        
         return Endpoint(path: "v4/launches/query",
                         method: .post,
                         headerParameters: ["Content-Type": "application/json"],
@@ -27,7 +21,6 @@ struct APIEndpoints {
     }
 
     static func getLaunchImage(path: String) -> Endpoint<Data> {
-        
         return Endpoint(path: path,
                         isFullPath: true,
                         method: .get,

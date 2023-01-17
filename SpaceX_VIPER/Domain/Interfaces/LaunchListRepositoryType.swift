@@ -6,5 +6,5 @@
 //
 
 protocol LaunchListRepositoryType {
-    func fetchLaunchData<T>(request: LaunchRequestModel<T>) async throws -> (LaunchResponseModel, CancellableType)
+    func fetchLaunchData<T>(request: LaunchRequestModel<T>) async throws -> LaunchResponseModel
 }

@@ -15,11 +15,9 @@ final class LaunchListRepository {
 }
 
 extension LaunchListRepository: LaunchListRepositoryType {
-    func fetchLaunchData<T>(request: LaunchRequestModel<T>) async throws -> (LaunchResponseModel, CancellableType) {
-        let task = RepositoryTask()
+    func fetchLaunchData<T>(request: LaunchRequestModel<T>) async throws -> LaunchResponseModel {
         let endpoint = APIEndpoints.getLaunchList(request: request)
-        let (data, taskCancellable) = try await dataTransferService.request(with: endpoint)
-        task.networkTask = taskCancellable
-        return (data, task)
+        let data = try await dataTransferService.request(with: endpoint)
+        return data
     }
 }

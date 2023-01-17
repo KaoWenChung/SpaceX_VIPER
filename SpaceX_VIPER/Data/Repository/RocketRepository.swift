@@ -17,7 +17,7 @@ final class RocketRepository {
 extension RocketRepository: RocketRepositoryType {
     func fetchRocket(queryID: String) async throws -> RocketResponseModel {
         let endpoint = APIEndpoints.getRocket(queryID: queryID)
-        let (data, _) = try await dataTransferService.request(with: endpoint)
+        let data = try await dataTransferService.request(with: endpoint)
         return data
     }
 }

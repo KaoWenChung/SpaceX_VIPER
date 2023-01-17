@@ -10,7 +10,6 @@
 		212676F42976ED5700D7109C /* LaunchListRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212676F32976ED5700D7109C /* LaunchListRepositoryType.swift */; };
 		212676F62976ED6400D7109C /* RocketRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212676F52976ED6400D7109C /* RocketRepositoryType.swift */; };
 		212676F82976ED7200D7109C /* LaunchImagesRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212676F72976ED7200D7109C /* LaunchImagesRepositoryType.swift */; };
-		212676FB2976ED9C00D7109C /* ShowCompanyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212676FA2976ED9C00D7109C /* ShowCompanyUseCase.swift */; };
 		212676FD2976EDA800D7109C /* ShowRocketUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212676FC2976EDA800D7109C /* ShowRocketUseCase.swift */; };
 		212676FF2976EDB400D7109C /* ShowLaunchListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212676FE2976EDB400D7109C /* ShowLaunchListUseCase.swift */; };
 		212677032976EDDB00D7109C /* DataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212677022976EDDB00D7109C /* DataTransferService.swift */; };
@@ -46,22 +45,34 @@
 		21CFC48D2976EB5600A2C183 /* CancellableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC48C2976EB5600A2C183 /* CancellableType.swift */; };
 		21CFC48F2976EB6500A2C183 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC48E2976EB6500A2C183 /* Alert.swift */; };
 		21CFC4932976EBBB00A2C183 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4922976EBBB00A2C183 /* APIEndpoints.swift */; };
-		21CFC4962976EC1300A2C183 /* CompanyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4952976EC1300A2C183 /* CompanyRepository.swift */; };
 		21CFC4982976EC2100A2C183 /* LaunchListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4972976EC2100A2C183 /* LaunchListRepository.swift */; };
 		21CFC49A2976EC2F00A2C183 /* RocketRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4992976EC2F00A2C183 /* RocketRepository.swift */; };
 		21CFC49C2976EC3C00A2C183 /* LaunchImagesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC49B2976EC3C00A2C183 /* LaunchImagesRepository.swift */; };
 		21CFC49F2976EC5200A2C183 /* RepositoryTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC49E2976EC5200A2C183 /* RepositoryTask.swift */; };
 		21CFC4A42976EC8600A2C183 /* LaunchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4A32976EC8600A2C183 /* LaunchModel.swift */; };
 		21CFC4A62976ECBA00A2C183 /* RocketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4A52976ECBA00A2C183 /* RocketModel.swift */; };
-		21CFC4A82976ECCF00A2C183 /* CompanyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4A72976ECCF00A2C183 /* CompanyResponseModel.swift */; };
-		21CFC4AA2976ECE600A2C183 /* CompanyRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4A92976ECE600A2C183 /* CompanyRepositoryType.swift */; };
+		21E039D42976F73F00C4E292 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E039D32976F73F00C4E292 /* UITableViewCell.swift */; };
+		21E039E72976FD6C00C4E292 /* ImageRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E039E62976FD6C00C4E292 /* ImageRepositoryMock.swift */; };
+		21E039E92976FDEC00C4E292 /* NetworkSessionManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E039E82976FDEC00C4E292 /* NetworkSessionManagerMock.swift */; };
+		21E039EB2976FE0600C4E292 /* NetworkConfigurableMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E039EA2976FE0600C4E292 /* NetworkConfigurableMock.swift */; };
+		21E039ED2976FE1A00C4E292 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E039EC2976FE1A00C4E292 /* NetworkServiceTests.swift */; };
+		21E039EF2976FE3500C4E292 /* DataTransferServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E039EE2976FE3500C4E292 /* DataTransferServiceTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		21E039DD2976FD2300C4E292 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21CFC4592976E8D600A2C183 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 21CFC4602976E8D600A2C183;
+			remoteInfo = SpaceX_VIPER;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		212676F32976ED5700D7109C /* LaunchListRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListRepositoryType.swift; sourceTree = "<group>"; };
 		212676F52976ED6400D7109C /* RocketRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketRepositoryType.swift; sourceTree = "<group>"; };
 		212676F72976ED7200D7109C /* LaunchImagesRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchImagesRepositoryType.swift; sourceTree = "<group>"; };
-		212676FA2976ED9C00D7109C /* ShowCompanyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCompanyUseCase.swift; sourceTree = "<group>"; };
 		212676FC2976EDA800D7109C /* ShowRocketUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowRocketUseCase.swift; sourceTree = "<group>"; };
 		212676FE2976EDB400D7109C /* ShowLaunchListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLaunchListUseCase.swift; sourceTree = "<group>"; };
 		212677022976EDDB00D7109C /* DataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferService.swift; sourceTree = "<group>"; };
@@ -98,15 +109,19 @@
 		21CFC48C2976EB5600A2C183 /* CancellableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellableType.swift; sourceTree = "<group>"; };
 		21CFC48E2976EB6500A2C183 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		21CFC4922976EBBB00A2C183 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
-		21CFC4952976EC1300A2C183 /* CompanyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyRepository.swift; sourceTree = "<group>"; };
 		21CFC4972976EC2100A2C183 /* LaunchListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListRepository.swift; sourceTree = "<group>"; };
 		21CFC4992976EC2F00A2C183 /* RocketRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketRepository.swift; sourceTree = "<group>"; };
 		21CFC49B2976EC3C00A2C183 /* LaunchImagesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchImagesRepository.swift; sourceTree = "<group>"; };
 		21CFC49E2976EC5200A2C183 /* RepositoryTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTask.swift; sourceTree = "<group>"; };
 		21CFC4A32976EC8600A2C183 /* LaunchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchModel.swift; sourceTree = "<group>"; };
 		21CFC4A52976ECBA00A2C183 /* RocketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketModel.swift; sourceTree = "<group>"; };
-		21CFC4A72976ECCF00A2C183 /* CompanyResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyResponseModel.swift; sourceTree = "<group>"; };
-		21CFC4A92976ECE600A2C183 /* CompanyRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyRepositoryType.swift; sourceTree = "<group>"; };
+		21E039D32976F73F00C4E292 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
+		21E039D92976FD2300C4E292 /* SpaceX_VIPERTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceX_VIPERTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		21E039E62976FD6C00C4E292 /* ImageRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryMock.swift; sourceTree = "<group>"; };
+		21E039E82976FDEC00C4E292 /* NetworkSessionManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionManagerMock.swift; sourceTree = "<group>"; };
+		21E039EA2976FE0600C4E292 /* NetworkConfigurableMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfigurableMock.swift; sourceTree = "<group>"; };
+		21E039EC2976FE1A00C4E292 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
+		21E039EE2976FE3500C4E292 /* DataTransferServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,13 +133,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		21E039D62976FD2300C4E292 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		212676F92976ED8E00D7109C /* Usecases */ = {
 			isa = PBXGroup;
 			children = (
-				212676FA2976ED9C00D7109C /* ShowCompanyUseCase.swift */,
 				212676FC2976EDA800D7109C /* ShowRocketUseCase.swift */,
 				212676FE2976EDB400D7109C /* ShowLaunchListUseCase.swift */,
 			);
@@ -222,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				21CFC4632976E8D600A2C183 /* SpaceX_VIPER */,
+				21E039DA2976FD2300C4E292 /* SpaceX_VIPERTests */,
 				21CFC4622976E8D600A2C183 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -230,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				21CFC4612976E8D600A2C183 /* SpaceX_VIPER.app */,
+				21E039D92976FD2300C4E292 /* SpaceX_VIPERTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -287,6 +310,7 @@
 				21CFC4832976EA5E00A2C183 /* UIImageView+.swift */,
 				21CFC4862976EAF500A2C183 /* Date+.swift */,
 				21CFC4882976EB0E00A2C183 /* Int+.swift */,
+				21E039D32976F73F00C4E292 /* UITableViewCell.swift */,
 				21CFC48A2976EB2100A2C183 /* UIAlertAction.swift */,
 			);
 			path = Extension;
@@ -313,7 +337,6 @@
 			isa = PBXGroup;
 			children = (
 				21CFC49D2976EC4600A2C183 /* Utils */,
-				21CFC4952976EC1300A2C183 /* CompanyRepository.swift */,
 				21CFC4972976EC2100A2C183 /* LaunchListRepository.swift */,
 				21CFC4992976EC2F00A2C183 /* RocketRepository.swift */,
 				21CFC49B2976EC3C00A2C183 /* LaunchImagesRepository.swift */,
@@ -332,7 +355,6 @@
 		21CFC4A02976EC6900A2C183 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				21CFC4A92976ECE600A2C183 /* CompanyRepositoryType.swift */,
 				212676F32976ED5700D7109C /* LaunchListRepositoryType.swift */,
 				212676F52976ED6400D7109C /* RocketRepositoryType.swift */,
 				212676F72976ED7200D7109C /* LaunchImagesRepositoryType.swift */,
@@ -355,9 +377,52 @@
 			children = (
 				21CFC4A32976EC8600A2C183 /* LaunchModel.swift */,
 				21CFC4A52976ECBA00A2C183 /* RocketModel.swift */,
-				21CFC4A72976ECCF00A2C183 /* CompanyResponseModel.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		21E039DA2976FD2300C4E292 /* SpaceX_VIPERTests */ = {
+			isa = PBXGroup;
+			children = (
+				21E039E32976FD4B00C4E292 /* Infrastructure */,
+				21E039E22976FD3800C4E292 /* Common */,
+			);
+			path = SpaceX_VIPERTests;
+			sourceTree = "<group>";
+		};
+		21E039E22976FD3800C4E292 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		21E039E32976FD4B00C4E292 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				21E039E42976FD5200C4E292 /* Network */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		21E039E42976FD5200C4E292 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				21E039E52976FD5500C4E292 /* Mocks */,
+				21E039EC2976FE1A00C4E292 /* NetworkServiceTests.swift */,
+				21E039EE2976FE3500C4E292 /* DataTransferServiceTests.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		21E039E52976FD5500C4E292 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				21E039E62976FD6C00C4E292 /* ImageRepositoryMock.swift */,
+				21E039E82976FDEC00C4E292 /* NetworkSessionManagerMock.swift */,
+				21E039EA2976FE0600C4E292 /* NetworkConfigurableMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -383,6 +448,24 @@
 			productReference = 21CFC4612976E8D600A2C183 /* SpaceX_VIPER.app */;
 			productType = "com.apple.product-type.application";
 		};
+		21E039D82976FD2300C4E292 /* SpaceX_VIPERTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21E039DF2976FD2300C4E292 /* Build configuration list for PBXNativeTarget "SpaceX_VIPERTests" */;
+			buildPhases = (
+				21E039D52976FD2300C4E292 /* Sources */,
+				21E039D62976FD2300C4E292 /* Frameworks */,
+				21E039D72976FD2300C4E292 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				21E039DE2976FD2300C4E292 /* PBXTargetDependency */,
+			);
+			name = SpaceX_VIPERTests;
+			productName = SpaceX_VIPERTests;
+			productReference = 21E039D92976FD2300C4E292 /* SpaceX_VIPERTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -395,6 +478,11 @@
 				TargetAttributes = {
 					21CFC4602976E8D600A2C183 = {
 						CreatedOnToolsVersion = 14.0;
+					};
+					21E039D82976FD2300C4E292 = {
+						CreatedOnToolsVersion = 14.0;
+						LastSwiftMigration = 1400;
+						TestTargetID = 21CFC4602976E8D600A2C183;
 					};
 				};
 			};
@@ -415,6 +503,7 @@
 			projectRoot = "";
 			targets = (
 				21CFC4602976E8D600A2C183 /* SpaceX_VIPER */,
+				21E039D82976FD2300C4E292 /* SpaceX_VIPERTests */,
 			);
 		};
 /* End PBXProject section */
@@ -429,6 +518,13 @@
 				212677222976F0AF00D7109C /* FilterDialogView.xib in Resources */,
 				2126772B2976F0FB00D7109C /* SpaceXViewController.xib in Resources */,
 				21CFC46E2976E8D800A2C183 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21E039D72976FD2300C4E292 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,14 +546,13 @@
 				21CFC48D2976EB5600A2C183 /* CancellableType.swift in Sources */,
 				212677072976EDF400D7109C /* Endpoint.swift in Sources */,
 				21CFC4812976E9AD00A2C183 /* AppFlowCoordinator.swift in Sources */,
-				21CFC4AA2976ECE600A2C183 /* CompanyRepositoryType.swift in Sources */,
 				21CFC47D2976E97300A2C183 /* SpaceXDIContainer.swift in Sources */,
 				2126771F2976EEFC00D7109C /* LaunchTableViewCell.swift in Sources */,
 				212677052976EDE800D7109C /* NetworkService.swift in Sources */,
+				21E039D42976F73F00C4E292 /* UITableViewCell.swift in Sources */,
 				21CFC48F2976EB6500A2C183 /* Alert.swift in Sources */,
 				21CFC4982976EC2100A2C183 /* LaunchListRepository.swift in Sources */,
 				212677092976EE0F00D7109C /* NetworkConfig.swift in Sources */,
-				21CFC4962976EC1300A2C183 /* CompanyRepository.swift in Sources */,
 				212676F82976ED7200D7109C /* LaunchImagesRepositoryType.swift in Sources */,
 				21CFC49C2976EC3C00A2C183 /* LaunchImagesRepository.swift in Sources */,
 				21CFC49A2976EC2F00A2C183 /* RocketRepository.swift in Sources */,
@@ -467,7 +562,6 @@
 				2126770D2976EE3800D7109C /* Observable.swift in Sources */,
 				21CFC4652976E8D600A2C183 /* AppDelegate.swift in Sources */,
 				21CFC49F2976EC5200A2C183 /* RepositoryTask.swift in Sources */,
-				21CFC4A82976ECCF00A2C183 /* CompanyResponseModel.swift in Sources */,
 				21CFC4672976E8D600A2C183 /* SceneDelegate.swift in Sources */,
 				2126772A2976F0FB00D7109C /* SpaceXViewController.swift in Sources */,
 				212677182976EEA900D7109C /* FilterDialogView.swift in Sources */,
@@ -479,12 +573,31 @@
 				21CFC48B2976EB2100A2C183 /* UIAlertAction.swift in Sources */,
 				21CFC4872976EAF500A2C183 /* Date+.swift in Sources */,
 				212676FD2976EDA800D7109C /* ShowRocketUseCase.swift in Sources */,
-				212676FB2976ED9C00D7109C /* ShowCompanyUseCase.swift in Sources */,
 				212676F62976ED6400D7109C /* RocketRepositoryType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		21E039D52976FD2300C4E292 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21E039EB2976FE0600C4E292 /* NetworkConfigurableMock.swift in Sources */,
+				21E039E72976FD6C00C4E292 /* ImageRepositoryMock.swift in Sources */,
+				21E039ED2976FE1A00C4E292 /* NetworkServiceTests.swift in Sources */,
+				21E039EF2976FE3500C4E292 /* DataTransferServiceTests.swift in Sources */,
+				21E039E92976FDEC00C4E292 /* NetworkSessionManagerMock.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		21E039DE2976FD2300C4E292 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 21CFC4602976E8D600A2C183 /* SpaceX_VIPER */;
+			targetProxy = 21E039DD2976FD2300C4E292 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		21CFC46F2976E8D800A2C183 /* LaunchScreen.storyboard */ = {
@@ -666,6 +779,63 @@
 			};
 			name = Release;
 		};
+		21E039E02976FD2300C4E292 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7QN4P34VRJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "owenkao.SpaceX-VIPERTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpaceX_VIPER.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SpaceX_VIPER";
+			};
+			name = Debug;
+		};
+		21E039E12976FD2300C4E292 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7QN4P34VRJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "owenkao.SpaceX-VIPERTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpaceX_VIPER.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SpaceX_VIPER";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -683,6 +853,15 @@
 			buildConfigurations = (
 				21CFC4762976E8D800A2C183 /* Debug */,
 				21CFC4772976E8D800A2C183 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		21E039DF2976FD2300C4E292 /* Build configuration list for PBXNativeTarget "SpaceX_VIPERTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21E039E02976FD2300C4E292 /* Debug */,
+				21E039E12976FD2300C4E292 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

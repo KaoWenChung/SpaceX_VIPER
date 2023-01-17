@@ -8,18 +8,15 @@
 import UIKit
 
 final class LaunchTableViewCell: UITableViewCell {
-
     @IBOutlet weak private(set) var missionImageView: UIImageView!
     @IBOutlet weak private(set) var missionLabel: UILabel!
     @IBOutlet weak private(set) var dateLabel: UILabel!
     @IBOutlet weak private(set) var rocketLabel: UILabel!
     @IBOutlet weak private(set) var daysLabel: UILabel!
-    @IBOutlet weak private(set) var isSuccessImageView: UIImageView!
 
     override func prepareForReuse() {
         super.prepareForReuse()
         missionImageView.image = nil
-        isSuccessImageView.image = nil
         missionLabel.text = nil
         dateLabel.text = nil
         rocketLabel.text = nil
@@ -31,9 +28,6 @@ final class LaunchTableViewCell: UITableViewCell {
         dateLabel.text = viewModel.date
         rocketLabel.text = viewModel.rocket
         daysLabel.text = viewModel.days
-        
-        let successMark = (viewModel.isSuccess ?? false) ? UIImage(named: "check") : UIImage(named: "cross")
-        isSuccessImageView.image = successMark
         let task = Task {
             await missionImageView.downloaded(imageLoader: imageRepository, from: viewModel.imageURL)
         }

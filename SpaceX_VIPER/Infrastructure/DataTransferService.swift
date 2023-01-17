@@ -8,8 +8,7 @@
 import Foundation
 
 public protocol DataTransferServiceType {
-    
-    func request<T: Decodable, E: ResponseRequestableType>(with endpoint: E) async throws -> (T, URLTask) where E.Response == T
+    func request<T: Decodable, E: ResponseRequestableType>(with endpoint: E) async throws -> T where E.Response == T
     func request<E: ResponseRequestableType>(with endpoint: E) async throws -> URLTask where E.Response == Void
 }
 
@@ -37,7 +36,6 @@ public enum DataTransferError: Error {
 }
 
 public final class DataTransferService {
-    
     private let networkService: NetworkServiceType
     private let errorResolver: DataTransferErrorResolverType
     private let errorLogger: DataTransferErrorLoggerType
@@ -52,13 +50,12 @@ public final class DataTransferService {
 }
 
 extension DataTransferService: DataTransferServiceType {
-    
-    public func request<T: Decodable, E: ResponseRequestableType>(with endpoint: E) async throws -> (T, URLTask) where E.Response == T {
+    public func request<T: Decodable, E: ResponseRequestableType>(with endpoint: E) async throws -> T where E.Response == T {
         do {
             let task = try networkService.request(endpoint: endpoint)
             let (data, _) = try await task.value
             let result: T = try decode(data: data, decoder: endpoint.responseDecoder)
-            return (result, task)
+            return result
         } catch let error as NetworkError {
             errorLogger.log(error: error)
             let error = self.resolve(networkError: error)

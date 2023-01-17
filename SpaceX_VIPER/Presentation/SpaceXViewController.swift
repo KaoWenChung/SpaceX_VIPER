@@ -69,8 +69,7 @@ class SpaceXViewController: UIViewController {
         }
     }
     private func initTableView() {
-        tableView.register(UINib(nibName: "LaunchTableViewCell", bundle: nil), forCellReuseIdentifier: "LaunchTableViewCell")
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "\(UITableViewCell.self)")
+        tableView.register(UINib(nibName: LaunchTableViewCell.name, bundle: nil), forCellReuseIdentifier: LaunchTableViewCell.name)
     }
     private func initDialogView() {
         dialogView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(gestureHandler)))
@@ -99,14 +98,8 @@ class SpaceXViewController: UIViewController {
     }
 
     private func bind(to viewModel: SpaceXViewModelType) {
-        viewModel.companyInformation.observe(on: self) { [weak self] _ in self?.updateCompanyInfo() }
         viewModel.launches.observe(on: self) { [weak self] _ in self?.updateItems() }
         viewModel.dialogViewModel.observe(on: self) { [weak self] _ in self?.updateDialogView() }
-    }
-    // Section 0 Row 0 is the cell present company information
-    private func updateCompanyInfo() {
-        let firstIndex = IndexPath(row: 0, section: 0)
-        tableView.reloadRows(at: [firstIndex], with: .automatic)
     }
 
     private func updateItems() {
@@ -122,59 +115,25 @@ class SpaceXViewController: UIViewController {
 extension SpaceXViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard indexPath.section == 1 else { return } // Doing nothing when user tap companyInfo
         viewModel.didSelectItem(at: indexPath.row)
     }
 }
 
 extension SpaceXViewController: UITableViewDataSource {
-    // Section 0, Cell 0 -> Company information, Section 1 and the rest of cells for launching list
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 1
-        case 1:
-            return viewModel.launches.value.count
-        default:
-            return 0
-        }
-    }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return "COMPANY"
-        case 1:
-            return "LAUNCHES"
-        default:
-            return ""
-        }
+        return viewModel.launches.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "\(UITableViewCell.self)", for: indexPath)
-            cell.textLabel?.text = viewModel.companyInformation.value
-            cell.textLabel?.numberOfLines = 0
-            return cell
-        default:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "LaunchTableViewCell",
-                                                           for: indexPath) as? LaunchTableViewCell else {
-                return UITableViewCell()
-            }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LaunchTableViewCell.name, for: indexPath) as? LaunchTableViewCell else { return UITableViewCell() }
 
-            cell.fill(viewModel.launches.value[indexPath.row], imageRepository: launchImagesRepository)
+        cell.fill(viewModel.launches.value[indexPath.row], imageRepository: launchImagesRepository)
 
-            if indexPath.row == viewModel.launches.value.count - 1 {
-                viewModel.didLoadNextPage()
-            }
-            return cell
+        if indexPath.row == viewModel.launches.value.count - 1 {
+            viewModel.didLoadNextPage()
         }
+        return cell
     }
 }
 

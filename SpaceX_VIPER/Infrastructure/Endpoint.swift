@@ -14,7 +14,6 @@ public enum HTTPMethod: String {
 
 public protocol ResponseRequestable: Requestable {
     associatedtype Response
-    
     var responseDecoder: ResponseDecoderType { get }
 }
 

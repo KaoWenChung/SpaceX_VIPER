@@ -8,7 +8,6 @@
 import UIKit
 
 final class LaunchImagesRepository {
-    
     private let dataTransferService: DataTransferServiceType
 
     init(dataTransferService: DataTransferServiceType) {
@@ -20,7 +19,7 @@ extension LaunchImagesRepository: LaunchImagesRepositoryType {
 
     func fetchImage(with imagePath: String) async throws -> Data {
         let endpoint = APIEndpoints.getLaunchImage(path: imagePath)
-        let (data, _) = try await dataTransferService.request(with: endpoint)
+        let data = try await dataTransferService.request(with: endpoint)
         return data
     }
 
