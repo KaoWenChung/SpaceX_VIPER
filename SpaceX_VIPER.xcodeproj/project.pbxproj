@@ -30,8 +30,9 @@
 		2126772A2976F0FB00D7109C /* SpaceXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212677282976F0FB00D7109C /* SpaceXViewController.swift */; };
 		2126772B2976F0FB00D7109C /* SpaceXViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 212677292976F0FB00D7109C /* SpaceXViewController.xib */; };
 		2126772E2976F20200D7109C /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 2126772D2976F20200D7109C /* MultiSlider */; };
-		21497718297706B900A53D23 /* SpaceXListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21497717297706B900A53D23 /* SpaceXListPresenter.swift */; };
-		2149771B2977071300A53D23 /* SpaceXListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2149771A2977071300A53D23 /* SpaceXListInteractor.swift */; };
+		21497718297706B900A53D23 /* SpaceXPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21497717297706B900A53D23 /* SpaceXPresenter.swift */; };
+		2149771B2977071300A53D23 /* SpaceXInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2149771A2977071300A53D23 /* SpaceXInteractor.swift */; };
+		21602767297AAA9C008C2CEC /* SpaceXRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21602766297AAA9C008C2CEC /* SpaceXRouter.swift */; };
 		21CFC4652976E8D600A2C183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4642976E8D600A2C183 /* AppDelegate.swift */; };
 		21CFC4672976E8D600A2C183 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4662976E8D600A2C183 /* SceneDelegate.swift */; };
 		21CFC46E2976E8D800A2C183 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CFC46D2976E8D800A2C183 /* Assets.xcassets */; };
@@ -94,8 +95,9 @@
 		212677262976F0DA00D7109C /* FilterDialogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDialogViewModel.swift; sourceTree = "<group>"; };
 		212677282976F0FB00D7109C /* SpaceXViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXViewController.swift; sourceTree = "<group>"; };
 		212677292976F0FB00D7109C /* SpaceXViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpaceXViewController.xib; sourceTree = "<group>"; };
-		21497717297706B900A53D23 /* SpaceXListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXListPresenter.swift; sourceTree = "<group>"; };
-		2149771A2977071300A53D23 /* SpaceXListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXListInteractor.swift; sourceTree = "<group>"; };
+		21497717297706B900A53D23 /* SpaceXPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXPresenter.swift; sourceTree = "<group>"; };
+		2149771A2977071300A53D23 /* SpaceXInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXInteractor.swift; sourceTree = "<group>"; };
+		21602766297AAA9C008C2CEC /* SpaceXRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXRouter.swift; sourceTree = "<group>"; };
 		21CFC4612976E8D600A2C183 /* SpaceX_VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX_VIPER.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CFC4642976E8D600A2C183 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21CFC4662976E8D600A2C183 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 		2126770A2976EE2500D7109C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				21602765297AAA86008C2CEC /* Router */,
 				21497719297706EF00A53D23 /* Interactor */,
 				214977162977069700A53D23 /* Presenter */,
 				212677232976F0C500D7109C /* ViewModel */,
@@ -248,7 +251,7 @@
 		214977162977069700A53D23 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				21497717297706B900A53D23 /* SpaceXListPresenter.swift */,
+				21497717297706B900A53D23 /* SpaceXPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -256,9 +259,17 @@
 		21497719297706EF00A53D23 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				2149771A2977071300A53D23 /* SpaceXListInteractor.swift */,
+				2149771A2977071300A53D23 /* SpaceXInteractor.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		21602765297AAA86008C2CEC /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				21602766297AAA9C008C2CEC /* SpaceXRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		21CFC4582976E8D600A2C183 = {
@@ -569,7 +580,7 @@
 				212677072976EDF400D7109C /* Endpoint.swift in Sources */,
 				21CFC4812976E9AD00A2C183 /* AppFlowCoordinator.swift in Sources */,
 				21CFC47D2976E97300A2C183 /* SpaceXDIContainer.swift in Sources */,
-				21497718297706B900A53D23 /* SpaceXListPresenter.swift in Sources */,
+				21497718297706B900A53D23 /* SpaceXPresenter.swift in Sources */,
 				2126771F2976EEFC00D7109C /* LaunchTableViewCell.swift in Sources */,
 				212677052976EDE800D7109C /* NetworkService.swift in Sources */,
 				21E039D42976F73F00C4E292 /* UITableViewCell.swift in Sources */,
@@ -577,6 +588,7 @@
 				21CFC4982976EC2100A2C183 /* LaunchListRepository.swift in Sources */,
 				212677092976EE0F00D7109C /* NetworkConfig.swift in Sources */,
 				212676F82976ED7200D7109C /* LaunchImagesRepositoryType.swift in Sources */,
+				21602767297AAA9C008C2CEC /* SpaceXRouter.swift in Sources */,
 				21CFC49C2976EC3C00A2C183 /* LaunchImagesRepository.swift in Sources */,
 				21CFC49A2976EC2F00A2C183 /* RocketRepository.swift in Sources */,
 				21CFC4892976EB0E00A2C183 /* Int+.swift in Sources */,
@@ -589,7 +601,7 @@
 				2126772A2976F0FB00D7109C /* SpaceXViewController.swift in Sources */,
 				212677182976EEA900D7109C /* FilterDialogView.swift in Sources */,
 				212676F42976ED5700D7109C /* LaunchListRepositoryType.swift in Sources */,
-				2149771B2977071300A53D23 /* SpaceXListInteractor.swift in Sources */,
+				2149771B2977071300A53D23 /* SpaceXInteractor.swift in Sources */,
 				212677272976F0DA00D7109C /* FilterDialogViewModel.swift in Sources */,
 				212677252976F0CD00D7109C /* SpaceXViewModel.swift in Sources */,
 				212677152976EE8100D7109C /* SpaceXFlowCoordinator.swift in Sources */,

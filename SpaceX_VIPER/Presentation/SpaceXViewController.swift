@@ -7,9 +7,17 @@
 
 import UIKit
 
-class SpaceXViewController: UIViewController {
+protocol SpaceXViewToPresenterProtocol: AnyObject {
+    var view: SpaceXPresenterToViewProtocol? { get set }
+    func loadLaunches()
+    func setFilter(_ viewModel: FilterDialogViewModel)
+    func selectItem(at index: Int)
+    func getLaunchesCount() -> Int
+    func getLaunch(index: Int) -> LaunchTableViewModel
+}
 
-    private let viewModel: SpaceXViewModelType
+class SpaceXViewController: UIViewController {
+    private let presenter: SpaceXViewToPresenterProtocol
     private var launchImagesRepository: LaunchImagesRepositoryType
     private var viewTranslationY: CGFloat = 0.0
     private var filterButton: UIBarButtonItem!
@@ -19,8 +27,9 @@ class SpaceXViewController: UIViewController {
     @IBOutlet weak private var tableView: UITableView!
     @IBOutlet weak private var dialogView: FilterDialogView!
     
-    init(viewModel: SpaceXViewModelType, launchImagesRepository: LaunchImagesRepositoryType) {
-        self.viewModel = viewModel
+    init(presenter: SpaceXViewToPresenterProtocol,
+         launchImagesRepository: LaunchImagesRepositoryType) {
+        self.presenter = presenter
         self.launchImagesRepository = launchImagesRepository
         super.init(nibName: nil, bundle: nil)
     }
@@ -32,8 +41,7 @@ class SpaceXViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigationBar()
-        viewModel.viewDidLoad()
-        bind(to: viewModel)
+        presenter.loadLaunches()
         initDialogView()
         initTableView()
         hideFilterView()
@@ -107,31 +115,31 @@ class SpaceXViewController: UIViewController {
     }
     
     private func updateDialogView() {
-        guard let dialogViewModel = viewModel.dialogViewModel.value else { return }
-        dialogView.fillView(dialogViewModel)
+//        guard let dialogViewModel = viewModel.dialogViewModel.value else { return }
+//        dialogView.fillView(dialogViewModel)
     }
 }
 
 extension SpaceXViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        viewModel.didSelectItem(at: indexPath.row)
+//        viewModel.didSelectItem(at: indexPath.row)
     }
 }
 
 extension SpaceXViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.launches.value.count
+        return presenter.getLaunchesCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: LaunchTableViewCell.name, for: indexPath) as? LaunchTableViewCell else { return UITableViewCell() }
 
-        cell.fill(viewModel.launches.value[indexPath.row], imageRepository: launchImagesRepository)
+        cell.fill(presenter.getLaunch(index: indexPath.row), imageRepository: launchImagesRepository)
 
-        if indexPath.row == viewModel.launches.value.count - 1 {
-            viewModel.didLoadNextPage()
+        if indexPath.row == presenter.getLaunchesCount() - 1 {
+            presenter.loadLaunches()
         }
         return cell
     }
@@ -139,7 +147,17 @@ extension SpaceXViewController: UITableViewDataSource {
 
 extension SpaceXViewController: FilterDialogViewDelegate {
     func confirmUpdateViewModel(_ dialogViewModel: FilterDialogViewModel) {
-        viewModel.didConfirmFilter(dialogViewModel)
+        presenter.setFilter(dialogViewModel)
         hideFilterView()
+    }
+}
+
+extension SpaceXViewController: SpaceXPresenterToViewProtocol {
+    func showLaunches() {
+        
+    }
+    
+    func showError() {
+        
     }
 }

@@ -43,14 +43,27 @@ final class SpaceXDIContainer {
     }
 
     // MARK: - SpaceX
-    func makeSpaceXViewController(actions: SpaceXViewModelActions) -> SpaceXViewController {
-        return SpaceXViewController(viewModel: makePostListViewModel(actions: actions), launchImagesRepository: makeLaunchImagesRepository())
+    func makeSpaceXViewController() -> SpaceXViewController {
+        let presenter = makeSpaceXPresenter()
+        let view = SpaceXViewController(presenter: presenter, launchImagesRepository: makeLaunchImagesRepository())
+        presenter.view = view
+        return view
     }
-    
-    func makePostListViewModel(actions: SpaceXViewModelActions) -> SpaceXViewModel {
-        return SpaceXViewModel(showLaunchUseCase: makeShowLaunchListUseCase(),
-                               showRocketUseCase: makeShowRocketUseCase(),
-                               actions: actions)
+
+    func makeSpaceXRouter() -> SpaceXRouterType {
+        SpaceXRouter()
+    }
+
+    func makeSpaceXPresenter() -> SpaceXPresenter {
+        let interactor = makeSpaceXInteractor()
+        let router = makeSpaceXRouter()
+        let presenter = SpaceXPresenter(interactor: interactor, router: router)
+        interactor.presenter = presenter
+        return presenter
+    }
+
+    func makeSpaceXInteractor() -> SpaceXInteractor {
+        SpaceXInteractor(showRocketUseCase: makeShowRocketUseCase(), showLaunchUseCase: makeShowLaunchListUseCase())
     }
 
     // MARK: - Flow Coordinators

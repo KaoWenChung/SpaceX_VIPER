@@ -7,25 +7,25 @@
 
 import Foundation
 
-protocol SpaceXListInteractorToPresenter: AnyObject {
+protocol SpaceXListInteractorToPresenterProtocol: AnyObject {
     func didLoadLaunches()
     func loadLaunchesFailed()
 }
 
 protocol SpaceXListInteractorInput {
-    func didLoadNextPage()
+    func loadNextPage()
     func didConfirmFilter(_ viewModel: FilterDialogViewModel)
 }
 
 protocol SpaceXListInteractorOutput {
     var launches: [LaunchTableViewModel] { get }
     var dialogViewModel: FilterDialogViewModel? { get }
-    var presenter: SpaceXListInteractorToPresenter? { get set }
+    var presenter: SpaceXListInteractorToPresenterProtocol? { get set }
 }
 
-protocol SpaceXListInteractorType: SpaceXListInteractorInput, SpaceXListInteractorOutput {}
+protocol SpaceXInteractorType: SpaceXListInteractorInput, SpaceXListInteractorOutput {}
 
-final class SpaceXListInteractor {
+final class SpaceXInteractor {
     // MARK: UseCases
     private let showRocketUseCase: ShowRocketUseCaseType
     private let showLaunchUseCase: ShowLaunchListUseCaseType
@@ -43,7 +43,7 @@ final class SpaceXListInteractor {
     private(set) var launches: [LaunchTableViewModel] = []
     private(set) var dialogViewModel: FilterDialogViewModel?
     
-    weak var presenter: SpaceXListInteractorToPresenter?
+    weak var presenter: SpaceXListInteractorToPresenterProtocol?
 
     init(showRocketUseCase: ShowRocketUseCaseType, showLaunchUseCase: ShowLaunchListUseCaseType) {
         self.showRocketUseCase = showRocketUseCase
@@ -155,8 +155,8 @@ final class SpaceXListInteractor {
     }
 }
 
-extension SpaceXListInteractor: SpaceXListInteractorType {
-    func didLoadNextPage() {
+extension SpaceXInteractor: SpaceXInteractorType {
+    func loadNextPage() {
         guard hasMorePages else { return }
         loadLaunch()
     }
