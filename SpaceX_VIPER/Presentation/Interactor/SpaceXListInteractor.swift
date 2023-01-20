@@ -1,54 +1,53 @@
 //
-//  SpaceXViewModel.swift
+//  SpaceXInteractor.swift
 //  SpaceX_VIPER
 //
 //  Created by wyn on 2023/1/17.
 //
 
-struct SpaceXViewModelActions {
-    /// Note: if you would need to edit movie inside Details screen and update this Movies List screen with updated movie then you would need this closure:
-    let didSelectItem: (LaunchTableViewModel) -> Void
+import Foundation
+
+protocol SpaceXListInteractorToPresenter: AnyObject {
+    func didLoadLaunches()
+    func loadLaunchesFailed()
 }
 
-protocol SpaceXViewModelInput {
-    func viewDidLoad()
+protocol SpaceXListInteractorInput {
     func didLoadNextPage()
     func didConfirmFilter(_ viewModel: FilterDialogViewModel)
-    func didSelectItem(at index: Int)
 }
 
-protocol SpaceXViewModelOutput {
-    var launches: Observable<[LaunchTableViewModel]> { get }
-    var dialogViewModel: Observable<FilterDialogViewModel?> { get }
+protocol SpaceXListInteractorOutput {
+    var launches: [LaunchTableViewModel] { get }
+    var dialogViewModel: FilterDialogViewModel? { get }
+    var presenter: SpaceXListInteractorToPresenter? { get set }
 }
 
-protocol SpaceXViewModelType: SpaceXViewModelInput, SpaceXViewModelOutput {}
+protocol SpaceXListInteractorType: SpaceXListInteractorInput, SpaceXListInteractorOutput {}
 
-final class SpaceXViewModel: SpaceXViewModelType {
+final class SpaceXListInteractor {
+    // MARK: UseCases
     private let showRocketUseCase: ShowRocketUseCaseType
     private let showLaunchUseCase: ShowLaunchListUseCaseType
-    private let actions: SpaceXViewModelActions?
-
-    private(set) var currentPage: Int = 0
-    private(set) var totalPageCount: Int = 1
-
+    
+    // Properties
     private var yearsRange = Set<Int>()
-//    private var launchList: [LaunchTableViewModel] = []
+    private var currentPage: Int = 0
+    private var totalPageCount: Int = 1
     private var launchLoadTask: CancellableType? { willSet { launchLoadTask?.cancel() } }
 
     var hasMorePages: Bool { currentPage < totalPageCount }
     var nextPage: Int { hasMorePages ? currentPage + 1 : currentPage }
     
-    // MARK: - Output
-    let launches: Observable<[LaunchTableViewModel]> = Observable([])
-    let dialogViewModel: Observable<FilterDialogViewModel?> = Observable(.none)
+    // MARK: Output
+    private(set) var launches: [LaunchTableViewModel] = []
+    private(set) var dialogViewModel: FilterDialogViewModel?
     
-    init(showLaunchUseCase: ShowLaunchListUseCaseType,
-         showRocketUseCase: ShowRocketUseCaseType,
-         actions: SpaceXViewModelActions? = nil) {
-        self.showLaunchUseCase = showLaunchUseCase
+    weak var presenter: SpaceXListInteractorToPresenter?
+
+    init(showRocketUseCase: ShowRocketUseCaseType, showLaunchUseCase: ShowLaunchListUseCaseType) {
         self.showRocketUseCase = showRocketUseCase
-        self.actions = actions
+        self.showLaunchUseCase = showLaunchUseCase
     }
 
     // MARK: - Private
@@ -60,26 +59,34 @@ final class SpaceXViewModel: SpaceXViewModelType {
             for launch in launchResponse.docs ?? [] {
                 var launchViewModel = LaunchTableViewModel(launch)
                 let rocket = try? await showRocketUseCase.execute(queryID: launch.rocket ?? "")
-                if let year = getYearBy(launch) {
-                    yearsRange.insert(year)
-                }
+                addYearToYearRange(launch)
                 launchViewModel.updateRocket(rocket)
-                launches.value.append(launchViewModel)
+                launches.append(launchViewModel)
             }
-            dialogViewModel.value = getDiaLogViewModelWith(years: yearsRange)
-//            launches.value = launchList
+            dialogViewModel = getDiaLogViewModelWith(years: yearsRange)
         }
+    }
+
+    private func dealWithDocs(_ docs: [LaunchDocModel]) async {
+        for doc in docs {
+            var launchViewModel = LaunchTableViewModel(doc)
+            let rocket = try? await showRocketUseCase.execute(queryID: doc.rocket ?? "")
+            addYearToYearRange(doc)
+            launchViewModel.updateRocket(rocket)
+            launches.append(launchViewModel)
+        }
+    }
+
+    private func addYearToYearRange(_ launchDoc: LaunchDocModel) {
+        guard let date = launchDoc.dateUnix?.unixToDate,
+              let year = Int(date.getDateString(format: "yyyy")) else { return }
+        yearsRange.insert(year)
     }
 
     private func getDiaLogViewModelWith(years: Set<Int>) -> FilterDialogViewModel {
         FilterDialogViewModel(staticMaxYear: years.max() ?? 0,
                               staticMinYear: years.min() ?? 0,
                               oldFilterDialogViewModel: dialogViewModel.value)
-    }
-
-    private func getYearBy(_ launchDoc: LaunchDocModel) -> Int? {
-        guard let date = launchDoc.dateUnix?.unixToDate else { return nil }
-        return Int(date.getDateString(format: "yyyy"))
     }
 
     private func loadLaunch() {
@@ -95,7 +102,7 @@ final class SpaceXViewModel: SpaceXViewModelType {
             try await loadTask.value
         }
     }
-    
+
     private func getResult(_ options: LaunchOptionRequestModel) async throws -> LaunchResponseModel {
         if dialogViewModel.value?.isPresentSuccessfulLaunchingOnly == true {
             return try await getLaunchResultWithSuccessQuery(options)
@@ -144,17 +151,11 @@ final class SpaceXViewModel: SpaceXViewModelType {
     private func resetPages() {
         currentPage = 0
         totalPageCount = 1
-//        launchList.removeAll()
-        launches.value.removeAll()
+        launches.removeAll()
     }
 }
 
-// MARK: - INPUT. View event methods
-extension SpaceXViewModel {
-    func viewDidLoad() {
-        loadLaunch()
-    }
-
+extension SpaceXListInteractor: SpaceXListInteractorType {
     func didLoadNextPage() {
         guard hasMorePages else { return }
         loadLaunch()
@@ -162,11 +163,7 @@ extension SpaceXViewModel {
 
     func didConfirmFilter(_ viewModel: FilterDialogViewModel) {
         resetPages()
-        dialogViewModel.value = viewModel
+        dialogViewModel = viewModel
         loadLaunch()
-    }
-
-    func didSelectItem(at index: Int) {
-        actions?.didSelectItem(launches.value[index])
     }
 }
