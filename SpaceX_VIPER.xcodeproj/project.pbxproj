@@ -25,11 +25,10 @@
 		2126771F2976EEFC00D7109C /* LaunchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2126771D2976EEFC00D7109C /* LaunchTableViewCell.swift */; };
 		212677202976EEFC00D7109C /* LaunchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2126771E2976EEFC00D7109C /* LaunchTableViewCell.xib */; };
 		212677222976F0AF00D7109C /* FilterDialogView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 212677212976F0AF00D7109C /* FilterDialogView.xib */; };
-		212677252976F0CD00D7109C /* SpaceXViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212677242976F0CD00D7109C /* SpaceXViewModel.swift */; };
-		212677272976F0DA00D7109C /* FilterDialogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212677262976F0DA00D7109C /* FilterDialogViewModel.swift */; };
 		2126772A2976F0FB00D7109C /* SpaceXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212677282976F0FB00D7109C /* SpaceXViewController.swift */; };
 		2126772B2976F0FB00D7109C /* SpaceXViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 212677292976F0FB00D7109C /* SpaceXViewController.xib */; };
 		2126772E2976F20200D7109C /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 2126772D2976F20200D7109C /* MultiSlider */; };
+		212AE4F0297C569D00BA62BB /* FilterDialogInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212AE4EE297C569D00BA62BB /* FilterDialogInteractor.swift */; };
 		21497718297706B900A53D23 /* SpaceXPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21497717297706B900A53D23 /* SpaceXPresenter.swift */; };
 		2149771B2977071300A53D23 /* SpaceXInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2149771A2977071300A53D23 /* SpaceXInteractor.swift */; };
 		21602767297AAA9C008C2CEC /* SpaceXRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21602766297AAA9C008C2CEC /* SpaceXRouter.swift */; };
@@ -91,10 +90,9 @@
 		2126771D2976EEFC00D7109C /* LaunchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchTableViewCell.swift; sourceTree = "<group>"; };
 		2126771E2976EEFC00D7109C /* LaunchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchTableViewCell.xib; sourceTree = "<group>"; };
 		212677212976F0AF00D7109C /* FilterDialogView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterDialogView.xib; sourceTree = "<group>"; };
-		212677242976F0CD00D7109C /* SpaceXViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXViewModel.swift; sourceTree = "<group>"; };
-		212677262976F0DA00D7109C /* FilterDialogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDialogViewModel.swift; sourceTree = "<group>"; };
 		212677282976F0FB00D7109C /* SpaceXViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXViewController.swift; sourceTree = "<group>"; };
 		212677292976F0FB00D7109C /* SpaceXViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpaceXViewController.xib; sourceTree = "<group>"; };
+		212AE4EE297C569D00BA62BB /* FilterDialogInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterDialogInteractor.swift; sourceTree = "<group>"; };
 		21497717297706B900A53D23 /* SpaceXPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXPresenter.swift; sourceTree = "<group>"; };
 		2149771A2977071300A53D23 /* SpaceXInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXInteractor.swift; sourceTree = "<group>"; };
 		21602766297AAA9C008C2CEC /* SpaceXRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXRouter.swift; sourceTree = "<group>"; };
@@ -175,7 +173,6 @@
 				21602765297AAA86008C2CEC /* Router */,
 				21497719297706EF00A53D23 /* Interactor */,
 				214977162977069700A53D23 /* Presenter */,
-				212677232976F0C500D7109C /* ViewModel */,
 				212677122976EE6A00D7109C /* SpaceXScene */,
 				2126770B2976EE2F00D7109C /* Utils */,
 				212677282976F0FB00D7109C /* SpaceXViewController.swift */,
@@ -239,15 +236,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		212677232976F0C500D7109C /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				212677242976F0CD00D7109C /* SpaceXViewModel.swift */,
-				212677262976F0DA00D7109C /* FilterDialogViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		214977162977069700A53D23 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +247,7 @@
 		21497719297706EF00A53D23 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				212AE4EE297C569D00BA62BB /* FilterDialogInteractor.swift */,
 				2149771A2977071300A53D23 /* SpaceXInteractor.swift */,
 			);
 			path = Interactor;
@@ -601,9 +590,8 @@
 				2126772A2976F0FB00D7109C /* SpaceXViewController.swift in Sources */,
 				212677182976EEA900D7109C /* FilterDialogView.swift in Sources */,
 				212676F42976ED5700D7109C /* LaunchListRepositoryType.swift in Sources */,
+				212AE4F0297C569D00BA62BB /* FilterDialogInteractor.swift in Sources */,
 				2149771B2977071300A53D23 /* SpaceXInteractor.swift in Sources */,
-				212677272976F0DA00D7109C /* FilterDialogViewModel.swift in Sources */,
-				212677252976F0CD00D7109C /* SpaceXViewModel.swift in Sources */,
 				212677152976EE8100D7109C /* SpaceXFlowCoordinator.swift in Sources */,
 				2126771C2976EEC500D7109C /* LaunchTableViewModel.swift in Sources */,
 				21CFC48B2976EB2100A2C183 /* UIAlertAction.swift in Sources */,

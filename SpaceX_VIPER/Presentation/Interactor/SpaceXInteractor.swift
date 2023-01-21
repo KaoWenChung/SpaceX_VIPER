@@ -14,12 +14,12 @@ protocol SpaceXListInteractorToPresenterProtocol: AnyObject {
 
 protocol SpaceXListInteractorInput {
     func loadNextPage()
-    func didConfirmFilter(_ viewModel: FilterDialogViewModel)
+    func didConfirmFilter(_ viewModel: FilterDialogInteractor)
 }
 
 protocol SpaceXListInteractorOutput {
     var launches: [LaunchTableViewModel] { get }
-    var dialogViewModel: FilterDialogViewModel? { get }
+    var dialogViewModel: FilterDialogInteractor? { get }
     var presenter: SpaceXListInteractorToPresenterProtocol? { get set }
 }
 
@@ -41,7 +41,7 @@ final class SpaceXInteractor {
     
     // MARK: Output
     private(set) var launches: [LaunchTableViewModel] = []
-    private(set) var dialogViewModel: FilterDialogViewModel?
+    private(set) var dialogViewModel: FilterDialogInteractor?
     
     weak var presenter: SpaceXListInteractorToPresenterProtocol?
 
@@ -64,6 +64,7 @@ final class SpaceXInteractor {
                 launches.append(launchViewModel)
             }
             dialogViewModel = getDiaLogViewModelWith(years: yearsRange)
+            presenter?.didLoadLaunches()
         }
     }
 
@@ -83,8 +84,8 @@ final class SpaceXInteractor {
         yearsRange.insert(year)
     }
 
-    private func getDiaLogViewModelWith(years: Set<Int>) -> FilterDialogViewModel {
-        FilterDialogViewModel(staticMaxYear: years.max() ?? 0,
+    private func getDiaLogViewModelWith(years: Set<Int>) -> FilterDialogInteractor {
+        FilterDialogInteractor(staticMaxYear: years.max() ?? 0,
                               staticMinYear: years.min() ?? 0,
                               oldFilterDialogViewModel: dialogViewModel.value)
     }
@@ -125,7 +126,7 @@ final class SpaceXInteractor {
         return result
     }
 
-    private func getDateUTCRequestModel(dialogViewModel: FilterDialogViewModel) -> LaunchQueryDateUTCRequestModel? {
+    private func getDateUTCRequestModel(dialogViewModel: FilterDialogInteractor) -> LaunchQueryDateUTCRequestModel? {
         if dialogViewModel.isYearDidChange {
             return LaunchQueryDateUTCRequestModel(gte: "\(dialogViewModel.minYear)-01-01T00:00:00.000Z", lte: "\(dialogViewModel.maxYear)-12-31T23:59:59.000Z")
         }
@@ -161,7 +162,7 @@ extension SpaceXInteractor: SpaceXInteractorType {
         loadLaunch()
     }
 
-    func didConfirmFilter(_ viewModel: FilterDialogViewModel) {
+    func didConfirmFilter(_ viewModel: FilterDialogInteractor) {
         resetPages()
         dialogViewModel = viewModel
         loadLaunch()

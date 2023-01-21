@@ -5,7 +5,7 @@
 //  Created by wyn on 2023/1/17.
 //
 
-struct FilterDialogViewModel {
+struct FilterDialogInteractor {
     // Use isYearDidChange to judge whether we need to update maxYear and min Year
     private(set) var isYearDidChange: Bool = false
     var isPresentSuccessfulLaunchingOnly: Bool
@@ -16,7 +16,7 @@ struct FilterDialogViewModel {
     var minYear: Int
     init(staticMaxYear: Int,
          staticMinYear: Int,
-         oldFilterDialogViewModel: FilterDialogViewModel?) {
+         oldFilterDialogViewModel: FilterDialogInteractor?) {
         isYearDidChange = oldFilterDialogViewModel?.isYearDidChange ?? false
         self.staticMaxYear = staticMaxYear
         self.staticMinYear = staticMinYear

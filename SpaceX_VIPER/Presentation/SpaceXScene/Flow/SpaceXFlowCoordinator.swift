@@ -24,7 +24,6 @@ final class SpaceXFlowCoordinator {
 
     func start() {
         // Note: here we keep strong reference with actions, this way this flow do not need to be strong referenced
-        let actions = SpaceXViewModelActions(didSelectItem: didSelectItem)
         let vc = dependencies.makeSpaceXViewController()
 
         navigationController?.pushViewController(vc, animated: false)

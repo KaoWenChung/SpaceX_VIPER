@@ -8,7 +8,6 @@
 import UIKit
 
 final class SpaceXDIContainer {
-    
     struct Dependencies {
         let dataTransferService: DataTransferServiceType
         let imageDataTransferService: DataTransferServiceType
@@ -45,7 +44,7 @@ final class SpaceXDIContainer {
     // MARK: - SpaceX
     func makeSpaceXViewController() -> SpaceXViewController {
         let presenter = makeSpaceXPresenter()
-        let view = SpaceXViewController(presenter: presenter, launchImagesRepository: makeLaunchImagesRepository())
+        let view = SpaceXRouter.createModule(presenter: presenter, launchImagesRepository: makeLaunchImagesRepository())
         presenter.view = view
         return view
     }

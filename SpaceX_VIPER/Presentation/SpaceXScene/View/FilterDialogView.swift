@@ -9,7 +9,7 @@ import MultiSlider
 import UIKit
 
 protocol FilterDialogViewDelegate: AnyObject {
-    func confirmUpdateViewModel(_ viewModel: FilterDialogViewModel)
+    func confirmUpdateViewModel(_ viewModel: FilterDialogInteractor)
 }
 
 final class FilterDialogView: BaseXibView {
@@ -19,9 +19,9 @@ final class FilterDialogView: BaseXibView {
     @IBOutlet weak private var sortButton: UIButton!
     @IBOutlet weak private var showSuccessfulLaunchingSwitch: UISwitch!
     weak var delegate: FilterDialogViewDelegate?
-    private var viewModel: FilterDialogViewModel!
+    private var viewModel: FilterDialogInteractor!
 
-    func fillView(_ viewModel: FilterDialogViewModel) {
+    func fillView(_ viewModel: FilterDialogInteractor) {
         accessibilityIdentifier = AccessibilityIdentifier.filterDialogView
         self.viewModel = viewModel
         let maxValue = CGFloat(viewModel.staticMaxYear)

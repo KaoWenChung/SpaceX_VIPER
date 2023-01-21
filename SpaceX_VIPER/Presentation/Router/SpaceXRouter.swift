@@ -10,7 +10,7 @@ protocol SpaceXRouterType {
 }
 
 final class SpaceXRouter: SpaceXRouterType {
-//    class func createModule(presenter: SpaceXViewToPresenterProtocol) -> SpaceXViewController {
-//        SpaceXViewController(presenter: <#T##SpaceXViewToPresenterProtocol#>, launchImagesRepository: <#T##LaunchImagesRepositoryType#>)
-//    }
+    class func createModule(presenter: SpaceXViewToPresenterProtocol, launchImagesRepository: LaunchImagesRepositoryType) -> SpaceXViewController {
+        SpaceXViewController(presenter: presenter, launchImagesRepository: launchImagesRepository)
+    }
 }
