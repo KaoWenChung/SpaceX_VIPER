@@ -44,13 +44,9 @@ final class SpaceXDIContainer {
     // MARK: - SpaceX
     func makeSpaceXViewController() -> SpaceXViewController {
         let presenter = makeSpaceXPresenter()
-        let view = SpaceXRouter.createModule(presenter: presenter, launchImagesRepository: makeLaunchImagesRepository())
+        let view = SpaceXViewController(presenter: presenter, launchImagesRepository: makeLaunchImagesRepository())
         presenter.view = view
         return view
-    }
-
-    func makeSpaceXRouter() -> SpaceXRouterType {
-        SpaceXRouter()
     }
 
     func makeSpaceXPresenter() -> SpaceXPresenter {
@@ -65,10 +61,8 @@ final class SpaceXDIContainer {
         SpaceXInteractor(showRocketUseCase: makeShowRocketUseCase(), showLaunchUseCase: makeShowLaunchListUseCase())
     }
 
-    // MARK: - Flow Coordinators
-    func makeSpaceXFlowCoordinator(navigationController: UINavigationController) -> SpaceXFlowCoordinator {
-        return SpaceXFlowCoordinator(navigationController: navigationController,
-                                           dependencies: self)
+    func makeSpaceXRouter() -> SpaceXRouterType {
+        return SpaceXRouter(dependencies: self)
     }
 }
 

@@ -19,7 +19,7 @@
 		2126770D2976EE3800D7109C /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2126770C2976EE3800D7109C /* Observable.swift */; };
 		2126770F2976EE4300D7109C /* AccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2126770E2976EE4300D7109C /* AccessibilityIdentifier.swift */; };
 		212677112976EE5400D7109C /* BaseXibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212677102976EE5400D7109C /* BaseXibView.swift */; };
-		212677152976EE8100D7109C /* SpaceXFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212677142976EE8100D7109C /* SpaceXFlowCoordinator.swift */; };
+		212677152976EE8100D7109C /* SpaceXRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212677142976EE8100D7109C /* SpaceXRouter.swift */; };
 		212677182976EEA900D7109C /* FilterDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212677172976EEA900D7109C /* FilterDialogView.swift */; };
 		2126771C2976EEC500D7109C /* LaunchTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2126771B2976EEC500D7109C /* LaunchTableViewModel.swift */; };
 		2126771F2976EEFC00D7109C /* LaunchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2126771D2976EEFC00D7109C /* LaunchTableViewCell.swift */; };
@@ -31,7 +31,6 @@
 		212AE4F0297C569D00BA62BB /* FilterDialogInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212AE4EE297C569D00BA62BB /* FilterDialogInteractor.swift */; };
 		21497718297706B900A53D23 /* SpaceXPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21497717297706B900A53D23 /* SpaceXPresenter.swift */; };
 		2149771B2977071300A53D23 /* SpaceXInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2149771A2977071300A53D23 /* SpaceXInteractor.swift */; };
-		21602767297AAA9C008C2CEC /* SpaceXRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21602766297AAA9C008C2CEC /* SpaceXRouter.swift */; };
 		21CFC4652976E8D600A2C183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4642976E8D600A2C183 /* AppDelegate.swift */; };
 		21CFC4672976E8D600A2C183 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4662976E8D600A2C183 /* SceneDelegate.swift */; };
 		21CFC46E2976E8D800A2C183 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CFC46D2976E8D800A2C183 /* Assets.xcassets */; };
@@ -84,7 +83,7 @@
 		2126770C2976EE3800D7109C /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		2126770E2976EE4300D7109C /* AccessibilityIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifier.swift; sourceTree = "<group>"; };
 		212677102976EE5400D7109C /* BaseXibView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseXibView.swift; sourceTree = "<group>"; };
-		212677142976EE8100D7109C /* SpaceXFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXFlowCoordinator.swift; sourceTree = "<group>"; };
+		212677142976EE8100D7109C /* SpaceXRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXRouter.swift; sourceTree = "<group>"; };
 		212677172976EEA900D7109C /* FilterDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDialogView.swift; sourceTree = "<group>"; };
 		2126771B2976EEC500D7109C /* LaunchTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchTableViewModel.swift; sourceTree = "<group>"; };
 		2126771D2976EEFC00D7109C /* LaunchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchTableViewCell.swift; sourceTree = "<group>"; };
@@ -95,7 +94,6 @@
 		212AE4EE297C569D00BA62BB /* FilterDialogInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterDialogInteractor.swift; sourceTree = "<group>"; };
 		21497717297706B900A53D23 /* SpaceXPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXPresenter.swift; sourceTree = "<group>"; };
 		2149771A2977071300A53D23 /* SpaceXInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXInteractor.swift; sourceTree = "<group>"; };
-		21602766297AAA9C008C2CEC /* SpaceXRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXRouter.swift; sourceTree = "<group>"; };
 		21CFC4612976E8D600A2C183 /* SpaceX_VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX_VIPER.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CFC4642976E8D600A2C183 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21CFC4662976E8D600A2C183 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -203,7 +201,6 @@
 		212677132976EE7600D7109C /* Flow */ = {
 			isa = PBXGroup;
 			children = (
-				212677142976EE8100D7109C /* SpaceXFlowCoordinator.swift */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -256,7 +253,7 @@
 		21602765297AAA86008C2CEC /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				21602766297AAA9C008C2CEC /* SpaceXRouter.swift */,
+				212677142976EE8100D7109C /* SpaceXRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -577,7 +574,6 @@
 				21CFC4982976EC2100A2C183 /* LaunchListRepository.swift in Sources */,
 				212677092976EE0F00D7109C /* NetworkConfig.swift in Sources */,
 				212676F82976ED7200D7109C /* LaunchImagesRepositoryType.swift in Sources */,
-				21602767297AAA9C008C2CEC /* SpaceXRouter.swift in Sources */,
 				21CFC49C2976EC3C00A2C183 /* LaunchImagesRepository.swift in Sources */,
 				21CFC49A2976EC2F00A2C183 /* RocketRepository.swift in Sources */,
 				21CFC4892976EB0E00A2C183 /* Int+.swift in Sources */,
@@ -592,7 +588,7 @@
 				212676F42976ED5700D7109C /* LaunchListRepositoryType.swift in Sources */,
 				212AE4F0297C569D00BA62BB /* FilterDialogInteractor.swift in Sources */,
 				2149771B2977071300A53D23 /* SpaceXInteractor.swift in Sources */,
-				212677152976EE8100D7109C /* SpaceXFlowCoordinator.swift in Sources */,
+				212677152976EE8100D7109C /* SpaceXRouter.swift in Sources */,
 				2126771C2976EEC500D7109C /* LaunchTableViewModel.swift in Sources */,
 				21CFC48B2976EB2100A2C183 /* UIAlertAction.swift in Sources */,
 				21CFC4872976EAF500A2C183 /* Date+.swift in Sources */,

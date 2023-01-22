@@ -9,7 +9,7 @@ import Foundation
 
 protocol SpaceXListInteractorToPresenterProtocol: AnyObject {
     func didLoadLaunches()
-    func loadLaunchesFailed()
+    func didLoadLaunchesFailed()
 }
 
 protocol SpaceXListInteractorInput {
@@ -52,20 +52,17 @@ final class SpaceXInteractor {
 
     // MARK: - Private
     // Deal with the list of launch including set filter dialog by years range
-    private func appendPage(_ launchResponse: LaunchResponseModel) {
+    private func appendPage(_ launchResponse: LaunchResponseModel) async {
         currentPage = launchResponse.page ?? 0
         totalPageCount = launchResponse.totalPages ?? 0
-        Task.init {
-            for launch in launchResponse.docs ?? [] {
-                var launchViewModel = LaunchTableViewModel(launch)
-                let rocket = try? await showRocketUseCase.execute(queryID: launch.rocket ?? "")
-                addYearToYearRange(launch)
-                launchViewModel.updateRocket(rocket)
-                launches.append(launchViewModel)
-            }
-            dialogViewModel = getDiaLogViewModelWith(years: yearsRange)
-            presenter?.didLoadLaunches()
+        for launch in launchResponse.docs ?? [] {
+            var launchViewModel = LaunchTableViewModel(launch)
+            let rocket = try? await showRocketUseCase.execute(queryID: launch.rocket ?? "")
+            addYearToYearRange(launch)
+            launchViewModel.updateRocket(rocket)
+            launches.append(launchViewModel)
         }
+        dialogViewModel = getDiaLogViewModelWith(years: yearsRange)
     }
 
     private func dealWithDocs(_ docs: [LaunchDocModel]) async {
@@ -96,12 +93,10 @@ final class SpaceXInteractor {
             let options = LaunchOptionRequestModel(sort: sort, page: nextPage, limit: 10)
             let launches = try await getResult(options)
             
-            appendPage(launches)
+            await appendPage(launches)
+            presenter?.didLoadLaunches()
         }
         launchLoadTask = loadTask
-        Task.init {
-            try await loadTask.value
-        }
     }
 
     private func getResult(_ options: LaunchOptionRequestModel) async throws -> LaunchResponseModel {

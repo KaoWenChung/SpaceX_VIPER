@@ -50,7 +50,7 @@ extension SpaceXPresenter: SpaceXListInteractorToPresenterProtocol {
         view?.showLaunches()
     }
 
-    func loadLaunchesFailed() {
+    func didLoadLaunchesFailed() {
         view?.showError()
     }
 }

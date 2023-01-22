@@ -21,7 +21,7 @@ final class AppFlowCoordinator {
     func start() {
         // In App Flow we can check if user needs to login, if yes we would run login flow
         let spaceXSceneDIContainer = appDIContainer.makeSpaceXSceneDIContainer()
-        let flow = spaceXSceneDIContainer.makeSpaceXFlowCoordinator(navigationController: navigationController)
-        flow.start()
+        let router = spaceXSceneDIContainer.makeSpaceXRouter()
+        router.start(navigationController: navigationController)
     }
 }
