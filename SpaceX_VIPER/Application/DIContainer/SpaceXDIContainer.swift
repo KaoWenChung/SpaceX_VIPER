@@ -66,4 +66,4 @@ final class SpaceXDIContainer {
     }
 }
 
-extension SpaceXDIContainer: SpaceXFlowCoordinatorDependencies { }
+extension SpaceXDIContainer: SpaceXRouterDependencies { }

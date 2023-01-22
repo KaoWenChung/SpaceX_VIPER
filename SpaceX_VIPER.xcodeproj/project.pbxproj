@@ -38,7 +38,7 @@
 		21CFC47B2976E95100A2C183 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC47A2976E95100A2C183 /* AppDIContainer.swift */; };
 		21CFC47D2976E97300A2C183 /* SpaceXDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC47C2976E97300A2C183 /* SpaceXDIContainer.swift */; };
 		21CFC47F2976E98B00A2C183 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC47E2976E98B00A2C183 /* AppConfiguration.swift */; };
-		21CFC4812976E9AD00A2C183 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4802976E9AD00A2C183 /* AppFlowCoordinator.swift */; };
+		21CFC4812976E9AD00A2C183 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4802976E9AD00A2C183 /* AppRouter.swift */; };
 		21CFC4842976EA5E00A2C183 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4832976EA5E00A2C183 /* UIImageView+.swift */; };
 		21CFC4872976EAF500A2C183 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4862976EAF500A2C183 /* Date+.swift */; };
 		21CFC4892976EB0E00A2C183 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4882976EB0E00A2C183 /* Int+.swift */; };
@@ -103,7 +103,7 @@
 		21CFC47A2976E95100A2C183 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		21CFC47C2976E97300A2C183 /* SpaceXDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXDIContainer.swift; sourceTree = "<group>"; };
 		21CFC47E2976E98B00A2C183 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
-		21CFC4802976E9AD00A2C183 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
+		21CFC4802976E9AD00A2C183 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		21CFC4832976EA5E00A2C183 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		21CFC4862976EAF500A2C183 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		21CFC4882976EB0E00A2C183 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
@@ -299,7 +299,7 @@
 				21CFC4642976E8D600A2C183 /* AppDelegate.swift */,
 				21CFC4662976E8D600A2C183 /* SceneDelegate.swift */,
 				21CFC47E2976E98B00A2C183 /* AppConfiguration.swift */,
-				21CFC4802976E9AD00A2C183 /* AppFlowCoordinator.swift */,
+				21CFC4802976E9AD00A2C183 /* AppRouter.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -564,7 +564,7 @@
 				21CFC4A42976EC8600A2C183 /* LaunchModel.swift in Sources */,
 				21CFC48D2976EB5600A2C183 /* CancellableType.swift in Sources */,
 				212677072976EDF400D7109C /* Endpoint.swift in Sources */,
-				21CFC4812976E9AD00A2C183 /* AppFlowCoordinator.swift in Sources */,
+				21CFC4812976E9AD00A2C183 /* AppRouter.swift in Sources */,
 				21CFC47D2976E97300A2C183 /* SpaceXDIContainer.swift in Sources */,
 				21497718297706B900A53D23 /* SpaceXPresenter.swift in Sources */,
 				2126771F2976EEFC00D7109C /* LaunchTableViewCell.swift in Sources */,

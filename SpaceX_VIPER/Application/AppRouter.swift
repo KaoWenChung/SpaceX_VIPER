@@ -1,5 +1,5 @@
 //
-//  AppFlowCoordinator.swift
+//  AppRouter.swift
 //  SpaceX_VIPER
 //
 //  Created by wyn on 2023/1/17.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AppFlowCoordinator {
+final class AppRouter {
 
     var navigationController: UINavigationController
     private let appDIContainer: AppDIContainer
