@@ -11,6 +11,7 @@ final class SpaceXDIContainer {
     struct Dependencies {
         let dataTransferService: DataTransferServiceType
         let imageDataTransferService: DataTransferServiceType
+        let imageCache: ImageCacheType
     }
     private let dependencies: Dependencies
 
@@ -37,8 +38,8 @@ final class SpaceXDIContainer {
         return RocketRepository(dataTransferService: dependencies.dataTransferService)
     }
 
-    func makeLaunchImagesRepository() -> LaunchImagesRepositoryType {
-        return LaunchImagesRepository(dataTransferService: dependencies.imageDataTransferService)
+    func makeLaunchImagesRepository() -> LaunchImageRepositoryType {
+        return LaunchImageRepository(dataTransferService: dependencies.imageDataTransferService, imageCache: dependencies.imageCache)
     }
 
     // MARK: - SpaceX

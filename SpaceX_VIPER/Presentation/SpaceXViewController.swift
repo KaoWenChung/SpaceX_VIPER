@@ -18,7 +18,7 @@ protocol SpaceXViewToPresenterProtocol: AnyObject {
 
 class SpaceXViewController: UIViewController {
     private let presenter: SpaceXViewToPresenterProtocol
-    private var launchImagesRepository: LaunchImagesRepositoryType
+    private var launchImagesRepository: LaunchImageRepositoryType
     private var viewTranslationY: CGFloat = 0.0
     private var filterButton: UIBarButtonItem!
     private var isShowFilter: Bool = false
@@ -28,7 +28,7 @@ class SpaceXViewController: UIViewController {
     @IBOutlet weak private var dialogView: FilterDialogView!
     
     init(presenter: SpaceXViewToPresenterProtocol,
-         launchImagesRepository: LaunchImagesRepositoryType) {
+         launchImagesRepository: LaunchImageRepositoryType) {
         self.presenter = presenter
         self.launchImagesRepository = launchImagesRepository
         super.init(nibName: nil, bundle: nil)

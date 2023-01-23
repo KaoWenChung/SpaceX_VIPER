@@ -10,6 +10,7 @@ import Foundation
 final class AppDIContainer {
 
     lazy var appConfiguration = AppConfiguration()
+    let imageCache = ImageCache()
 
     // MARK: - Network
     lazy var apiDataTransferService = {
@@ -26,7 +27,7 @@ final class AppDIContainer {
 
     // MARK: - DIContainers of scenes
     func makeSpaceXSceneDIContainer() -> SpaceXDIContainer {
-        let dependencies = SpaceXDIContainer.Dependencies(dataTransferService: apiDataTransferService, imageDataTransferService: imageDataTransferService)
+        let dependencies = SpaceXDIContainer.Dependencies(dataTransferService: apiDataTransferService, imageDataTransferService: imageDataTransferService, imageCache: imageCache)
         return SpaceXDIContainer(dependencies: dependencies)
     }
 
