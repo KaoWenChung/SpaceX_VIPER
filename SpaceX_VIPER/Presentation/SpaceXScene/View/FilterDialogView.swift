@@ -9,7 +9,7 @@ import MultiSlider
 import UIKit
 
 protocol FilterDialogViewDelegate: AnyObject {
-    func confirmUpdateViewModel(_ viewModel: FilterDialogInteractor)
+    func confirmUpdateInteractor(_ interactor: FilterDialogInteractor)
 }
 
 final class FilterDialogView: BaseXibView {
@@ -19,20 +19,20 @@ final class FilterDialogView: BaseXibView {
     @IBOutlet weak private var sortButton: UIButton!
     @IBOutlet weak private var showSuccessfulLaunchingSwitch: UISwitch!
     weak var delegate: FilterDialogViewDelegate?
-    private var viewModel: FilterDialogInteractor!
+    private var interactor: FilterDialogInteractor!
 
-    func fillView(_ viewModel: FilterDialogInteractor) {
+    func fillView(_ interactor: FilterDialogInteractor) {
         accessibilityIdentifier = AccessibilityIdentifier.filterDialogView
-        self.viewModel = viewModel
-        let maxValue = CGFloat(viewModel.staticMaxYear)
-        let minValue = CGFloat(viewModel.staticMinYear)
-        let topValue = viewModel.maxYear
-        let lowValue = viewModel.minYear
+        self.interactor = interactor
+        let maxValue = CGFloat(interactor.staticMaxYear)
+        let minValue = CGFloat(interactor.staticMinYear)
+        let topValue = interactor.maxYear
+        let lowValue = interactor.minYear
         setMoney(lowYear: lowValue, topYear: topValue)
         sliderBar.minimumValue = minValue
         sliderBar.maximumValue = maxValue
         sliderBar.value = [CGFloat(lowValue), CGFloat(topValue)]
-        showSuccessfulLaunchingSwitch.isOn = viewModel.isPresentSuccessfulLaunchingOnly
+        showSuccessfulLaunchingSwitch.isOn = interactor.isPresentSuccessfulLaunchingOnly
     }
     // MARK: - Private functions
 
@@ -54,22 +54,22 @@ final class FilterDialogView: BaseXibView {
             lowValue = topValue
         }
         setMoney(lowYear: lowValue, topYear: topValue)
-        viewModel.minYear = lowValue
-        viewModel.maxYear = topValue
+        interactor.minYear = lowValue
+        interactor.maxYear = topValue
     }
     
     @IBAction private func tapSortButton(_ sender: Any) {
-        viewModel.isAscending.toggle()
-        let title = viewModel.isAscending ? "Sort Ascending" : "Sort Descending"
+        interactor.isAscending.toggle()
+        let title = interactor.isAscending ? "Sort Ascending" : "Sort Descending"
         sortButton.setTitle(title, for: .normal)
     }
 
     @IBAction private func tapConfirm() {
-        viewModel.setYearIsChanged()
-        delegate?.confirmUpdateViewModel(viewModel)
+        interactor.setYearIsChanged()
+        delegate?.confirmUpdateInteractor(interactor)
     }
 
     @IBAction private func tapShowSuccessfulLaunching(_ sender: UISwitch) {
-        viewModel.toggleSuccess(sender.isOn)
+        interactor.toggleSuccess(sender.isOn)
     }
 }

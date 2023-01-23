@@ -1,11 +1,11 @@
 //
-//  LaunchTableViewModel.swift
+//  LaunchCellModel.swift
 //  SpaceX_VIPER
 //
 //  Created by wyn on 2023/1/17.
 //
 
-struct LaunchTableViewModel {
+struct LaunchCellModel {
     let mission: String
     let date: String?
     let imageURL: String

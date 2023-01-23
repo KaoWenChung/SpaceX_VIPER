@@ -10,10 +10,10 @@ import UIKit
 protocol SpaceXViewToPresenterProtocol: AnyObject {
     var view: SpaceXPresenterToViewProtocol? { get set }
     func loadLaunches()
-    func setFilter(_ viewModel: FilterDialogInteractor)
+    func setFilter(_ interactor: FilterDialogInteractor)
     func selectItem(at index: Int)
     func getLaunchesCount() -> Int
-    func getLaunch(index: Int) -> LaunchTableViewModel
+    func getLaunch(index: Int) -> LaunchCellModel
 }
 
 class SpaceXViewController: UIViewController {
@@ -110,15 +110,15 @@ class SpaceXViewController: UIViewController {
     }
     
     private func updateDialogView() {
-//        guard let dialogViewModel = viewModel.dialogViewModel.value else { return }
-//        dialogView.fillView(dialogViewModel)
+//        guard let dialogInteractor = interactor.dialogInteractor.value else { return }
+//        dialogView.fillView(dialogInteractor)
     }
 }
 
 extension SpaceXViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        viewModel.didSelectItem(at: indexPath.row)
+//        interactor.didSelectItem(at: indexPath.row)
     }
 }
 
@@ -141,8 +141,8 @@ extension SpaceXViewController: UITableViewDataSource {
 }
 
 extension SpaceXViewController: FilterDialogViewDelegate {
-    func confirmUpdateViewModel(_ dialogViewModel: FilterDialogInteractor) {
-        presenter.setFilter(dialogViewModel)
+    func confirmUpdateInteractor(_ dialogInteractor: FilterDialogInteractor) {
+        presenter.setFilter(dialogInteractor)
         hideFilterView()
     }
 }

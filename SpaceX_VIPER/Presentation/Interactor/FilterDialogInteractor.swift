@@ -1,5 +1,5 @@
 //
-//  FilterDialogViewModel.swift
+//  FilterDialogInteractor.swift
 //  SpaceX_VIPER
 //
 //  Created by wyn on 2023/1/17.
@@ -16,13 +16,13 @@ struct FilterDialogInteractor {
     var minYear: Int
     init(staticMaxYear: Int,
          staticMinYear: Int,
-         oldFilterDialogViewModel: FilterDialogInteractor?) {
-        isYearDidChange = oldFilterDialogViewModel?.isYearDidChange ?? false
+         oldFilterDialogModel: FilterDialogInteractor?) {
+        isYearDidChange = oldFilterDialogModel?.isYearDidChange ?? false
         self.staticMaxYear = staticMaxYear
         self.staticMinYear = staticMinYear
-        maxYear = isYearDidChange ? (oldFilterDialogViewModel?.maxYear ?? staticMaxYear) : staticMaxYear
-        minYear = isYearDidChange ? (oldFilterDialogViewModel?.minYear ?? staticMinYear) : staticMinYear
-        isPresentSuccessfulLaunchingOnly = oldFilterDialogViewModel?.isPresentSuccessfulLaunchingOnly ?? false
+        maxYear = isYearDidChange ? (oldFilterDialogModel?.maxYear ?? staticMaxYear) : staticMaxYear
+        minYear = isYearDidChange ? (oldFilterDialogModel?.minYear ?? staticMinYear) : staticMinYear
+        isPresentSuccessfulLaunchingOnly = oldFilterDialogModel?.isPresentSuccessfulLaunchingOnly ?? false
     }
     mutating func setYearIsChanged() {
         isYearDidChange = !(staticMaxYear == maxYear && staticMinYear == minYear)

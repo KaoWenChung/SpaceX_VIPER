@@ -32,7 +32,7 @@ final class SpaceXRouter: SpaceXRouterType {
         spaceXViewController = vc
     }
 
-    private func didSelectItem(_ launch: LaunchTableViewModel) {
+    private func didSelectItem(_ launch: LaunchCellModel) {
         if let spaceXViewController {
             let linkDict: [String: String?] = ["video": launch.videoLink,
                                                "wiki": launch.wikiLink,

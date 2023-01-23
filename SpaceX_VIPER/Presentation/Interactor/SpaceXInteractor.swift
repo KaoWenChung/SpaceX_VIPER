@@ -14,12 +14,12 @@ protocol SpaceXListInteractorToPresenterProtocol: AnyObject {
 
 protocol SpaceXListInteractorInput {
     func loadNextPage()
-    func didConfirmFilter(_ viewModel: FilterDialogInteractor)
+    func didConfirmFilter(_ interactor: FilterDialogInteractor)
 }
 
 protocol SpaceXListInteractorOutput {
-    var launches: [LaunchTableViewModel] { get }
-    var dialogViewModel: FilterDialogInteractor? { get }
+    var launches: [LaunchCellModel] { get }
+    var dialogInteractor: FilterDialogInteractor? { get }
     var presenter: SpaceXListInteractorToPresenterProtocol? { get set }
 }
 
@@ -40,8 +40,8 @@ final class SpaceXInteractor {
     var nextPage: Int { hasMorePages ? currentPage + 1 : currentPage }
     
     // MARK: Output
-    private(set) var launches: [LaunchTableViewModel] = []
-    private(set) var dialogViewModel: FilterDialogInteractor?
+    private(set) var launches: [LaunchCellModel] = []
+    private(set) var dialogInteractor: FilterDialogInteractor?
     
     weak var presenter: SpaceXListInteractorToPresenterProtocol?
 
@@ -56,22 +56,22 @@ final class SpaceXInteractor {
         currentPage = launchResponse.page ?? 0
         totalPageCount = launchResponse.totalPages ?? 0
         for launch in launchResponse.docs ?? [] {
-            var launchViewModel = LaunchTableViewModel(launch)
+            var launchCellModel = LaunchCellModel(launch)
             let rocket = try? await showRocketUseCase.execute(queryID: launch.rocket ?? "")
             addYearToYearRange(launch)
-            launchViewModel.updateRocket(rocket)
-            launches.append(launchViewModel)
+            launchCellModel.updateRocket(rocket)
+            launches.append(launchCellModel)
         }
-        dialogViewModel = getDiaLogViewModelWith(years: yearsRange)
+        dialogInteractor = getDiaLogModelWith(years: yearsRange)
     }
 
     private func dealWithDocs(_ docs: [LaunchDocModel]) async {
         for doc in docs {
-            var launchViewModel = LaunchTableViewModel(doc)
+            var cellModel = LaunchCellModel(doc)
             let rocket = try? await showRocketUseCase.execute(queryID: doc.rocket ?? "")
             addYearToYearRange(doc)
-            launchViewModel.updateRocket(rocket)
-            launches.append(launchViewModel)
+            cellModel.updateRocket(rocket)
+            launches.append(cellModel)
         }
     }
 
@@ -81,15 +81,15 @@ final class SpaceXInteractor {
         yearsRange.insert(year)
     }
 
-    private func getDiaLogViewModelWith(years: Set<Int>) -> FilterDialogInteractor {
+    private func getDiaLogModelWith(years: Set<Int>) -> FilterDialogInteractor {
         FilterDialogInteractor(staticMaxYear: years.max() ?? 0,
-                              staticMinYear: years.min() ?? 0,
-                              oldFilterDialogViewModel: dialogViewModel.value)
+                               staticMinYear: years.min() ?? 0,
+                               oldFilterDialogModel: dialogInteractor)
     }
 
     private func loadLaunch() {
         let loadTask = Task {
-            let sort = LaunchSortRequestModel(sort: (dialogViewModel.value?.isAscending ?? true) ? .asc : .desc)
+            let sort = LaunchSortRequestModel(sort: (dialogInteractor?.isAscending ?? true) ? .asc : .desc)
             let options = LaunchOptionRequestModel(sort: sort, page: nextPage, limit: 10)
             let launches = try await getResult(options)
             
@@ -100,7 +100,7 @@ final class SpaceXInteractor {
     }
 
     private func getResult(_ options: LaunchOptionRequestModel) async throws -> LaunchResponseModel {
-        if dialogViewModel.value?.isPresentSuccessfulLaunchingOnly == true {
+        if dialogInteractor?.isPresentSuccessfulLaunchingOnly == true {
             return try await getLaunchResultWithSuccessQuery(options)
         } else {
             return try await getLaunchResultWithoutSuccessQuery(options)
@@ -121,24 +121,24 @@ final class SpaceXInteractor {
         return result
     }
 
-    private func getDateUTCRequestModel(dialogViewModel: FilterDialogInteractor) -> LaunchQueryDateUTCRequestModel? {
-        if dialogViewModel.isYearDidChange {
-            return LaunchQueryDateUTCRequestModel(gte: "\(dialogViewModel.minYear)-01-01T00:00:00.000Z", lte: "\(dialogViewModel.maxYear)-12-31T23:59:59.000Z")
+    private func getDateUTCRequestModel(dialogInteractor: FilterDialogInteractor) -> LaunchQueryDateUTCRequestModel? {
+        if dialogInteractor.isYearDidChange {
+            return LaunchQueryDateUTCRequestModel(gte: "\(dialogInteractor.minYear)-01-01T00:00:00.000Z", lte: "\(dialogInteractor.maxYear)-12-31T23:59:59.000Z")
         }
         return nil
     }
 
     private func getDateQuery() -> LaunchQueryDateRequestModel? {
-        if let dialogViewModel = dialogViewModel.value {
-            let dateQuery: LaunchQueryDateUTCRequestModel? = getDateUTCRequestModel(dialogViewModel: dialogViewModel)
+        if let dialogInteractor = dialogInteractor {
+            let dateQuery: LaunchQueryDateUTCRequestModel? = getDateUTCRequestModel(dialogInteractor: dialogInteractor)
             return LaunchQueryDateRequestModel(dateUtc: dateQuery)
         }
         return nil
     }
 
     private func getSuccessDateQuery() -> LaunchQuerySuccessDateRequestModel? {
-        if let dialogViewModel = dialogViewModel.value {
-            let dateQuery: LaunchQueryDateUTCRequestModel? = getDateUTCRequestModel(dialogViewModel: dialogViewModel)
+        if let dialogInteractor = dialogInteractor {
+            let dateQuery: LaunchQueryDateUTCRequestModel? = getDateUTCRequestModel(dialogInteractor: dialogInteractor)
             return LaunchQuerySuccessDateRequestModel(dateUtc: dateQuery)
         }
         return nil
@@ -157,9 +157,9 @@ extension SpaceXInteractor: SpaceXInteractorType {
         loadLaunch()
     }
 
-    func didConfirmFilter(_ viewModel: FilterDialogInteractor) {
+    func didConfirmFilter(_ interactor: FilterDialogInteractor) {
         resetPages()
-        dialogViewModel = viewModel
+        dialogInteractor = interactor
         loadLaunch()
     }
 }

@@ -21,7 +21,7 @@
 		212677112976EE5400D7109C /* BaseXibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212677102976EE5400D7109C /* BaseXibView.swift */; };
 		212677152976EE8100D7109C /* SpaceXRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212677142976EE8100D7109C /* SpaceXRouter.swift */; };
 		212677182976EEA900D7109C /* FilterDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212677172976EEA900D7109C /* FilterDialogView.swift */; };
-		2126771C2976EEC500D7109C /* LaunchTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2126771B2976EEC500D7109C /* LaunchTableViewModel.swift */; };
+		2126771C2976EEC500D7109C /* LaunchCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2126771B2976EEC500D7109C /* LaunchCellModel.swift */; };
 		2126771F2976EEFC00D7109C /* LaunchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2126771D2976EEFC00D7109C /* LaunchTableViewCell.swift */; };
 		212677202976EEFC00D7109C /* LaunchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2126771E2976EEFC00D7109C /* LaunchTableViewCell.xib */; };
 		212677222976F0AF00D7109C /* FilterDialogView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 212677212976F0AF00D7109C /* FilterDialogView.xib */; };
@@ -85,7 +85,7 @@
 		212677102976EE5400D7109C /* BaseXibView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseXibView.swift; sourceTree = "<group>"; };
 		212677142976EE8100D7109C /* SpaceXRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXRouter.swift; sourceTree = "<group>"; };
 		212677172976EEA900D7109C /* FilterDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDialogView.swift; sourceTree = "<group>"; };
-		2126771B2976EEC500D7109C /* LaunchTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchTableViewModel.swift; sourceTree = "<group>"; };
+		2126771B2976EEC500D7109C /* LaunchCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCellModel.swift; sourceTree = "<group>"; };
 		2126771D2976EEFC00D7109C /* LaunchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchTableViewCell.swift; sourceTree = "<group>"; };
 		2126771E2976EEFC00D7109C /* LaunchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchTableViewCell.xib; sourceTree = "<group>"; };
 		212677212976F0AF00D7109C /* FilterDialogView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterDialogView.xib; sourceTree = "<group>"; };
@@ -168,6 +168,7 @@
 		2126770A2976EE2500D7109C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				212AE4F1297D5B6700BA62BB /* Entity */,
 				21602765297AAA86008C2CEC /* Router */,
 				21497719297706EF00A53D23 /* Interactor */,
 				214977162977069700A53D23 /* Presenter */,
@@ -192,17 +193,9 @@
 		212677122976EE6A00D7109C /* SpaceXScene */ = {
 			isa = PBXGroup;
 			children = (
-				212677132976EE7600D7109C /* Flow */,
 				212677162976EE9100D7109C /* View */,
 			);
 			path = SpaceXScene;
-			sourceTree = "<group>";
-		};
-		212677132976EE7600D7109C /* Flow */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Flow;
 			sourceTree = "<group>";
 		};
 		212677162976EE9100D7109C /* View */ = {
@@ -218,19 +211,18 @@
 		212677192976EEB300D7109C /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				2126771A2976EEB800D7109C /* ViewModel */,
 				2126771D2976EEFC00D7109C /* LaunchTableViewCell.swift */,
 				2126771E2976EEFC00D7109C /* LaunchTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		2126771A2976EEB800D7109C /* ViewModel */ = {
+		212AE4F1297D5B6700BA62BB /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				2126771B2976EEC500D7109C /* LaunchTableViewModel.swift */,
+				2126771B2976EEC500D7109C /* LaunchCellModel.swift */,
 			);
-			path = ViewModel;
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		214977162977069700A53D23 /* Presenter */ = {
@@ -589,7 +581,7 @@
 				212AE4F0297C569D00BA62BB /* FilterDialogInteractor.swift in Sources */,
 				2149771B2977071300A53D23 /* SpaceXInteractor.swift in Sources */,
 				212677152976EE8100D7109C /* SpaceXRouter.swift in Sources */,
-				2126771C2976EEC500D7109C /* LaunchTableViewModel.swift in Sources */,
+				2126771C2976EEC500D7109C /* LaunchCellModel.swift in Sources */,
 				21CFC48B2976EB2100A2C183 /* UIAlertAction.swift in Sources */,
 				21CFC4872976EAF500A2C183 /* Date+.swift in Sources */,
 				212676FD2976EDA800D7109C /* ShowRocketUseCase.swift in Sources */,

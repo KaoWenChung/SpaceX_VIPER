@@ -28,7 +28,7 @@ extension SpaceXPresenter: SpaceXViewToPresenterProtocol {
         interactor.launches.count
     }
     
-    func getLaunch(index: Int) -> LaunchTableViewModel {
+    func getLaunch(index: Int) -> LaunchCellModel {
         interactor.launches[index]
     }
     
@@ -36,8 +36,8 @@ extension SpaceXPresenter: SpaceXViewToPresenterProtocol {
         interactor.loadNextPage()
     }
     
-    func setFilter(_ viewModel: FilterDialogInteractor) {
-        interactor.didConfirmFilter(viewModel)
+    func setFilter(_ interactor: FilterDialogInteractor) {
+        self.interactor.didConfirmFilter(interactor)
     }
     
     func selectItem(at index: Int) {
