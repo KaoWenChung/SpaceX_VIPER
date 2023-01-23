@@ -10,7 +10,7 @@ import UIKit
 protocol SpaceXViewToPresenterProtocol: AnyObject {
     var view: SpaceXPresenterToViewProtocol? { get set }
     func loadLaunches()
-    func setFilter(_ interactor: FilterDialogInteractor)
+    func setFilter(_ interactor: FilterDialogModel)
     func selectItem(at index: Int)
     func getLaunchesCount() -> Int
     func getLaunch(index: Int) -> LaunchCellModel
@@ -141,7 +141,7 @@ extension SpaceXViewController: UITableViewDataSource {
 }
 
 extension SpaceXViewController: FilterDialogViewDelegate {
-    func confirmUpdateInteractor(_ dialogInteractor: FilterDialogInteractor) {
+    func confirmUpdateInteractor(_ dialogInteractor: FilterDialogModel) {
         presenter.setFilter(dialogInteractor)
         hideFilterView()
     }

@@ -5,29 +5,28 @@
 //  Created by wyn on 2023/1/17.
 //
 
-struct FilterDialogInteractor {
+struct FilterDialogModel {
     // Use isYearDidChange to judge whether we need to update maxYear and min Year
-    private(set) var isYearDidChange: Bool = false
-    var isPresentSuccessfulLaunchingOnly: Bool
-    var isAscending: Bool = true
+    var isYearDidChange: Bool {
+        !(staticMaxYear == maxYear && staticMinYear == minYear)
+    }
+    let isPresentSuccessfulLaunchingOnly: Bool
+    let isAscending: Bool
     let staticMaxYear: Int
     let staticMinYear: Int
-    var maxYear: Int
-    var minYear: Int
-    init(staticMaxYear: Int,
+    let maxYear: Int
+    let minYear: Int
+    init(isPresentSuccessfulLaunchingOnly: Bool,
+         isAscending: Bool,
+         staticMaxYear: Int,
          staticMinYear: Int,
-         oldFilterDialogModel: FilterDialogInteractor?) {
-        isYearDidChange = oldFilterDialogModel?.isYearDidChange ?? false
+         maxYear: Int,
+         minYear: Int) {
+        self.isPresentSuccessfulLaunchingOnly = isPresentSuccessfulLaunchingOnly
+        self.isAscending = isAscending
         self.staticMaxYear = staticMaxYear
         self.staticMinYear = staticMinYear
-        maxYear = isYearDidChange ? (oldFilterDialogModel?.maxYear ?? staticMaxYear) : staticMaxYear
-        minYear = isYearDidChange ? (oldFilterDialogModel?.minYear ?? staticMinYear) : staticMinYear
-        isPresentSuccessfulLaunchingOnly = oldFilterDialogModel?.isPresentSuccessfulLaunchingOnly ?? false
-    }
-    mutating func setYearIsChanged() {
-        isYearDidChange = !(staticMaxYear == maxYear && staticMinYear == minYear)
-    }
-    mutating func toggleSuccess(_ isOn: Bool) {
-        isPresentSuccessfulLaunchingOnly = isOn
+        self.maxYear = maxYear
+        self.minYear = minYear
     }
 }

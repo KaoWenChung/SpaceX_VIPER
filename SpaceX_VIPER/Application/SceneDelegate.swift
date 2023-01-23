@@ -8,7 +8,6 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
     let appDIContainer = AppDIContainer()
     var appRouter: AppRouter?
     var window: UIWindow?
@@ -38,7 +37,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
-
-
 }
 

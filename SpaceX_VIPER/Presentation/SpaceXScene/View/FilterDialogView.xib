@@ -29,7 +29,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="366" height="71"/>
                             <buttonConfiguration key="configuration" style="plain" title="Sort Ascending"/>
                             <connections>
-                                <action selector="tapSortButton:" destination="-1" eventType="touchUpInside" id="hjs-zE-ccm"/>
+                                <action selector="tapSortButton:" destination="-1" eventType="touchUpInside" id="S1g-X3-4IP"/>
                             </connections>
                         </button>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H6O-aO-LUl">
@@ -43,9 +43,6 @@
                                 </label>
                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TkT-Oh-Zyf">
                                     <rect key="frame" x="317" y="0.0" width="51" height="31"/>
-                                    <connections>
-                                        <action selector="tapShowSuccessfulLaunching:" destination="-1" eventType="valueChanged" id="pyU-YC-Ohh"/>
-                                    </connections>
                                 </switch>
                             </subviews>
                         </stackView>

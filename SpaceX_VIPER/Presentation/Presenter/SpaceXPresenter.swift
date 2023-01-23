@@ -36,7 +36,7 @@ extension SpaceXPresenter: SpaceXViewToPresenterProtocol {
         interactor.loadNextPage()
     }
     
-    func setFilter(_ interactor: FilterDialogInteractor) {
+    func setFilter(_ interactor: FilterDialogModel) {
         self.interactor.didConfirmFilter(interactor)
     }
     

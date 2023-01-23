@@ -14,12 +14,12 @@ protocol SpaceXListInteractorToPresenterProtocol: AnyObject {
 
 protocol SpaceXListInteractorInput {
     func loadNextPage()
-    func didConfirmFilter(_ interactor: FilterDialogInteractor)
+    func didConfirmFilter(_ interactor: FilterDialogModel)
 }
 
 protocol SpaceXListInteractorOutput {
     var launches: [LaunchCellModel] { get }
-    var dialogInteractor: FilterDialogInteractor? { get }
+    var dialogInteractor: FilterDialogModel? { get }
     var presenter: SpaceXListInteractorToPresenterProtocol? { get set }
 }
 
@@ -41,7 +41,7 @@ final class SpaceXInteractor {
     
     // MARK: Output
     private(set) var launches: [LaunchCellModel] = []
-    private(set) var dialogInteractor: FilterDialogInteractor?
+    private(set) var dialogInteractor: FilterDialogModel?
     
     weak var presenter: SpaceXListInteractorToPresenterProtocol?
 
@@ -81,10 +81,16 @@ final class SpaceXInteractor {
         yearsRange.insert(year)
     }
 
-    private func getDiaLogModelWith(years: Set<Int>) -> FilterDialogInteractor {
-        FilterDialogInteractor(staticMaxYear: years.max() ?? 0,
-                               staticMinYear: years.min() ?? 0,
-                               oldFilterDialogModel: dialogInteractor)
+    private func getDiaLogModelWith(years: Set<Int>) -> FilterDialogModel {
+        FilterDialogModel(isPresentSuccessfulLaunchingOnly: dialogInteractor?.isPresentSuccessfulLaunchingOnly ?? false,
+                          isAscending: dialogInteractor?.isAscending ?? true,
+                          staticMaxYear: years.max() ?? 0,
+                          staticMinYear: years.min() ?? 0,
+                          maxYear: dialogInteractor?.maxYear ?? 0,
+                          minYear: dialogInteractor?.minYear ?? 0)
+//        FilterDialogModel(staticMaxYear: years.max() ?? 0,
+//                               staticMinYear: years.min() ?? 0,
+//                               oldFilterDialogModel: dialogInteractor)
     }
 
     private func loadLaunch() {
@@ -121,7 +127,7 @@ final class SpaceXInteractor {
         return result
     }
 
-    private func getDateUTCRequestModel(dialogInteractor: FilterDialogInteractor) -> LaunchQueryDateUTCRequestModel? {
+    private func getDateUTCRequestModel(dialogInteractor: FilterDialogModel) -> LaunchQueryDateUTCRequestModel? {
         if dialogInteractor.isYearDidChange {
             return LaunchQueryDateUTCRequestModel(gte: "\(dialogInteractor.minYear)-01-01T00:00:00.000Z", lte: "\(dialogInteractor.maxYear)-12-31T23:59:59.000Z")
         }
@@ -157,7 +163,7 @@ extension SpaceXInteractor: SpaceXInteractorType {
         loadLaunch()
     }
 
-    func didConfirmFilter(_ interactor: FilterDialogInteractor) {
+    func didConfirmFilter(_ interactor: FilterDialogModel) {
         resetPages()
         dialogInteractor = interactor
         loadLaunch()

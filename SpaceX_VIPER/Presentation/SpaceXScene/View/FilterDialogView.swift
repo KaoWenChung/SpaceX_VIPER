@@ -9,30 +9,28 @@ import MultiSlider
 import UIKit
 
 protocol FilterDialogViewDelegate: AnyObject {
-    func confirmUpdateInteractor(_ interactor: FilterDialogInteractor)
+    func confirmUpdateInteractor(_ presenter: FilterDialogModel)
 }
 
 final class FilterDialogView: BaseXibView {
-    @IBOutlet weak private var sliderBar: MultiSlider!
-    @IBOutlet weak private var lowLabel: UILabel!
-    @IBOutlet weak private var topLabel: UILabel!
-    @IBOutlet weak private var sortButton: UIButton!
-    @IBOutlet weak private var showSuccessfulLaunchingSwitch: UISwitch!
+    @IBOutlet weak private(set) var sliderBar: MultiSlider!
+    @IBOutlet weak private(set) var lowLabel: UILabel!
+    @IBOutlet weak private(set) var topLabel: UILabel!
+    @IBOutlet weak private(set) var sortButton: UIButton!
+    @IBOutlet weak private(set) var showSuccessfulLaunchingSwitch: UISwitch!
     weak var delegate: FilterDialogViewDelegate?
-    private var interactor: FilterDialogInteractor!
-
-    func fillView(_ interactor: FilterDialogInteractor) {
+    
+    func fillView(_ model: FilterDialogModel) {
         accessibilityIdentifier = AccessibilityIdentifier.filterDialogView
-        self.interactor = interactor
-        let maxValue = CGFloat(interactor.staticMaxYear)
-        let minValue = CGFloat(interactor.staticMinYear)
-        let topValue = interactor.maxYear
-        let lowValue = interactor.minYear
+        let maxValue = CGFloat(model.staticMaxYear)
+        let minValue = CGFloat(model.staticMinYear)
+        let topValue = model.maxYear
+        let lowValue = model.minYear
         setMoney(lowYear: lowValue, topYear: topValue)
         sliderBar.minimumValue = minValue
         sliderBar.maximumValue = maxValue
         sliderBar.value = [CGFloat(lowValue), CGFloat(topValue)]
-        showSuccessfulLaunchingSwitch.isOn = interactor.isPresentSuccessfulLaunchingOnly
+        showSuccessfulLaunchingSwitch.isOn = model.isPresentSuccessfulLaunchingOnly
     }
     // MARK: - Private functions
 
@@ -43,8 +41,8 @@ final class FilterDialogView: BaseXibView {
 
     // MARK: IBAction
     @IBAction private func onSliderChanged(_ sender: MultiSlider) {
-        var lowValue: Int = Int(sender.value.first!)
-        var topValue: Int = Int(sender.value.last!)
+        var lowValue: Int = Int(sender.value.first ?? 0)
+        var topValue: Int = Int(sender.value.last ?? 0)
         let maxValue: Int = Int(sliderBar.maximumValue)
         let minValue: Int = Int(sliderBar.minimumValue)
         if topValue < lowValue {
@@ -54,22 +52,25 @@ final class FilterDialogView: BaseXibView {
             lowValue = topValue
         }
         setMoney(lowYear: lowValue, topYear: topValue)
-        interactor.minYear = lowValue
-        interactor.maxYear = topValue
     }
     
-    @IBAction private func tapSortButton(_ sender: Any) {
-        interactor.isAscending.toggle()
-        let title = interactor.isAscending ? "Sort Ascending" : "Sort Descending"
+    @IBAction private func tapSortButton(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        let title = sender.isSelected ? "Sort Ascending" : "Sort Descending"
         sortButton.setTitle(title, for: .normal)
     }
 
     @IBAction private func tapConfirm() {
-        interactor.setYearIsChanged()
-        delegate?.confirmUpdateInteractor(interactor)
-    }
-
-    @IBAction private func tapShowSuccessfulLaunching(_ sender: UISwitch) {
-        interactor.toggleSuccess(sender.isOn)
+        let maxValue = Int(sliderBar.maximumValue)
+        let minValue = Int(sliderBar.minimumValue)
+        let lowValue = Int(sliderBar.value.first ?? 0)
+        let topValue = Int(sliderBar.value.last ?? 0)
+        let model = FilterDialogModel(isPresentSuccessfulLaunchingOnly: showSuccessfulLaunchingSwitch.isOn,
+                                      isAscending: sortButton.isSelected,
+                                      staticMaxYear: maxValue,
+                                      staticMinYear: minValue,
+                                      maxYear: topValue,
+                                      minYear: lowValue)
+        delegate?.confirmUpdateInteractor(model)
     }
 }
