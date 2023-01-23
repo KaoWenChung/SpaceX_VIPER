@@ -154,7 +154,7 @@ extension SpaceXViewController: SpaceXPresenterToViewProtocol {
         }
     }
     
-    func showError() {
-        
+    func showError(_ error: String) {
+        Alert.show(style: .alert, vc: self, title: CommonString.error.text, message: error, cancel: "OK")
     }
 }

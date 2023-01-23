@@ -7,7 +7,7 @@
 
 protocol SpaceXPresenterToViewProtocol: AnyObject {
     func showLaunches()
-    func showError()
+    func showError(_ error: String)
 }
 
 final class SpaceXPresenter {
@@ -50,7 +50,7 @@ extension SpaceXPresenter: SpaceXListInteractorToPresenterProtocol {
         view?.showLaunches()
     }
 
-    func didLoadLaunchesFailed() {
-        view?.showError()
+    func didLoadLaunchesFailed(_ error: String) {
+        view?.showError(error)
     }
 }

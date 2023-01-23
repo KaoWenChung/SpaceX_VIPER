@@ -9,7 +9,7 @@ import Foundation
 
 protocol SpaceXListInteractorToPresenterProtocol: AnyObject {
     func didLoadLaunches()
-    func didLoadLaunchesFailed()
+    func didLoadLaunchesFailed(_ error: String)
 }
 
 protocol SpaceXListInteractorInput {

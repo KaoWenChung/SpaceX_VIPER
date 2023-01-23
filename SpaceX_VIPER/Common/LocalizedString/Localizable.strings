@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  SpaceX_VIPER
+
+  Created by wyn on 2023/1/23.
+  
+*/
+
+"CommonString.error" = "ERROR";
+"CommonString.loading" = "Loading...";
+
+"SpaceXViewString.companyInfo" = "%@ was founded by %@ in %@ years. It has now %@ employees, %@ launch sites, and is valued at USD %@";

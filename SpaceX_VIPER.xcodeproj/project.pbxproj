@@ -32,6 +32,9 @@
 		21497718297706B900A53D23 /* SpaceXPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21497717297706B900A53D23 /* SpaceXPresenter.swift */; };
 		2149771B2977071300A53D23 /* SpaceXInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2149771A2977071300A53D23 /* SpaceXInteractor.swift */; };
 		215B02B4297EF40E008BF333 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215B02B3297EF40E008BF333 /* ImageCache.swift */; };
+		215B02B7297EF70D008BF333 /* LocalizedStringType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215B02B6297EF70D008BF333 /* LocalizedStringType.swift */; };
+		215B02B9297EF723008BF333 /* CommonString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215B02B8297EF723008BF333 /* CommonString.swift */; };
+		215B02BB297EF732008BF333 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 215B02BA297EF732008BF333 /* Localizable.strings */; };
 		21CFC4652976E8D600A2C183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4642976E8D600A2C183 /* AppDelegate.swift */; };
 		21CFC4672976E8D600A2C183 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4662976E8D600A2C183 /* SceneDelegate.swift */; };
 		21CFC46E2976E8D800A2C183 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CFC46D2976E8D800A2C183 /* Assets.xcassets */; };
@@ -96,6 +99,9 @@
 		21497717297706B900A53D23 /* SpaceXPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXPresenter.swift; sourceTree = "<group>"; };
 		2149771A2977071300A53D23 /* SpaceXInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXInteractor.swift; sourceTree = "<group>"; };
 		215B02B3297EF40E008BF333 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		215B02B6297EF70D008BF333 /* LocalizedStringType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringType.swift; sourceTree = "<group>"; };
+		215B02B8297EF723008BF333 /* CommonString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonString.swift; sourceTree = "<group>"; };
+		215B02BA297EF732008BF333 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		21CFC4612976E8D600A2C183 /* SpaceX_VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX_VIPER.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CFC4642976E8D600A2C183 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21CFC4662976E8D600A2C183 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -252,6 +258,16 @@
 			path = Cache;
 			sourceTree = "<group>";
 		};
+		215B02B5297EF700008BF333 /* LocalizedString */ = {
+			isa = PBXGroup;
+			children = (
+				215B02B6297EF70D008BF333 /* LocalizedStringType.swift */,
+				215B02B8297EF723008BF333 /* CommonString.swift */,
+				215B02BA297EF732008BF333 /* Localizable.strings */,
+			);
+			path = LocalizedString;
+			sourceTree = "<group>";
+		};
 		21602765297AAA86008C2CEC /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				21CFC4852976EA6400A2C183 /* Extension */,
+				215B02B5297EF700008BF333 /* LocalizedString */,
 				21CFC48C2976EB5600A2C183 /* CancellableType.swift */,
 				21CFC48E2976EB6500A2C183 /* Alert.swift */,
 			);
@@ -536,6 +553,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				212677202976EEFC00D7109C /* LaunchTableViewCell.xib in Resources */,
+				215B02BB297EF732008BF333 /* Localizable.strings in Resources */,
 				21CFC4712976E8D800A2C183 /* LaunchScreen.storyboard in Resources */,
 				212677222976F0AF00D7109C /* FilterDialogView.xib in Resources */,
 				2126772B2976F0FB00D7109C /* SpaceXViewController.xib in Resources */,
@@ -566,6 +584,7 @@
 				212677112976EE5400D7109C /* BaseXibView.swift in Sources */,
 				21CFC4842976EA5E00A2C183 /* UIImageView+.swift in Sources */,
 				21CFC4A42976EC8600A2C183 /* LaunchModel.swift in Sources */,
+				215B02B9297EF723008BF333 /* CommonString.swift in Sources */,
 				21CFC48D2976EB5600A2C183 /* CancellableType.swift in Sources */,
 				212677072976EDF400D7109C /* Endpoint.swift in Sources */,
 				21CFC4812976E9AD00A2C183 /* AppRouter.swift in Sources */,
@@ -581,6 +600,7 @@
 				21CFC49C2976EC3C00A2C183 /* LaunchImageRepository.swift in Sources */,
 				21CFC49A2976EC2F00A2C183 /* RocketRepository.swift in Sources */,
 				21CFC4892976EB0E00A2C183 /* Int+.swift in Sources */,
+				215B02B7297EF70D008BF333 /* LocalizedStringType.swift in Sources */,
 				212677032976EDDB00D7109C /* DataTransferService.swift in Sources */,
 				21CFC4932976EBBB00A2C183 /* APIEndpoints.swift in Sources */,
 				2126770D2976EE3800D7109C /* Observable.swift in Sources */,
