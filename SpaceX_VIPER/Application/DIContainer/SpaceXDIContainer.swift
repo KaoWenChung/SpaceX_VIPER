@@ -46,7 +46,7 @@ final class SpaceXDIContainer {
     func makeSpaceXViewController() -> SpaceXViewController {
         let presenter = makeSpaceXPresenter()
         let view = SpaceXViewController(presenter: presenter)
-        presenter.view = view
+        presenter.mainView = view
         return view
     }
 

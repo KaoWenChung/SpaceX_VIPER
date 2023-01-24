@@ -8,8 +8,8 @@
 import MultiSlider
 import UIKit
 
-protocol FilterDialogViewDelegate: AnyObject {
-    func confirmUpdateInteractor(_ presenter: FilterDialogModel)
+protocol FilterDialogViewToPresenterProtocol: AnyObject {
+    func confirmUpdateInteractor(_ model: FilterDialogModel)
 }
 
 final class FilterDialogView: BaseXibView {
@@ -18,9 +18,9 @@ final class FilterDialogView: BaseXibView {
     @IBOutlet weak private(set) var topLabel: UILabel!
     @IBOutlet weak private(set) var sortButton: UIButton!
     @IBOutlet weak private(set) var showSuccessfulLaunchingSwitch: UISwitch!
-    weak var delegate: FilterDialogViewDelegate?
+    weak var presenter: FilterDialogViewToPresenterProtocol?
     
-    func fillView(_ model: FilterDialogModel) {
+    private func fillView(_ model: FilterDialogModel) {
         accessibilityIdentifier = AccessibilityIdentifier.filterDialogView
         let maxValue = CGFloat(model.staticMaxYear)
         let minValue = CGFloat(model.staticMinYear)
@@ -66,11 +66,19 @@ final class FilterDialogView: BaseXibView {
         let lowValue = Int(sliderBar.value.first ?? 0)
         let topValue = Int(sliderBar.value.last ?? 0)
         let model = FilterDialogModel(isPresentSuccessfulLaunchingOnly: showSuccessfulLaunchingSwitch.isOn,
-                                      isAscending: sortButton.isSelected,
+                                      isAscending: !sortButton.isSelected,
                                       staticMaxYear: maxValue,
                                       staticMinYear: minValue,
                                       maxYear: topValue,
                                       minYear: lowValue)
-        delegate?.confirmUpdateInteractor(model)
+        presenter?.confirmUpdateInteractor(model)
+    }
+}
+
+extension FilterDialogView: SpaceXPresenterToFilterViewProtocol {
+    func updateFilterView(_ model: FilterDialogModel) {
+        DispatchQueue.main.async {
+            self.fillView(model)
+        }
     }
 }

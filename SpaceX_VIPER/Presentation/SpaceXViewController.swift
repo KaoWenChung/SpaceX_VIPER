@@ -7,10 +7,10 @@
 
 import UIKit
 
-protocol SpaceXViewToPresenterProtocol: AnyObject {
-    var view: SpaceXPresenterToViewProtocol? { get set }
+protocol SpaceXViewToPresenterProtocol: FilterDialogViewToPresenterProtocol {
+    var mainView: SpaceXPresenterToViewProtocol? { get set }
+    var filterView: SpaceXPresenterToFilterViewProtocol? { get set }
     func loadLaunches()
-    func setFilter(_ model: FilterDialogModel)
     func selectItem(at index: Int)
     func getLaunchesCount() -> Int
     func getLaunch(index: Int) -> LaunchCellModel
@@ -78,7 +78,8 @@ class SpaceXViewController: UIViewController {
     }
     private func initDialogView() {
         dialogView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(gestureHandler)))
-        dialogView.delegate = self
+        presenter.filterView = dialogView
+        dialogView.presenter = presenter
     }
     private func initNavigationBar() {
         title = "SpaceX"
@@ -132,20 +133,14 @@ extension SpaceXViewController: UITableViewDataSource {
     }
 }
 
-extension SpaceXViewController: FilterDialogViewDelegate {
-    func confirmUpdateInteractor(_ dialogInteractor: FilterDialogModel) {
-        presenter.setFilter(dialogInteractor)
-        hideFilterView()
-    }
-}
+//extension SpaceXViewController: FilterDialogViewDelegate {
+//    func confirmUpdateInteractor(_ dialogInteractor: FilterDialogModel?) {
+//        presenter.setFilter(dialogInteractor)
+//        hideFilterView()
+//    }
+//}
 
 extension SpaceXViewController: SpaceXPresenterToViewProtocol {
-    func updateFilterView(_ model: FilterDialogModel) {
-        DispatchQueue.main.async {
-            self.dialogView.fillView(model)
-        }
-    }
-    
     func showLaunches() {
         DispatchQueue.main.async {
             self.tableView.reloadData()

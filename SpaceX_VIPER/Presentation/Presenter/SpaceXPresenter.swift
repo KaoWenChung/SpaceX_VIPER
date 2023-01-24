@@ -8,12 +8,16 @@
 protocol SpaceXPresenterToViewProtocol: AnyObject {
     func showLaunches()
     func showError(_ error: String)
+}
+
+protocol SpaceXPresenterToFilterViewProtocol: AnyObject {
     func updateFilterView(_ model: FilterDialogModel)
 }
 
 final class SpaceXPresenter {
     // MARK: Properties
-    weak var view: SpaceXPresenterToViewProtocol?
+    weak var mainView: SpaceXPresenterToViewProtocol?
+    weak var filterView: SpaceXPresenterToFilterViewProtocol?
     private let interactor: SpaceXInteractorType
     private let router: SpaceXRouterType
     
@@ -25,6 +29,10 @@ final class SpaceXPresenter {
 }
 
 extension SpaceXPresenter: SpaceXViewToPresenterProtocol {
+    func confirmUpdateInteractor(_ model: FilterDialogModel) {
+        interactor.didConfirmFilter(model)
+    }
+    
     func getLaunchesCount() -> Int {
         interactor.launches.count
     }
@@ -37,25 +45,20 @@ extension SpaceXPresenter: SpaceXViewToPresenterProtocol {
         interactor.loadNextPage()
     }
     
-    func setFilter(_ interactor: FilterDialogModel) {
-        self.interactor.didConfirmFilter(interactor)
-    }
-    
     func selectItem(at index: Int) {
-//        interactor.
     }
 }
 
 extension SpaceXPresenter: SpaceXListInteractorToPresenterProtocol {
     func didLoadLaunches() {
-        view?.showLaunches()
+        mainView?.showLaunches()
     }
 
     func didLoadLaunchesFailed(_ error: String) {
-        view?.showError(error)
+        mainView?.showError(error)
     }
 
     func didSetFilterModel(_ model: FilterDialogModel) {
-        view?.updateFilterView(model)
+        filterView?.updateFilterView(model)
     }
 }

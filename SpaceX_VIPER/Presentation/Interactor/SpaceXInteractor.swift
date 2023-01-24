@@ -15,12 +15,12 @@ protocol SpaceXListInteractorToPresenterProtocol: AnyObject {
 
 protocol SpaceXListInteractorInput {
     func loadNextPage()
-    func didConfirmFilter(_ interactor: FilterDialogModel)
+    func didConfirmFilter(_ interactor: FilterDialogModel?)
 }
 
 protocol SpaceXListInteractorOutput {
     var launches: [LaunchCellModel] { get }
-    var dialogInteractor: FilterDialogModel? { get }
+    var filterModel: FilterDialogModel? { get }
     var presenter: SpaceXListInteractorToPresenterProtocol? { get set }
 }
 
@@ -45,7 +45,7 @@ final class SpaceXInteractor {
     
     // MARK: Output
     private(set) var launches: [LaunchCellModel] = []
-    private(set) var dialogInteractor: FilterDialogModel?
+    private(set) var filterModel: FilterDialogModel?
     
     weak var presenter: SpaceXListInteractorToPresenterProtocol?
 
@@ -69,9 +69,7 @@ final class SpaceXInteractor {
             launchCellModel.updateRocket(rocket)
             launches.append(launchCellModel)
         }
-        let dialogModel = getDiaLogModelWith()
-        dialogInteractor = dialogModel
-        presenter?.didSetFilterModel(dialogModel)
+        presenter?.didSetFilterModel(getDiaLogModelWith())
     }
 
     private func dealWithDocs(_ docs: [LaunchDocModel]) async {
@@ -93,10 +91,10 @@ final class SpaceXInteractor {
     private func getDiaLogModelWith() -> FilterDialogModel {
         let staticMaxYear = yearsRange.max() ?? 0
         let staticMinYear = yearsRange.min() ?? 0
-        let maxYear = dialogInteractor?.maxYear ?? staticMaxYear
-        let minYear = dialogInteractor?.minYear ?? staticMinYear
-        return FilterDialogModel(isPresentSuccessfulLaunchingOnly: dialogInteractor?.isPresentSuccessfulLaunchingOnly ?? false,
-                          isAscending: dialogInteractor?.isAscending ?? true,
+        let maxYear = filterModel?.maxYear ?? staticMaxYear
+        let minYear = filterModel?.minYear ?? staticMinYear
+        return FilterDialogModel(isPresentSuccessfulLaunchingOnly: filterModel?.isPresentSuccessfulLaunchingOnly ?? false,
+                          isAscending: filterModel?.isAscending ?? true,
                           staticMaxYear: staticMaxYear,
                           staticMinYear: staticMinYear,
                           maxYear: maxYear,
@@ -105,7 +103,7 @@ final class SpaceXInteractor {
 
     private func loadLaunch() {
         let loadTask = Task {
-            let sort = LaunchSortRequestModel(sort: (dialogInteractor?.isAscending ?? true) ? .asc : .desc)
+            let sort = LaunchSortRequestModel(sort: (filterModel?.isAscending ?? true) ? .asc : .desc)
             let options = LaunchOptionRequestModel(sort: sort, page: nextPage, limit: 10)
             let launches = try await getResult(options)
             
@@ -116,7 +114,7 @@ final class SpaceXInteractor {
     }
 
     private func getResult(_ options: LaunchOptionRequestModel) async throws -> LaunchResponseModel {
-        if dialogInteractor?.isPresentSuccessfulLaunchingOnly == true {
+        if filterModel?.isPresentSuccessfulLaunchingOnly == true {
             return try await getLaunchResultWithSuccessQuery(options)
         } else {
             return try await getLaunchResultWithoutSuccessQuery(options)
@@ -145,7 +143,7 @@ final class SpaceXInteractor {
     }
 
     private func getDateQuery() -> LaunchQueryDateRequestModel? {
-        if let dialogInteractor = dialogInteractor {
+        if let dialogInteractor = filterModel {
             let dateQuery: LaunchQueryDateUTCRequestModel? = getDateUTCRequestModel(dialogInteractor: dialogInteractor)
             return LaunchQueryDateRequestModel(dateUtc: dateQuery)
         }
@@ -153,7 +151,7 @@ final class SpaceXInteractor {
     }
 
     private func getSuccessDateQuery() -> LaunchQuerySuccessDateRequestModel? {
-        if let dialogInteractor = dialogInteractor {
+        if let dialogInteractor = filterModel {
             let dateQuery: LaunchQueryDateUTCRequestModel? = getDateUTCRequestModel(dialogInteractor: dialogInteractor)
             return LaunchQuerySuccessDateRequestModel(dateUtc: dateQuery)
         }
@@ -173,9 +171,9 @@ extension SpaceXInteractor: SpaceXInteractorType {
         loadLaunch()
     }
 
-    func didConfirmFilter(_ interactor: FilterDialogModel) {
+    func didConfirmFilter(_ interactor: FilterDialogModel?) {
         resetPages()
-        dialogInteractor = interactor
+        filterModel = interactor
         loadLaunch()
     }
 }
