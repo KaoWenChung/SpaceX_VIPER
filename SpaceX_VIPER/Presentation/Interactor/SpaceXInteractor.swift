@@ -8,6 +8,7 @@
 import Foundation
 
 protocol SpaceXListInteractorToPresenterProtocol: AnyObject {
+    func didSetFilterModel(_ model: FilterDialogModel)
     func didLoadLaunches()
     func didLoadLaunchesFailed(_ error: String)
 }
@@ -68,7 +69,9 @@ final class SpaceXInteractor {
             launchCellModel.updateRocket(rocket)
             launches.append(launchCellModel)
         }
-        dialogInteractor = getDiaLogModelWith(years: yearsRange)
+        let dialogModel = getDiaLogModelWith()
+        dialogInteractor = dialogModel
+        presenter?.didSetFilterModel(dialogModel)
     }
 
     private func dealWithDocs(_ docs: [LaunchDocModel]) async {
@@ -87,16 +90,17 @@ final class SpaceXInteractor {
         yearsRange.insert(year)
     }
 
-    private func getDiaLogModelWith(years: Set<Int>) -> FilterDialogModel {
-        FilterDialogModel(isPresentSuccessfulLaunchingOnly: dialogInteractor?.isPresentSuccessfulLaunchingOnly ?? false,
+    private func getDiaLogModelWith() -> FilterDialogModel {
+        let staticMaxYear = yearsRange.max() ?? 0
+        let staticMinYear = yearsRange.min() ?? 0
+        let maxYear = dialogInteractor?.maxYear ?? staticMaxYear
+        let minYear = dialogInteractor?.minYear ?? staticMinYear
+        return FilterDialogModel(isPresentSuccessfulLaunchingOnly: dialogInteractor?.isPresentSuccessfulLaunchingOnly ?? false,
                           isAscending: dialogInteractor?.isAscending ?? true,
-                          staticMaxYear: years.max() ?? 0,
-                          staticMinYear: years.min() ?? 0,
-                          maxYear: dialogInteractor?.maxYear ?? 0,
-                          minYear: dialogInteractor?.minYear ?? 0)
-//        FilterDialogModel(staticMaxYear: years.max() ?? 0,
-//                               staticMinYear: years.min() ?? 0,
-//                               oldFilterDialogModel: dialogInteractor)
+                          staticMaxYear: staticMaxYear,
+                          staticMinYear: staticMinYear,
+                          maxYear: maxYear,
+                          minYear: minYear)
     }
 
     private func loadLaunch() {

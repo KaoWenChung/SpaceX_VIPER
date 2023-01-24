@@ -65,7 +65,6 @@ struct LaunchSortRequestModel: Encodable {
 }
 
 struct LaunchResponseModel: Decodable {
-
     let docs: [LaunchDocModel]?
     let hasNextPage: Bool?
     let hasPrevPage: Bool?

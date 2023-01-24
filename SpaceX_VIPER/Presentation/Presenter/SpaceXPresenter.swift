@@ -8,6 +8,7 @@
 protocol SpaceXPresenterToViewProtocol: AnyObject {
     func showLaunches()
     func showError(_ error: String)
+    func updateFilterView(_ model: FilterDialogModel)
 }
 
 final class SpaceXPresenter {
@@ -52,5 +53,9 @@ extension SpaceXPresenter: SpaceXListInteractorToPresenterProtocol {
 
     func didLoadLaunchesFailed(_ error: String) {
         view?.showError(error)
+    }
+
+    func didSetFilterModel(_ model: FilterDialogModel) {
+        view?.updateFilterView(model)
     }
 }
