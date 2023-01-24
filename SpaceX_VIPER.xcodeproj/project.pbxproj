@@ -209,8 +209,7 @@
 		212677162976EE9100D7109C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				212677172976EEA900D7109C /* FilterDialogView.swift */,
-				212677212976F0AF00D7109C /* FilterDialogView.xib */,
+				215B02BC29801CEB008BF333 /* FilterDialogView */,
 				212677192976EEB300D7109C /* Cell */,
 			);
 			path = View;
@@ -266,6 +265,30 @@
 				215B02BA297EF732008BF333 /* Localizable.strings */,
 			);
 			path = LocalizedString;
+			sourceTree = "<group>";
+		};
+		215B02BC29801CEB008BF333 /* FilterDialogView */ = {
+			isa = PBXGroup;
+			children = (
+				215B02BD29801CF7008BF333 /* FilterDialogItemView */,
+				212677172976EEA900D7109C /* FilterDialogView.swift */,
+				212677212976F0AF00D7109C /* FilterDialogView.xib */,
+			);
+			path = FilterDialogView;
+			sourceTree = "<group>";
+		};
+		215B02BD29801CF7008BF333 /* FilterDialogItemView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FilterDialogItemView;
+			sourceTree = "<group>";
+		};
+		215B02BE29801E02008BF333 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		21602765297AAA86008C2CEC /* Router */ = {
@@ -423,6 +446,7 @@
 		21E039DA2976FD2300C4E292 /* SpaceX_VIPERTests */ = {
 			isa = PBXGroup;
 			children = (
+				215B02BE29801E02008BF333 /* New Group */,
 				21E039E32976FD4B00C4E292 /* Infrastructure */,
 				21E039E22976FD3800C4E292 /* Common */,
 			);

@@ -18,7 +18,6 @@ protocol SpaceXViewToPresenterProtocol: AnyObject {
 
 class SpaceXViewController: UIViewController {
     private let presenter: SpaceXViewToPresenterProtocol
-    private var launchImagesRepository: LaunchImageRepositoryType
     private var viewTranslationY: CGFloat = 0.0
     private var filterButton: UIBarButtonItem!
     private var isShowFilter: Bool = false
@@ -27,10 +26,8 @@ class SpaceXViewController: UIViewController {
     @IBOutlet weak private var tableView: UITableView!
     @IBOutlet weak private var dialogView: FilterDialogView!
     
-    init(presenter: SpaceXViewToPresenterProtocol,
-         launchImagesRepository: LaunchImageRepositoryType) {
+    init(presenter: SpaceXViewToPresenterProtocol) {
         self.presenter = presenter
-        self.launchImagesRepository = launchImagesRepository
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -131,7 +128,7 @@ extension SpaceXViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: LaunchTableViewCell.name, for: indexPath) as? LaunchTableViewCell else { return UITableViewCell() }
 
-        cell.fill(presenter.getLaunch(index: indexPath.row), imageRepository: launchImagesRepository)
+        cell.fill(presenter.getLaunch(index: indexPath.row))
 
         if indexPath.row == presenter.getLaunchesCount() - 1 {
             presenter.loadLaunches()

@@ -23,13 +23,13 @@ final class LaunchTableViewCell: UITableViewCell {
         daysLabel.text = nil
     }
 
-    func fill(_ interactor: LaunchCellModel, imageRepository: LaunchImageRepositoryType) {
+    func fill(_ interactor: LaunchCellModel) {
         missionLabel.text = interactor.mission
         dateLabel.text = interactor.date
         rocketLabel.text = interactor.rocket
         daysLabel.text = interactor.days
         let task = Task {
-            await missionImageView.downloaded(imageLoader: imageRepository, from: interactor.imageURL)
+            await missionImageView.downloaded(imageLoader: interactor.imageRepository, from: interactor.imageURL)
         }
         task.cancel()
         Task.init {

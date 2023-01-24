@@ -45,7 +45,7 @@ final class SpaceXDIContainer {
     // MARK: - SpaceX
     func makeSpaceXViewController() -> SpaceXViewController {
         let presenter = makeSpaceXPresenter()
-        let view = SpaceXViewController(presenter: presenter, launchImagesRepository: makeLaunchImagesRepository())
+        let view = SpaceXViewController(presenter: presenter)
         presenter.view = view
         return view
     }
@@ -59,7 +59,7 @@ final class SpaceXDIContainer {
     }
 
     func makeSpaceXInteractor() -> SpaceXInteractor {
-        SpaceXInteractor(showRocketUseCase: makeShowRocketUseCase(), showLaunchUseCase: makeShowLaunchListUseCase())
+        SpaceXInteractor(showRocketUseCase: makeShowRocketUseCase(), showLaunchUseCase: makeShowLaunchListUseCase(), imageRepository: makeLaunchImagesRepository())
     }
 
     func makeSpaceXRouter() -> SpaceXRouterType {

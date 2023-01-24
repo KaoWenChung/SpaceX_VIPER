@@ -30,6 +30,9 @@ final class SpaceXInteractor {
     private let showRocketUseCase: ShowRocketUseCaseType
     private let showLaunchUseCase: ShowLaunchListUseCaseType
     
+    // MARK: Repository
+    private let imageRepository: LaunchImageRepositoryType
+    
     // Properties
     private var yearsRange = Set<Int>()
     private var currentPage: Int = 0
@@ -45,9 +48,12 @@ final class SpaceXInteractor {
     
     weak var presenter: SpaceXListInteractorToPresenterProtocol?
 
-    init(showRocketUseCase: ShowRocketUseCaseType, showLaunchUseCase: ShowLaunchListUseCaseType) {
+    init(showRocketUseCase: ShowRocketUseCaseType,
+         showLaunchUseCase: ShowLaunchListUseCaseType,
+         imageRepository: LaunchImageRepositoryType) {
         self.showRocketUseCase = showRocketUseCase
         self.showLaunchUseCase = showLaunchUseCase
+        self.imageRepository = imageRepository
     }
 
     // MARK: - Private
@@ -56,7 +62,7 @@ final class SpaceXInteractor {
         currentPage = launchResponse.page ?? 0
         totalPageCount = launchResponse.totalPages ?? 0
         for launch in launchResponse.docs ?? [] {
-            var launchCellModel = LaunchCellModel(launch)
+            var launchCellModel = LaunchCellModel(launch, imageRepository: imageRepository)
             let rocket = try? await showRocketUseCase.execute(queryID: launch.rocket ?? "")
             addYearToYearRange(launch)
             launchCellModel.updateRocket(rocket)
@@ -67,7 +73,7 @@ final class SpaceXInteractor {
 
     private func dealWithDocs(_ docs: [LaunchDocModel]) async {
         for doc in docs {
-            var cellModel = LaunchCellModel(doc)
+            var cellModel = LaunchCellModel(doc, imageRepository: imageRepository)
             let rocket = try? await showRocketUseCase.execute(queryID: doc.rocket ?? "")
             addYearToYearRange(doc)
             cellModel.updateRocket(rocket)

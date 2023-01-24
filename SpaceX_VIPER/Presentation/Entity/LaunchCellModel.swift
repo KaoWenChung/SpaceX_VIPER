@@ -6,6 +6,7 @@
 //
 
 struct LaunchCellModel {
+    let imageRepository: LaunchImageRepositoryType
     let mission: String
     let date: String?
     let imageURL: String
@@ -17,7 +18,9 @@ struct LaunchCellModel {
     
     private(set) var rocket: String? = nil
     
-    init(_ launchData: LaunchDocModel) {
+    init(_ launchData: LaunchDocModel,
+         imageRepository: LaunchImageRepositoryType) {
+        self.imageRepository = imageRepository
         mission = "Misson: \(launchData.name ?? "")"
 
         if let dateUnix = launchData.dateUnix {
