@@ -15,18 +15,26 @@ protocol SpaceXListInteractorToPresenterProtocol: AnyObject {
 
 protocol SpaceXListInteractorInput {
     func loadNextPage()
-    func didConfirmFilter(_ interactor: FilterDialogModel?)
+    func didConfirmFilter(_ model: FilterDialogModel)
 }
 
 protocol SpaceXListInteractorOutput {
     var launches: [LaunchCellModel] { get }
-    var filterModel: FilterDialogModel? { get }
     var presenter: SpaceXListInteractorToPresenterProtocol? { get set }
 }
 
 protocol SpaceXInteractorType: SpaceXListInteractorInput, SpaceXListInteractorOutput {}
 
 final class SpaceXInteractor {
+    enum FilterStatus {
+        case didSet
+        case notSet
+    }
+    enum Contents {
+        static let isAscendingDefaultValue = true
+        static let isOnlySuccessfulLaunchingDefaultValue = false
+        
+    }
     // MARK: UseCases
     private let showRocketUseCase: ShowRocketUseCaseType
     private let showLaunchUseCase: ShowLaunchListUseCaseType
@@ -39,13 +47,14 @@ final class SpaceXInteractor {
     private var currentPage: Int = 0
     private var totalPageCount: Int = 1
     private var launchLoadTask: CancellableType? { willSet { launchLoadTask?.cancel() } }
+    private var filterModel: FilterDialogModel?
+    private var filterStatus: FilterStatus = .notSet
 
     var hasMorePages: Bool { currentPage < totalPageCount }
     var nextPage: Int { hasMorePages ? currentPage + 1 : currentPage }
     
     // MARK: Output
     private(set) var launches: [LaunchCellModel] = []
-    private(set) var filterModel: FilterDialogModel?
     
     weak var presenter: SpaceXListInteractorToPresenterProtocol?
 
@@ -93,8 +102,8 @@ final class SpaceXInteractor {
         let staticMinYear = yearsRange.min() ?? 0
         let maxYear = filterModel?.maxYear ?? staticMaxYear
         let minYear = filterModel?.minYear ?? staticMinYear
-        return FilterDialogModel(isPresentSuccessfulLaunchingOnly: filterModel?.isPresentSuccessfulLaunchingOnly ?? false,
-                          isAscending: filterModel?.isAscending ?? true,
+        return FilterDialogModel(isOnlySuccessfulLaunching: filterModel?.isOnlySuccessfulLaunching ?? Contents.isOnlySuccessfulLaunchingDefaultValue,
+                                 isAscending: filterModel?.isAscending ?? Contents.isAscendingDefaultValue,
                           staticMaxYear: staticMaxYear,
                           staticMinYear: staticMinYear,
                           maxYear: maxYear,
@@ -114,7 +123,7 @@ final class SpaceXInteractor {
     }
 
     private func getResult(_ options: LaunchOptionRequestModel) async throws -> LaunchResponseModel {
-        if filterModel?.isPresentSuccessfulLaunchingOnly == true {
+        if filterModel?.isOnlySuccessfulLaunching == true {
             return try await getLaunchResultWithSuccessQuery(options)
         } else {
             return try await getLaunchResultWithoutSuccessQuery(options)
@@ -136,7 +145,7 @@ final class SpaceXInteractor {
     }
 
     private func getDateUTCRequestModel(dialogInteractor: FilterDialogModel) -> LaunchQueryDateUTCRequestModel? {
-        if dialogInteractor.isYearDidChange {
+        if filterStatus == .didSet {
             return LaunchQueryDateUTCRequestModel(gte: "\(dialogInteractor.minYear)-01-01T00:00:00.000Z", lte: "\(dialogInteractor.maxYear)-12-31T23:59:59.000Z")
         }
         return nil
@@ -171,9 +180,17 @@ extension SpaceXInteractor: SpaceXInteractorType {
         loadLaunch()
     }
 
-    func didConfirmFilter(_ interactor: FilterDialogModel?) {
+    func didConfirmFilter(_ model: FilterDialogModel) {
         resetPages()
-        filterModel = interactor
+        if model.isAscending == Contents.isAscendingDefaultValue,
+           model.isOnlySuccessfulLaunching == Contents.isOnlySuccessfulLaunchingDefaultValue,
+           model.staticMinYear == model.minYear,
+           model.staticMaxYear == model.maxYear {
+            filterStatus = .notSet
+        } else {
+            filterStatus = .didSet
+        }
+        filterModel = model
         loadLaunch()
     }
 }

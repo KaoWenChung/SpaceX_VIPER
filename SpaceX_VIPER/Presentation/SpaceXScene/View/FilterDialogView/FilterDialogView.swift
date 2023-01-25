@@ -9,7 +9,7 @@ import MultiSlider
 import UIKit
 
 protocol FilterDialogViewToPresenterProtocol: AnyObject {
-    func confirmUpdateInteractor(_ model: FilterDialogModel)
+    func didConfirmFilter(_ model: FilterDialogModel)
 }
 
 final class FilterDialogView: BaseXibView {
@@ -30,7 +30,7 @@ final class FilterDialogView: BaseXibView {
         sliderBar.minimumValue = minValue
         sliderBar.maximumValue = maxValue
         sliderBar.value = [CGFloat(lowValue), CGFloat(topValue)]
-        showSuccessfulLaunchingSwitch.isOn = model.isPresentSuccessfulLaunchingOnly
+        showSuccessfulLaunchingSwitch.isOn = model.isOnlySuccessfulLaunching
     }
     // MARK: - Private functions
 
@@ -65,13 +65,13 @@ final class FilterDialogView: BaseXibView {
         let minValue = Int(sliderBar.minimumValue)
         let lowValue = Int(sliderBar.value.first ?? 0)
         let topValue = Int(sliderBar.value.last ?? 0)
-        let model = FilterDialogModel(isPresentSuccessfulLaunchingOnly: showSuccessfulLaunchingSwitch.isOn,
+        let model = FilterDialogModel(isOnlySuccessfulLaunching: showSuccessfulLaunchingSwitch.isOn,
                                       isAscending: !sortButton.isSelected,
                                       staticMaxYear: maxValue,
                                       staticMinYear: minValue,
                                       maxYear: topValue,
                                       minYear: lowValue)
-        presenter?.confirmUpdateInteractor(model)
+        presenter?.didConfirmFilter(model)
     }
 }
 

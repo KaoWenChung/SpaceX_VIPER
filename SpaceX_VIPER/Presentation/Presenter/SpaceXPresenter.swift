@@ -27,9 +27,9 @@ final class SpaceXPresenter {
         self.router = router
     }
 }
-
+// MARK: - SpaceXViewToPresenterProtocol
 extension SpaceXPresenter: SpaceXViewToPresenterProtocol {
-    func confirmUpdateInteractor(_ model: FilterDialogModel) {
+    func didConfirmFilter(_ model: FilterDialogModel) {
         interactor.didConfirmFilter(model)
     }
     
@@ -48,7 +48,7 @@ extension SpaceXPresenter: SpaceXViewToPresenterProtocol {
     func selectItem(at index: Int) {
     }
 }
-
+// MARK: - SpaceXListInteractorToPresenterProtocol
 extension SpaceXPresenter: SpaceXListInteractorToPresenterProtocol {
     func didLoadLaunches() {
         mainView?.showLaunches()

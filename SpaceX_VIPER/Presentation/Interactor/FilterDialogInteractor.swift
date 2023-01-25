@@ -6,23 +6,19 @@
 //
 
 struct FilterDialogModel {
-    // Use isYearDidChange to judge whether we need to update maxYear and min Year
-    var isYearDidChange: Bool {
-        !(staticMaxYear == maxYear && staticMinYear == minYear)
-    }
-    let isPresentSuccessfulLaunchingOnly: Bool
+    let isOnlySuccessfulLaunching: Bool
     let isAscending: Bool
     let staticMaxYear: Int
     let staticMinYear: Int
     let maxYear: Int
     let minYear: Int
-    init(isPresentSuccessfulLaunchingOnly: Bool,
+    init(isOnlySuccessfulLaunching: Bool,
          isAscending: Bool,
          staticMaxYear: Int,
          staticMinYear: Int,
          maxYear: Int,
          minYear: Int) {
-        self.isPresentSuccessfulLaunchingOnly = isPresentSuccessfulLaunchingOnly
+        self.isOnlySuccessfulLaunching = isOnlySuccessfulLaunching
         self.isAscending = isAscending
         self.staticMaxYear = staticMaxYear
         self.staticMinYear = staticMinYear
