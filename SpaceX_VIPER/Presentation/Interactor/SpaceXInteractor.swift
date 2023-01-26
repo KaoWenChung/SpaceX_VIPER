@@ -100,14 +100,16 @@ final class SpaceXInteractor {
     private func getDiaLogModelWith() -> FilterDialogModel {
         let staticMaxYear = yearsRange.max() ?? 0
         let staticMinYear = yearsRange.min() ?? 0
-        let maxYear = filterModel?.maxYear ?? staticMaxYear
-        let minYear = filterModel?.minYear ?? staticMinYear
-        return FilterDialogModel(isOnlySuccessfulLaunching: filterModel?.isOnlySuccessfulLaunching ?? Contents.isOnlySuccessfulLaunchingDefaultValue,
-                                 isAscending: filterModel?.isAscending ?? Contents.isAscendingDefaultValue,
-                          staticMaxYear: staticMaxYear,
-                          staticMinYear: staticMinYear,
-                          maxYear: maxYear,
-                          minYear: minYear)
+        let maxYear = filterStatus == .didSet ? filterModel?.maxYear ?? staticMaxYear : staticMaxYear
+        let minYear = filterStatus == .didSet ? filterModel?.minYear ?? staticMinYear : staticMinYear
+        let isOnlySuccessfulLaunching = filterStatus == .didSet ? filterModel?.isOnlySuccessfulLaunching : Contents.isOnlySuccessfulLaunchingDefaultValue
+        let isAscending = filterStatus == .didSet ? filterModel?.isAscending : Contents.isAscendingDefaultValue
+        return FilterDialogModel(isOnlySuccessfulLaunching: isOnlySuccessfulLaunching ?? Contents.isOnlySuccessfulLaunchingDefaultValue,
+                                 isAscending: isAscending ?? Contents.isAscendingDefaultValue,
+                                 staticMaxYear: staticMaxYear,
+                                 staticMinYear: staticMinYear,
+                                 maxYear: maxYear,
+                                 minYear: minYear)
     }
 
     private func loadLaunch() {
