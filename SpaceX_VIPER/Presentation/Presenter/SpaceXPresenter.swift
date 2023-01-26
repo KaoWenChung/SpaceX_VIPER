@@ -7,6 +7,7 @@
 
 protocol SpaceXPresenterToViewProtocol: AnyObject {
     func showLaunches()
+    func didConfirmFilter()
     func showError(_ error: String)
 }
 
@@ -31,6 +32,7 @@ final class SpaceXPresenter {
 extension SpaceXPresenter: SpaceXViewToPresenterProtocol {
     func didConfirmFilter(_ model: FilterDialogModel) {
         interactor.didConfirmFilter(model)
+        mainView?.didConfirmFilter()
     }
     
     func getLaunchesCount() -> Int {

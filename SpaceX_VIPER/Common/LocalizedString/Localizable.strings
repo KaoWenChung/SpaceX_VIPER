@@ -8,5 +8,10 @@
 
 "CommonString.error" = "ERROR";
 "CommonString.loading" = "Loading...";
+"CommonString.ok" = "OK";
+
+"SpaceXViewString.title" = "SpaceX";
+"SpaceXViewString.filter" = "Filter";
+"SpaceXViewString.closeFilter" = "Close Filter";
 
 "SpaceXViewString.companyInfo" = "%@ was founded by %@ in %@ years. It has now %@ employees, %@ launch sites, and is valued at USD %@";

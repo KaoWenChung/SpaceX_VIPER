@@ -17,6 +17,11 @@ protocol SpaceXViewToPresenterProtocol: FilterDialogViewToPresenterProtocol {
 }
 
 class SpaceXViewController: UIViewController {
+    enum SpaceXViewString: LocalizedStringType {
+        case filter
+        case title
+        case closeFilter
+    }
     private let presenter: SpaceXViewToPresenterProtocol
     private var viewTranslationY: CGFloat = 0.0
     private var filterButton: UIBarButtonItem!
@@ -82,14 +87,14 @@ class SpaceXViewController: UIViewController {
         dialogView.presenter = presenter
     }
     private func initNavigationBar() {
-        title = "SpaceX"
-        filterButton = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(tapFilterButton))
+        title = SpaceXViewString.title.text
+        filterButton = UIBarButtonItem(title: SpaceXViewString.filter.text, style: .plain, target: self, action: #selector(tapFilterButton))
         navigationItem.rightBarButtonItem = filterButton
     }
     // Hide the filter dialog and change the title of filter button
     private func hideFilterView() {
         isShowFilter = false
-        filterButton.title = "Filter"
+        filterButton.title = SpaceXViewString.filter.text
         dialogView.transform = CGAffineTransform(translationX: 0, y: -dialogView.frame.height)
         dialogView.alpha = 0
         backgroundColorView.alpha = 0
@@ -97,7 +102,7 @@ class SpaceXViewController: UIViewController {
     // Show the filter dialog and change the title of filter button
     private func showFilterView() {
         isShowFilter = true
-        filterButton.title = "Close Filter"
+        filterButton.title = SpaceXViewString.closeFilter.text
         dialogView.transform = CGAffineTransform(translationX: 0, y: 0)
         dialogView.alpha = 1
         backgroundColorView.alpha = 1
@@ -111,7 +116,6 @@ class SpaceXViewController: UIViewController {
 extension SpaceXViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        interactor.didSelectItem(at: indexPath.row)
     }
 }
 
@@ -133,13 +137,6 @@ extension SpaceXViewController: UITableViewDataSource {
     }
 }
 
-//extension SpaceXViewController: FilterDialogViewDelegate {
-//    func confirmUpdateInteractor(_ dialogInteractor: FilterDialogModel?) {
-//        presenter.setFilter(dialogInteractor)
-//        hideFilterView()
-//    }
-//}
-
 extension SpaceXViewController: SpaceXPresenterToViewProtocol {
     func showLaunches() {
         DispatchQueue.main.async {
@@ -148,6 +145,10 @@ extension SpaceXViewController: SpaceXPresenterToViewProtocol {
     }
     
     func showError(_ error: String) {
-        Alert.show(style: .alert, vc: self, title: CommonString.error.text, message: error, cancel: "OK")
+        Alert.show(style: .alert, vc: self, title: CommonString.error.text, message: error, cancel: CommonString.ok.text)
+    }
+
+    func didConfirmFilter() {
+        hideFilterView()
     }
 }
