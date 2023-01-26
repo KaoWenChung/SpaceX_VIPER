@@ -26,15 +26,26 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="6uN-Sc-elk">
                     <rect key="frame" x="24" y="24" width="366" height="287"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="342" placeholderIntrinsicHeight="0.0" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PiW-Ia-EZo">
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="3Ks-us-TmE">
                             <rect key="frame" x="0.0" y="0.0" width="366" height="71"/>
-                            <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="Sort by ascending" imagePadding="10">
-                                <imageReference key="image" image="arrowtriangle.down.fill" catalog="system" symbolScale="small"/>
-                            </buttonConfiguration>
-                            <connections>
-                                <action selector="tapSortButton:" destination="-1" eventType="touchUpInside" id="S1g-X3-4IP"/>
-                            </connections>
-                        </button>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort By" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8F-dG-6Hw">
+                                    <rect key="frame" x="0.0" y="0.0" width="183" height="71"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="342" placeholderIntrinsicHeight="0.0" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PiW-Ia-EZo">
+                                    <rect key="frame" x="183" y="0.0" width="183" height="71"/>
+                                    <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="Ascending" imagePadding="10">
+                                        <imageReference key="image" image="arrowtriangle.down.fill" catalog="system" symbolScale="small"/>
+                                    </buttonConfiguration>
+                                    <connections>
+                                        <action selector="tapSortButton:" destination="-1" eventType="touchUpInside" id="S1g-X3-4IP"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H6O-aO-LUl">
                             <rect key="frame" x="0.0" y="101" width="366" height="31"/>
                             <subviews>

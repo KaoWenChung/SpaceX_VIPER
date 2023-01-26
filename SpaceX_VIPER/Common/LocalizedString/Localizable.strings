@@ -9,9 +9,12 @@
 "CommonString.error" = "ERROR";
 "CommonString.loading" = "Loading...";
 "CommonString.ok" = "OK";
+"CommonString.cancel" = "Cancel";
 
 "SpaceXViewString.title" = "SpaceX";
 "SpaceXViewString.filter" = "Filter";
 "SpaceXViewString.closeFilter" = "Close Filter";
+"SpaceXViewString.sortTitle" = "Sort the launch list by";
 
-"SpaceXViewString.companyInfo" = "%@ was founded by %@ in %@ years. It has now %@ employees, %@ launch sites, and is valued at USD %@";
+"SpaceXInteractorString.sortAscending" = "Ascending";
+"SpaceXInteractorString.sortDescending" = "Descending";

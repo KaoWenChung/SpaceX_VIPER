@@ -14,6 +14,8 @@ protocol SpaceXViewToPresenterProtocol: FilterDialogViewToPresenterProtocol {
     func selectItem(at index: Int)
     func getLaunchesCount() -> Int
     func getLaunch(index: Int) -> LaunchCellModel
+    func getSortOptions() -> [AlertAction.Button]
+    func didSetSort(_ option: String)
 }
 
 class SpaceXViewController: UIViewController {
@@ -21,6 +23,7 @@ class SpaceXViewController: UIViewController {
         case filter
         case title
         case closeFilter
+        case sortTitle
     }
     private let presenter: SpaceXViewToPresenterProtocol
     private var viewTranslationY: CGFloat = 0.0
@@ -138,6 +141,14 @@ extension SpaceXViewController: UITableViewDataSource {
 }
 
 extension SpaceXViewController: SpaceXPresenterToViewProtocol {
+    func didSelectSort() {
+        let buttons = presenter.getSortOptions()
+        Alert.show(style: .actionSheet, vc: self, title: SpaceXViewString.sortTitle.text, cancel: CommonString.cancel.text, others: buttons) { action in
+            guard action.style == .default else { return }
+            self.presenter.didSetSort(action.title)
+        }
+    }
+    
     func showLaunches() {
         DispatchQueue.main.async {
             self.tableView.reloadData()

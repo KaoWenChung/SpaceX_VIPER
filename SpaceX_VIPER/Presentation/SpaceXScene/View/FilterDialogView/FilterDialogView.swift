@@ -10,6 +10,7 @@ import UIKit
 
 protocol FilterDialogViewToPresenterProtocol: AnyObject {
     func didConfirmFilter(_ model: FilterDialogModel)
+    func didSelectSort()
 }
 
 final class FilterDialogView: BaseXibView {
@@ -55,9 +56,7 @@ final class FilterDialogView: BaseXibView {
     }
     
     @IBAction private func tapSortButton(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        let title = sender.isSelected ? "Sort Ascending" : "Sort Descending"
-        sortButton.setTitle(title, for: .normal)
+        presenter?.didSelectSort()
     }
 
     @IBAction private func tapConfirm() {
@@ -66,7 +65,7 @@ final class FilterDialogView: BaseXibView {
         let lowValue = Int(sliderBar.value.first ?? 0)
         let topValue = Int(sliderBar.value.last ?? 0)
         let model = FilterDialogModel(isOnlySuccessfulLaunching: showSuccessfulLaunchingSwitch.isOn,
-                                      isAscending: !sortButton.isSelected,
+                                      sorting: sortButton.title(for: .normal),
                                       staticMaxYear: maxValue,
                                       staticMinYear: minValue,
                                       maxYear: topValue,
@@ -76,6 +75,10 @@ final class FilterDialogView: BaseXibView {
 }
 
 extension FilterDialogView: SpaceXPresenterToFilterViewProtocol {
+    func updateSort(_ option: String) {
+        sortButton.setTitle(option, for: .normal)
+    }
+    
     func updateFilterView(_ model: FilterDialogModel) {
         DispatchQueue.main.async {
             self.fillView(model)

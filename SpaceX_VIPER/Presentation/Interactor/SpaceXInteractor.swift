@@ -20,18 +20,23 @@ protocol SpaceXListInteractorInput {
 
 protocol SpaceXListInteractorOutput {
     var launches: [LaunchCellModel] { get }
+    var sortOptions: [AlertAction.Button] { get }
     var presenter: SpaceXListInteractorToPresenterProtocol? { get set }
 }
 
 protocol SpaceXInteractorType: SpaceXListInteractorInput, SpaceXListInteractorOutput {}
 
 final class SpaceXInteractor {
+    enum SpaceXInteractorString: LocalizedStringType {
+        case sortAscending
+        case sortDescending
+    }
     enum FilterStatus {
         case didSet
         case notSet
     }
     enum Contents {
-        static let isAscendingDefaultValue = true
+        static let isAscendingDefaultValue = SpaceXInteractorString.sortAscending.text
         static let isOnlySuccessfulLaunchingDefaultValue = false
         
     }
@@ -55,6 +60,10 @@ final class SpaceXInteractor {
     
     // MARK: Output
     private(set) var launches: [LaunchCellModel] = []
+    let sortOptions: [AlertAction.Button] = [
+        AlertAction.Button.default(SpaceXInteractorString.sortAscending.text),
+        AlertAction.Button.default(SpaceXInteractorString.sortDescending.text)
+    ]
     
     weak var presenter: SpaceXListInteractorToPresenterProtocol?
 
@@ -103,9 +112,9 @@ final class SpaceXInteractor {
         let maxYear = filterStatus == .didSet ? filterModel?.maxYear ?? staticMaxYear : staticMaxYear
         let minYear = filterStatus == .didSet ? filterModel?.minYear ?? staticMinYear : staticMinYear
         let isOnlySuccessfulLaunching = filterStatus == .didSet ? filterModel?.isOnlySuccessfulLaunching : Contents.isOnlySuccessfulLaunchingDefaultValue
-        let isAscending = filterStatus == .didSet ? filterModel?.isAscending : Contents.isAscendingDefaultValue
+        let sorting = filterStatus == .didSet ? filterModel?.sorting : Contents.isAscendingDefaultValue
         return FilterDialogModel(isOnlySuccessfulLaunching: isOnlySuccessfulLaunching ?? Contents.isOnlySuccessfulLaunchingDefaultValue,
-                                 isAscending: isAscending ?? Contents.isAscendingDefaultValue,
+                                 sorting: sorting,
                                  staticMaxYear: staticMaxYear,
                                  staticMinYear: staticMinYear,
                                  maxYear: maxYear,
@@ -114,7 +123,7 @@ final class SpaceXInteractor {
 
     private func loadLaunch() {
         let loadTask = Task {
-            let sort = LaunchSortRequestModel(sort: (filterModel?.isAscending ?? true) ? .asc : .desc)
+            let sort = LaunchSortRequestModel(sort: (filterModel?.sorting == SpaceXInteractorString.sortDescending.text) ? .desc : .asc)
             let options = LaunchOptionRequestModel(sort: sort, page: nextPage, limit: 10)
             let launches = try await getResult(options)
             
@@ -184,7 +193,7 @@ extension SpaceXInteractor: SpaceXInteractorType {
 
     func didConfirmFilter(_ model: FilterDialogModel) {
         resetPages()
-        if model.isAscending == Contents.isAscendingDefaultValue,
+        if model.sorting == Contents.isAscendingDefaultValue,
            model.isOnlySuccessfulLaunching == Contents.isOnlySuccessfulLaunchingDefaultValue,
            model.staticMinYear == model.minYear,
            model.staticMaxYear == model.maxYear {

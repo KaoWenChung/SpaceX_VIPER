@@ -8,11 +8,13 @@
 protocol SpaceXPresenterToViewProtocol: AnyObject {
     func showLaunches()
     func didConfirmFilter()
+    func didSelectSort()
     func showError(_ error: String)
 }
 
 protocol SpaceXPresenterToFilterViewProtocol: AnyObject {
     func updateFilterView(_ model: FilterDialogModel)
+    func updateSort(_ option: String)
 }
 
 final class SpaceXPresenter {
@@ -30,6 +32,18 @@ final class SpaceXPresenter {
 }
 // MARK: - SpaceXViewToPresenterProtocol
 extension SpaceXPresenter: SpaceXViewToPresenterProtocol {
+    func didSetSort(_ option: String) {
+        filterView?.updateSort(option)
+    }
+    
+    func getSortOptions() -> [AlertAction.Button] {
+        interactor.sortOptions
+    }
+    
+    func didSelectSort() {
+        mainView?.didSelectSort()
+    }
+    
     func didConfirmFilter(_ model: FilterDialogModel) {
         interactor.didConfirmFilter(model)
         mainView?.didConfirmFilter()
