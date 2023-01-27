@@ -38,7 +38,12 @@ final class SpaceXInteractor {
     enum Contents {
         static let isAscendingDefaultValue = SpaceXInteractorString.sortAscending.text
         static let isOnlySuccessfulLaunchingDefaultValue = false
-        
+        static let currentPageDefault = 0
+        static let totalPageCountDefault = 1
+        static let aPage = 1
+        static let limitPerPage = 10
+        static let startOfYear = "-01-01T00:00:00.000Z"
+        static let endOfYear = "-12-31T23:59:59.000Z"
     }
     // MARK: UseCases
     private let showRocketUseCase: ShowRocketUseCaseType
@@ -49,14 +54,14 @@ final class SpaceXInteractor {
     
     // Properties
     private var yearsRange = Set<Int>()
-    private var currentPage: Int = 0
-    private var totalPageCount: Int = 1
+    private var currentPage: Int = Contents.currentPageDefault
+    private var totalPageCount: Int = Contents.totalPageCountDefault
     private var launchLoadTask: CancellableType? { willSet { launchLoadTask?.cancel() } }
     private var filterModel: FilterDialogModel?
     private var filterStatus: FilterStatus = .notSet
 
     var hasMorePages: Bool { currentPage < totalPageCount }
-    var nextPage: Int { hasMorePages ? currentPage + 1 : currentPage }
+    var nextPage: Int { hasMorePages ? currentPage + Contents.aPage : currentPage }
     
     // MARK: Output
     private(set) var launches: [LaunchCellModel] = []
@@ -78,8 +83,8 @@ final class SpaceXInteractor {
     // MARK: - Private
     // Deal with the list of launch including set filter dialog by years range
     private func appendPage(_ launchResponse: LaunchResponseModel) async {
-        currentPage = launchResponse.page ?? 0
-        totalPageCount = launchResponse.totalPages ?? 0
+        currentPage = launchResponse.page ?? Contents.currentPageDefault
+        totalPageCount = launchResponse.totalPages ?? Contents.totalPageCountDefault
         for launch in launchResponse.docs ?? [] {
             var launchCellModel = LaunchCellModel(launch, imageRepository: imageRepository)
             let rocket = try? await showRocketUseCase.execute(queryID: launch.rocket ?? "")
@@ -125,7 +130,7 @@ final class SpaceXInteractor {
         let loadTask = Task {
             let sortString = filterModel?.sorting ?? Contents.isAscendingDefaultValue
             let sort = LaunchSortRequestModel(sort: (sortString == SpaceXInteractorString.sortDescending.text) ? .desc : .asc)
-            let options = LaunchOptionRequestModel(sort: sort, page: nextPage, limit: 10)
+            let options = LaunchOptionRequestModel(sort: sort, page: nextPage, limit: Contents.limitPerPage)
             let launches = try await getResult(options)
             
             await appendPage(launches)
@@ -145,7 +150,6 @@ final class SpaceXInteractor {
     private func getLaunchResultWithoutSuccessQuery(_ options: LaunchOptionRequestModel) async throws -> LaunchResponseModel {
         let query = getDateQuery()
         let request: LaunchRequestModel = LaunchRequestModel(query: query, options: options)
-        print("wwwww", request)
         let result = try await showLaunchUseCase.execute(request: request)
         return result
     }
@@ -153,14 +157,13 @@ final class SpaceXInteractor {
     private func getLaunchResultWithSuccessQuery(_ options: LaunchOptionRequestModel) async throws -> LaunchResponseModel {
         let query = getSuccessDateQuery()
         let request: LaunchRequestModel = LaunchRequestModel(query: query, options: options)
-        print("wwwww", request)
         let result = try await showLaunchUseCase.execute(request: request)
         return result
     }
 
     private func getDateUTCRequestModel(dialogInteractor: FilterDialogModel) -> LaunchQueryDateUTCRequestModel? {
         if dialogInteractor.isYearDidChange {
-            return LaunchQueryDateUTCRequestModel(gte: "\(dialogInteractor.minYear)-01-01T00:00:00.000Z", lte: "\(dialogInteractor.maxYear)-12-31T23:59:59.000Z")
+            return LaunchQueryDateUTCRequestModel(gte: dialogInteractor.minYear.description + Contents.startOfYear, lte: dialogInteractor.maxYear.description + Contents.endOfYear)
         }
         return nil
     }
@@ -182,8 +185,8 @@ final class SpaceXInteractor {
     }
 
     private func resetPages() {
-        currentPage = 0
-        totalPageCount = 1
+        currentPage = Contents.currentPageDefault
+        totalPageCount = Contents.totalPageCountDefault
         launches.removeAll()
     }
 }
