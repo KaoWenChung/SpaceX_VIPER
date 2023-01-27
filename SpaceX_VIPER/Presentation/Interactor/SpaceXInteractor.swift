@@ -123,7 +123,8 @@ final class SpaceXInteractor {
 
     private func loadLaunch() {
         let loadTask = Task {
-            let sort = LaunchSortRequestModel(sort: (filterModel?.sorting == SpaceXInteractorString.sortDescending.text) ? .desc : .asc)
+            let sortString = filterModel?.sorting ?? Contents.isAscendingDefaultValue
+            let sort = LaunchSortRequestModel(sort: (sortString == SpaceXInteractorString.sortDescending.text) ? .desc : .asc)
             let options = LaunchOptionRequestModel(sort: sort, page: nextPage, limit: 10)
             let launches = try await getResult(options)
             
@@ -144,6 +145,7 @@ final class SpaceXInteractor {
     private func getLaunchResultWithoutSuccessQuery(_ options: LaunchOptionRequestModel) async throws -> LaunchResponseModel {
         let query = getDateQuery()
         let request: LaunchRequestModel = LaunchRequestModel(query: query, options: options)
+        print("wwwww", request)
         let result = try await showLaunchUseCase.execute(request: request)
         return result
     }
@@ -151,12 +153,13 @@ final class SpaceXInteractor {
     private func getLaunchResultWithSuccessQuery(_ options: LaunchOptionRequestModel) async throws -> LaunchResponseModel {
         let query = getSuccessDateQuery()
         let request: LaunchRequestModel = LaunchRequestModel(query: query, options: options)
+        print("wwwww", request)
         let result = try await showLaunchUseCase.execute(request: request)
         return result
     }
 
     private func getDateUTCRequestModel(dialogInteractor: FilterDialogModel) -> LaunchQueryDateUTCRequestModel? {
-        if filterStatus == .didSet {
+        if dialogInteractor.isYearDidChange {
             return LaunchQueryDateUTCRequestModel(gte: "\(dialogInteractor.minYear)-01-01T00:00:00.000Z", lte: "\(dialogInteractor.maxYear)-12-31T23:59:59.000Z")
         }
         return nil
@@ -164,7 +167,7 @@ final class SpaceXInteractor {
 
     private func getDateQuery() -> LaunchQueryDateRequestModel? {
         if let dialogInteractor = filterModel {
-            let dateQuery: LaunchQueryDateUTCRequestModel? = getDateUTCRequestModel(dialogInteractor: dialogInteractor)
+            let dateQuery = getDateUTCRequestModel(dialogInteractor: dialogInteractor)
             return LaunchQueryDateRequestModel(dateUtc: dateQuery)
         }
         return nil
@@ -172,7 +175,7 @@ final class SpaceXInteractor {
 
     private func getSuccessDateQuery() -> LaunchQuerySuccessDateRequestModel? {
         if let dialogInteractor = filterModel {
-            let dateQuery: LaunchQueryDateUTCRequestModel? = getDateUTCRequestModel(dialogInteractor: dialogInteractor)
+            let dateQuery = getDateUTCRequestModel(dialogInteractor: dialogInteractor)
             return LaunchQuerySuccessDateRequestModel(dateUtc: dateQuery)
         }
         return nil
@@ -198,10 +201,11 @@ extension SpaceXInteractor: SpaceXInteractorType {
            model.staticMinYear == model.minYear,
            model.staticMaxYear == model.maxYear {
             filterStatus = .notSet
+            filterModel = nil
         } else {
             filterStatus = .didSet
+            filterModel = model
         }
-        filterModel = model
         loadLaunch()
     }
 }
