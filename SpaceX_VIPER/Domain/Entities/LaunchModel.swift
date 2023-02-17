@@ -94,7 +94,6 @@ struct LaunchResponseModel: Decodable {
 
 
 struct LaunchDocModel: Decodable {
-    
     let autoUpdate: Bool?
     let capsules: [String]?
     let cores: [LaunchCoreModel]?
@@ -152,7 +151,6 @@ struct LaunchDocModel: Decodable {
     }
 }
 struct LaunchFailureModel : Decodable {
-    
     let time: Int?
     let altitude: Int?
     let reason: String?

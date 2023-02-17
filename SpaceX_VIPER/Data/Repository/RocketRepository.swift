@@ -6,7 +6,6 @@
 //
 
 final class RocketRepository {
-
     private let dataTransferService: DataTransferServiceType
 
     init(dataTransferService: DataTransferServiceType) {

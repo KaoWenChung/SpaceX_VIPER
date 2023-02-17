@@ -32,7 +32,8 @@ final class SpaceXInteractor {
         case sortDescending
     }
     enum FilterStatus {
-        case didSet
+        case didSetWithoutYear
+        case didSetWithYear
         case notSet
     }
     enum Contents {
@@ -114,10 +115,10 @@ final class SpaceXInteractor {
     private func getDiaLogModelWith() -> FilterDialogModel {
         let staticMaxYear = yearsRange.max() ?? 0
         let staticMinYear = yearsRange.min() ?? 0
-        let maxYear = filterStatus == .didSet ? filterModel?.maxYear ?? staticMaxYear : staticMaxYear
-        let minYear = filterStatus == .didSet ? filterModel?.minYear ?? staticMinYear : staticMinYear
-        let isOnlySuccessfulLaunching = filterStatus == .didSet ? filterModel?.isOnlySuccessfulLaunching : Contents.isOnlySuccessfulLaunchingDefaultValue
-        let sorting = filterStatus == .didSet ? filterModel?.sorting : Contents.isAscendingDefaultValue
+        let maxYear = filterStatus == .didSetWithYear ? filterModel?.maxYear ?? staticMaxYear : staticMaxYear
+        let minYear = filterStatus == .didSetWithYear ? filterModel?.minYear ?? staticMinYear : staticMinYear
+        let isOnlySuccessfulLaunching = filterStatus == .didSetWithoutYear ? filterModel?.isOnlySuccessfulLaunching : Contents.isOnlySuccessfulLaunchingDefaultValue
+        let sorting = filterStatus == .didSetWithoutYear ? filterModel?.sorting : Contents.isAscendingDefaultValue
         return FilterDialogModel(isOnlySuccessfulLaunching: isOnlySuccessfulLaunching ?? Contents.isOnlySuccessfulLaunchingDefaultValue,
                                  sorting: sorting,
                                  staticMaxYear: staticMaxYear,
@@ -206,7 +207,12 @@ extension SpaceXInteractor: SpaceXInteractorType {
             filterStatus = .notSet
             filterModel = nil
         } else {
-            filterStatus = .didSet
+            if model.staticMinYear == model.minYear,
+               model.staticMaxYear == model.maxYear {
+                filterStatus = .didSetWithoutYear
+            } else {
+                filterStatus = .didSetWithYear
+            }
             filterModel = model
         }
         loadLaunch()

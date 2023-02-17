@@ -270,18 +270,10 @@
 		215B02BC29801CEB008BF333 /* FilterDialogView */ = {
 			isa = PBXGroup;
 			children = (
-				215B02BD29801CF7008BF333 /* FilterDialogItemView */,
 				212677172976EEA900D7109C /* FilterDialogView.swift */,
 				212677212976F0AF00D7109C /* FilterDialogView.xib */,
 			);
 			path = FilterDialogView;
-			sourceTree = "<group>";
-		};
-		215B02BD29801CF7008BF333 /* FilterDialogItemView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FilterDialogItemView;
 			sourceTree = "<group>";
 		};
 		215B02BE29801E02008BF333 /* New Group */ = {
