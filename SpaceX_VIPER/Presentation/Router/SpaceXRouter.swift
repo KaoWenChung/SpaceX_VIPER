@@ -31,21 +31,4 @@ final class SpaceXRouter: SpaceXRouterType {
         navigationController.pushViewController(vc, animated: false)
         spaceXViewController = vc
     }
-
-    private func didSelectItem(_ launch: LaunchCellModel) {
-        if let spaceXViewController {
-            let linkDict: [String: String?] = ["video": launch.videoLink,
-                                               "wiki": launch.wikiLink,
-                                               "article": launch.articleLink]
-            var buttons: [AlertAction.Button] = []
-            for link in linkDict {
-                buttons.append(AlertAction.Button.default(link.key))
-            }
-            Alert.show(style: .actionSheet, vc: spaceXViewController, cancel: "Cancel", others: buttons) { action in
-                if let link = linkDict[action.title], let link, let url = URL(string: link) {
-                    UIApplication.shared.open(url)
-                }
-            }
-        }
-    }
 }

@@ -1,16 +1,16 @@
 //
-//  Alert.swift
+//  Alertable.swift
 //  SpaceX_VIPER
 //
-//  Created by wyn on 2023/1/17.
+//  Created by wyn on 2023/2/18.
 //
 
 import UIKit
 
-class Alert {
-    /// It's a simple alert which only show title, message, and a button "OK"
-    class func show(style: UIAlertController.Style,
-                    vc: UIViewController,
+public protocol Alertable {}
+
+public extension Alertable where Self: UIViewController {
+    func showAlert(style: UIAlertController.Style,
                     title: String? = nil,
                     message: String? = nil,
                     cancel: String? = nil,
@@ -20,27 +20,25 @@ class Alert {
         let alertController: UIAlertController = UIAlertController(title: title,
                                                                     message: message,
                                                                     preferredStyle: style)
-        if let cancel {
+        if let cancel = cancel {
             let cancelAction: UIAlertAction = UIAlertAction(index: 0, title: cancel, style: .cancel, handler: handler)
             alertController.addAction(cancelAction)
         }
 
-        if let others {
+        if let others = others {
             for (index, alertStyle) in others.enumerated() {
                 let otherAction: UIAlertAction = UIAlertAction(index: index + 1, title: alertStyle.title, style: alertStyle.style, handler: handler)
                 alertController.addAction(otherAction)
             }
         }
-        vc.present(alertController, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
-
-
 }
 
-class AlertAction {
-
+public class AlertAction {
     enum Style: Int {
-
         case `default`
         case cancel
         case destructive
@@ -55,11 +53,9 @@ class AlertAction {
                 return .destructive
             }
         }
-
     }
 
-    enum Button {
-
+    public enum Button {
         case `default`(_ title: String)
         case destructive(_ title: String)
 
@@ -81,9 +77,9 @@ class AlertAction {
         }
     }
 
-    var index: Int = Int()
-    var title: String = String()
-    var style: Style = .default
+    let index: Int
+    let title: String
+    let style: Style
     init(index: Int, title: String, style: Style) {
         self.index = index
         self.title = title
@@ -92,4 +88,14 @@ class AlertAction {
 
 }
 
-
+extension UIAlertAction {
+    convenience init(index: Int,
+                     title: String?,
+                     style: AlertAction.Style,
+                     handler: ((AlertAction) -> Void)?) {
+        self.init(title: title, style: style.describe) { _ in
+            let alertAction = AlertAction(index: index, title: title ?? "", style: style)
+            handler?(alertAction)
+        }
+    }
+}

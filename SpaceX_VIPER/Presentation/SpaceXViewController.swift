@@ -18,7 +18,7 @@ protocol SpaceXViewToPresenterProtocol: FilterDialogViewToPresenterProtocol {
     func didSetSort(_ option: String)
 }
 
-class SpaceXViewController: UIViewController {
+final class SpaceXViewController: UIViewController, Alertable {
     enum SpaceXViewString: LocalizedStringType {
         case filter
         case title
@@ -143,7 +143,7 @@ extension SpaceXViewController: UITableViewDataSource {
 extension SpaceXViewController: SpaceXPresenterToViewProtocol {
     func didSelectSort() {
         let buttons = presenter.getSortOptions()
-        Alert.show(style: .actionSheet, vc: self, title: SpaceXViewString.sortTitle.text, cancel: CommonString.cancel.text, others: buttons) { action in
+        showAlert(style: .actionSheet, title: SpaceXViewString.sortTitle.text, cancel: CommonString.cancel.text, others: buttons) { action in
             guard action.style == .default else { return }
             self.presenter.didSetSort(action.title)
         }
@@ -156,7 +156,7 @@ extension SpaceXViewController: SpaceXPresenterToViewProtocol {
     }
     
     func showError(_ error: String) {
-        Alert.show(style: .alert, vc: self, title: CommonString.error.text, message: error, cancel: CommonString.ok.text)
+        showAlert(style: .alert, title: CommonString.error.text, message: error, cancel: CommonString.ok.text)
     }
 
     func didConfirmFilter() {
