@@ -13,9 +13,11 @@ final class LaunchTableViewCell: UITableViewCell {
     @IBOutlet weak private(set) var dateLabel: UILabel!
     @IBOutlet weak private(set) var rocketLabel: UILabel!
     @IBOutlet weak private(set) var daysLabel: UILabel!
+    private var imageLoadTask: CancellableType?
 
     override func prepareForReuse() {
         super.prepareForReuse()
+        imageLoadTask?.cancel()
         missionImageView.image = nil
         missionLabel.text = nil
         dateLabel.text = nil
@@ -31,9 +33,6 @@ final class LaunchTableViewCell: UITableViewCell {
         let task = Task {
             await missionImageView.downloaded(imageLoader: interactor.imageRepository, from: interactor.imageURL)
         }
-        task.cancel()
-        Task.init {
-            await task.value
-        }
+        imageLoadTask = task
     }
 }
