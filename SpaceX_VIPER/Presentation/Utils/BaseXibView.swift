@@ -9,9 +9,6 @@ import UIKit
 
 @IBDesignable
 class BaseXibView: UIView {
-
-    @IBInspectable var nibName: String?
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         xibSetup()
@@ -24,10 +21,8 @@ class BaseXibView: UIView {
 
     func xibSetup() {
         let boundle = Bundle(for: classForCoder)
-        if nibName == nil {
-            nibName = "\(classForCoder)"
-        }
-        let nib = UINib(nibName: nibName!, bundle: boundle)
+        let nibName = "\(classForCoder)"
+        let nib = UINib(nibName: nibName, bundle: boundle)
         if let view = nib.instantiate(withOwner: self, options: nil).first as? UIView {
             view.frame = self.bounds
             view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
