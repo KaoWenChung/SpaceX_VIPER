@@ -15,7 +15,6 @@ private struct MockResponseData: Decodable {
 
 // MARK: - Tests
 final class DataTransferServiceTests: XCTestCase {
-
     func testReceivedValidJSONResponse_decodeResponseToObject() async {
         let expectation = expectation(description: "should decode response to object")
         let sut = makeSUT(mockData: #"{"name": "Mike"}"#)

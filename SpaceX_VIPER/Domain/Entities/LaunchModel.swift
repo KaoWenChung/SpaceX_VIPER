@@ -1,7 +1,4 @@
 //
-//  LaunchModel.swift
-//  SpaceX_VIPER
-//
 //  Created by wyn on 2023/1/17.
 //
 
@@ -92,7 +89,6 @@ struct LaunchResponseModel: Decodable {
     }
 }
 
-
 struct LaunchDocModel: Decodable {
     let autoUpdate: Bool?
     let capsules: [String]?
@@ -150,6 +146,7 @@ struct LaunchDocModel: Decodable {
         case window
     }
 }
+
 struct LaunchFailureModel : Decodable {
     let time: Int?
     let altitude: Int?
@@ -161,8 +158,8 @@ struct LaunchFailureModel : Decodable {
         case reason
     }
 }
+
 struct LaunchLinkModel : Decodable {
-    
     let article: String?
     let flickr: LaunchFlickrModel?
     let patch: LaunchPatchModel?
@@ -171,7 +168,6 @@ struct LaunchLinkModel : Decodable {
     let webcast: String?
     let wikipedia: String?
     let youtubeId: String?
-    
     
     enum CodingKeys: String, CodingKey {
         case article
@@ -186,12 +182,10 @@ struct LaunchLinkModel : Decodable {
 }
 
 struct LaunchRedditModel : Decodable {
-    
     let campaign: String?
     let launch: String?
     let media: String?
     let recovery: String?
-    
     
     enum CodingKeys: String, CodingKey {
         case campaign
@@ -202,7 +196,6 @@ struct LaunchRedditModel : Decodable {
 }
 
 struct LaunchPatchModel : Decodable {
-    
     let large: String?
     let small: String?
     
@@ -211,24 +204,22 @@ struct LaunchPatchModel : Decodable {
         case small
     }
 }
+
 struct LaunchFlickrModel : Decodable {
-    
     let original: [String]?
     let small: [String]?
-    
     
     enum CodingKeys: String, CodingKey {
         case original
         case small
     }
 }
+
 struct LaunchFairingModel : Decodable {
-    
     let recovered: Bool?
     let recoveryAttempt: Bool?
     let reused: Bool?
     let ships: [String]?
-    
     
     enum CodingKeys: String, CodingKey {
         case recovered
@@ -239,7 +230,6 @@ struct LaunchFairingModel : Decodable {
 }
 
 struct LaunchCoreModel : Decodable {
-    
     let core: String?
     let flight: Int?
     let gridfins: Bool?

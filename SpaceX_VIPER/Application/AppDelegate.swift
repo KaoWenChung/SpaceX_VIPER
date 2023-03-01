@@ -1,7 +1,4 @@
 //
-//  AppDelegate.swift
-//  SpaceX_VIPER
-//
 //  Created by wyn on 2023/1/17.
 //
 
@@ -56,7 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
     // MARK: - Core Data Saving support
-
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {

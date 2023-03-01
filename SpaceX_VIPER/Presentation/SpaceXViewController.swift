@@ -1,7 +1,4 @@
 //
-//  SpaceXViewController.swift
-//  SpaceX_VIPER
-//
 //  Created by wyn on 2023/1/17.
 //
 
@@ -19,6 +16,13 @@ protocol SpaceXViewToPresenterProtocol: FilterDialogViewToPresenterProtocol {
 }
 
 final class SpaceXViewController: UIViewController, Alertable {
+    enum Content {
+        static let upperLimit: CGFloat = 50
+        static let lowerLimit: CGFloat = -100
+        static let changedDuration: CGFloat = 0.2
+        static let endedDuration: CGFloat = 0.5
+        static let springDamping: CGFloat = 0.7
+    }
     enum SpaceXViewString: LocalizedStringType {
         case filter
         case title
@@ -58,17 +62,17 @@ final class SpaceXViewController: UIViewController, Alertable {
         switch sender.state {
         case .changed:
             viewTranslationY = sender.translation(in: view).y
-            guard viewTranslationY < 50 else { return }
-            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            guard viewTranslationY < Content.upperLimit else { return }
+            UIView.animate(withDuration: Content.changedDuration, delay: 0, usingSpringWithDamping: Content.springDamping, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.dialogView.transform = CGAffineTransform(translationX: 0, y: self.viewTranslationY)
             })
         case .ended:
-            if viewTranslationY > -100 {
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            if viewTranslationY > Content.lowerLimit {
+                UIView.animate(withDuration: Content.endedDuration, delay: 0, usingSpringWithDamping: Content.springDamping, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     self.dialogView.transform = .identity
                 })
             } else {
-                UIView.animate(withDuration: 0.3) {
+                UIView.animate(withDuration: Content.endedDuration) {
                     self.hideFilterView()
                 }
             }
@@ -76,19 +80,23 @@ final class SpaceXViewController: UIViewController, Alertable {
             break
         }
     }
+
     @objc private func tapFilterButton() {
         UIView.animate(withDuration: 0.3) {
             self.isShowFilter ? self.hideFilterView() : self.showFilterView()
         }
     }
+
     private func initTableView() {
         tableView.register(UINib(nibName: LaunchTableViewCell.name, bundle: nil), forCellReuseIdentifier: LaunchTableViewCell.name)
     }
+
     private func initDialogView() {
         dialogView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(gestureHandler)))
         presenter.filterView = dialogView
         dialogView.presenter = presenter
     }
+
     private func initNavigationBar() {
         title = SpaceXViewString.title.text
         filterButton = UIBarButtonItem(title: SpaceXViewString.filter.text, style: .plain, target: self, action: #selector(tapFilterButton))
@@ -123,7 +131,6 @@ extension SpaceXViewController: UITableViewDelegate {
 }
 
 extension SpaceXViewController: UITableViewDataSource {
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.getLaunchesCount()
     }

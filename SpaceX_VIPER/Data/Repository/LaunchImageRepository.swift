@@ -1,7 +1,4 @@
 //
-//  LaunchImagesRepository.swift
-//  SpaceX_VIPER
-//
 //  Created by wyn on 2023/1/17.
 //
 

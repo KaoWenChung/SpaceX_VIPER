@@ -1,7 +1,4 @@
 //
-//  Alertable.swift
-//  SpaceX_VIPER
-//
 //  Created by wyn on 2023/2/18.
 //
 

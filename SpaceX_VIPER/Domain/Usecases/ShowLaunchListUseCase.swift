@@ -1,7 +1,4 @@
 //
-//  ShowLaunchListUseCase.swift
-//  SpaceX_VIPER
-//
 //  Created by wyn on 2023/1/17.
 //
 
@@ -10,7 +7,6 @@ protocol ShowLaunchListUseCaseType {
 }
 
 final class ShowLaunchListUseCase: ShowLaunchListUseCaseType {
-
     private let repository: LaunchListRepositoryType
 
     init(repository: LaunchListRepositoryType) {

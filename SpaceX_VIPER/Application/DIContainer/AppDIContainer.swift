@@ -1,14 +1,10 @@
 //
-//  AppDIContainer.swift
-//  SpaceX_VIPER
-//
 //  Created by wyn on 2023/1/17.
 //
 
 import Foundation
 
 final class AppDIContainer {
-
     lazy var appConfiguration = AppConfiguration()
     let imageCache = ImageCache()
 

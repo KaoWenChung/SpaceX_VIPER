@@ -1,7 +1,4 @@
 //
-//  BaseXibView.swift
-//  SpaceX_VIPER
-//
 //  Created by wyn on 2023/1/17.
 //
 
@@ -21,7 +18,7 @@ class BaseXibView: UIView {
 
     func xibSetup() {
         let boundle = Bundle(for: classForCoder)
-        let nibName = "\(classForCoder)"
+        let nibName = String(describing: classForCoder)
         let nib = UINib(nibName: nibName, bundle: boundle)
         if let view = nib.instantiate(withOwner: self, options: nil).first as? UIView {
             view.frame = self.bounds

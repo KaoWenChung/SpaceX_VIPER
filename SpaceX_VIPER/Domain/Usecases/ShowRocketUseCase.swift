@@ -1,7 +1,4 @@
 //
-//  ShowRocketUseCase.swift
-//  SpaceX_VIPER
-//
 //  Created by wyn on 2023/1/17.
 //
 
@@ -10,7 +7,6 @@ protocol ShowRocketUseCaseType {
 }
 
 final class ShowRocketUseCase: ShowRocketUseCaseType {
-
     private let repository: RocketRepositoryType
 
     init(repository: RocketRepositoryType) {
