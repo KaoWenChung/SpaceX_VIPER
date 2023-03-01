@@ -8,11 +8,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="154" id="KGk-i7-Jjw" customClass="LaunchTableViewCell" customModule="SpaceX_VIPER" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="423" height="151"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="186" id="KGk-i7-Jjw" customClass="LaunchTableViewCell" customModule="SpaceX_VIPER" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="423" height="183"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="423" height="151"/>
+                <rect key="frame" x="0.0" y="0.0" width="423" height="183"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IY9-a3-IEC">
@@ -23,52 +23,65 @@
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="oHl-aS-Zbz">
-                        <rect key="frame" x="70" y="10" width="283" height="131"/>
+                        <rect key="frame" x="70" y="10" width="95" height="163"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="283" placeholderIntrinsicHeight="61" text="Mission:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBR-2b-E10">
-                                <rect key="frame" x="0.0" y="0.0" width="283" height="61"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="95" placeholderIntrinsicHeight="93" text="Mission:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBR-2b-E10">
+                                <rect key="frame" x="0.0" y="0.0" width="95" height="93"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date/ time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xP-eB-QMk">
-                                <rect key="frame" x="0.0" y="64" width="283" height="20.333333333333329"/>
+                                <rect key="frame" x="0.0" y="96" width="95" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rocket:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cd-cN-YsX">
-                                <rect key="frame" x="0.0" y="87.333333333333329" width="283" height="20.333333333333329"/>
+                                <rect key="frame" x="0.0" y="119.33333333333333" width="95" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Since/ From:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kv9-Rl-lTb">
-                                <rect key="frame" x="0.0" y="110.66666666666667" width="283" height="20.333333333333329"/>
+                                <rect key="frame" x="0.0" y="142.66666666666666" width="95" height="20.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                     </stackView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="muK-RV-XdX">
+                        <rect key="frame" x="349" y="109" width="64" height="64"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="64" id="MCy-GM-7CJ"/>
+                            <constraint firstAttribute="height" constant="64" id="rnQ-xC-cpZ"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="oHl-aS-Zbz" firstAttribute="leading" secondItem="IY9-a3-IEC" secondAttribute="trailing" constant="10" id="3AJ-QP-DAR"/>
                     <constraint firstAttribute="bottom" secondItem="oHl-aS-Zbz" secondAttribute="bottom" constant="10" id="3Vi-Fj-ooO"/>
                     <constraint firstItem="IY9-a3-IEC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="D9A-PS-y3L"/>
+                    <constraint firstAttribute="bottom" secondItem="muK-RV-XdX" secondAttribute="bottom" constant="10" id="GSa-aE-WVx"/>
                     <constraint firstItem="oHl-aS-Zbz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="OUg-Sb-45D"/>
                     <constraint firstItem="oHl-aS-Zbz" firstAttribute="leading" secondItem="IY9-a3-IEC" secondAttribute="trailing" constant="10" id="ecg-1r-VU9"/>
                     <constraint firstItem="IY9-a3-IEC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="fkM-MG-WLW"/>
+                    <constraint firstAttribute="trailing" secondItem="muK-RV-XdX" secondAttribute="trailing" constant="10" id="iHf-mb-z3X"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="dateLabel" destination="5xP-eB-QMk" id="SKM-Du-KbX"/>
                 <outlet property="daysLabel" destination="kv9-Rl-lTb" id="hjq-bn-aJn"/>
+                <outlet property="isSuccessImage" destination="muK-RV-XdX" id="5uV-i7-D5F"/>
                 <outlet property="missionImageView" destination="IY9-a3-IEC" id="yE2-Rv-hIV"/>
                 <outlet property="missionLabel" destination="PBR-2b-E10" id="4Zi-M6-nWh"/>
                 <outlet property="rocketLabel" destination="3cd-cN-YsX" id="LNt-ya-gRW"/>
             </connections>
-            <point key="canvasLocation" x="196.15384615384616" y="33.767772511848342"/>
+            <point key="canvasLocation" x="196.15384615384616" y="45.142180094786731"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="check" width="24" height="24"/>
+    </resources>
 </document>
