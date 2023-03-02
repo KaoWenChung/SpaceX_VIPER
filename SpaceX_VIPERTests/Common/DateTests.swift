@@ -22,4 +22,18 @@ final class DateExtensionTests: XCTestCase {
         // Then
         XCTAssertEqual(daysGap, 1)
     }
+
+    func test_getDaysGap_givenTwoDatesInJanuary_returnsTwo() {
+        // Given
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let januaryFirst = formatter.date(from: "2023/01/01 00:00")
+        let januarySecond = formatter.date(from: "2023/01/03 00:00")
+        
+        // When
+        let daysGap = januaryFirst?.getDaysGap(to: januarySecond!)
+        
+        // Then
+        XCTAssertEqual(daysGap, 2)
+    }
 }
