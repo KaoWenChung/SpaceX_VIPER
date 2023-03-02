@@ -36,4 +36,17 @@ final class DateExtensionTests: XCTestCase {
         // Then
         XCTAssertEqual(daysGap, 2)
     }
+
+    func test_getDateString_givenJanuaryFirstAndDateFormat_returnsFormattedDateString() {
+        // Given
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let januaryFirst = formatter.date(from: "2023/01/01 00:00")
+
+        // When
+        let dateString = januaryFirst?.getDateString(format: "yyyy/MM/dd")
+
+        // Then
+        XCTAssertEqual(dateString, "2023/01/01")
+    }
 }
