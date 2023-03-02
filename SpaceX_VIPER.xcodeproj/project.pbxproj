@@ -36,6 +36,7 @@
 		215B02B7297EF70D008BF333 /* LocalizedStringType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215B02B6297EF70D008BF333 /* LocalizedStringType.swift */; };
 		215B02B9297EF723008BF333 /* CommonString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215B02B8297EF723008BF333 /* CommonString.swift */; };
 		215B02BB297EF732008BF333 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 215B02BA297EF732008BF333 /* Localizable.strings */; };
+		21A7D0C529B14B81003C224E /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A7D0C429B14B81003C224E /* DateTests.swift */; };
 		21C57D2429AFB94300C6F158 /* LocalizedStringTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C57D2329AFB94300C6F158 /* LocalizedStringTypeTests.swift */; };
 		21CFC4652976E8D600A2C183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4642976E8D600A2C183 /* AppDelegate.swift */; };
 		21CFC4672976E8D600A2C183 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4662976E8D600A2C183 /* SceneDelegate.swift */; };
@@ -103,6 +104,7 @@
 		215B02B6297EF70D008BF333 /* LocalizedStringType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringType.swift; sourceTree = "<group>"; };
 		215B02B8297EF723008BF333 /* CommonString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonString.swift; sourceTree = "<group>"; };
 		215B02BA297EF732008BF333 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		21A7D0C429B14B81003C224E /* DateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
 		21C57D2329AFB94300C6F158 /* LocalizedStringTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringTypeTests.swift; sourceTree = "<group>"; };
 		21CFC4612976E8D600A2C183 /* SpaceX_VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX_VIPER.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CFC4642976E8D600A2C183 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				21C57D2329AFB94300C6F158 /* LocalizedStringTypeTests.swift */,
+				21A7D0C429B14B81003C224E /* DateTests.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -635,6 +638,7 @@
 				21C57D2429AFB94300C6F158 /* LocalizedStringTypeTests.swift in Sources */,
 				21E039EB2976FE0600C4E292 /* NetworkConfigurableMock.swift in Sources */,
 				21E039E72976FD6C00C4E292 /* ImageRepositoryMock.swift in Sources */,
+				21A7D0C529B14B81003C224E /* DateTests.swift in Sources */,
 				21E039ED2976FE1A00C4E292 /* NetworkServiceTests.swift in Sources */,
 				21E039EF2976FE3500C4E292 /* DataTransferServiceTests.swift in Sources */,
 				21E039E92976FDEC00C4E292 /* NetworkSessionManagerMock.swift in Sources */,

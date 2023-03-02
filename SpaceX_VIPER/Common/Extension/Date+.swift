@@ -5,10 +5,9 @@
 import Foundation
 
 extension Date {
-    func getDaysGap(from fromDate: Date = Date(), to toDate: Date? = nil) -> Int {
-        let toDate: Date = toDate == nil ? self : toDate!
+    func getDaysGap(to date: Date = Date()) -> Int {
         let calendar: Calendar = Calendar.current
-        let components = (calendar as NSCalendar).components(.day, from: fromDate, to: toDate, options: [])
+        let components = (calendar as NSCalendar).components(.day, from: self, to: date, options: [])
 
         return components.day!
     }
