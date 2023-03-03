@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2105BB5D29B2511F00D4E924 /* IntExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2105BB5C29B2511F00D4E924 /* IntExtensionTests.swift */; };
 		2112342A29A180F5007FB455 /* Alertable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112342929A180F5007FB455 /* Alertable+.swift */; };
 		212676F42976ED5700D7109C /* LaunchListRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212676F32976ED5700D7109C /* LaunchListRepositoryType.swift */; };
 		212676F62976ED6400D7109C /* RocketRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212676F52976ED6400D7109C /* RocketRepositoryType.swift */; };
@@ -76,6 +77,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2105BB5C29B2511F00D4E924 /* IntExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensionTests.swift; sourceTree = "<group>"; };
 		2112342929A180F5007FB455 /* Alertable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alertable+.swift"; sourceTree = "<group>"; };
 		212676F32976ED5700D7109C /* LaunchListRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListRepositoryType.swift; sourceTree = "<group>"; };
 		212676F52976ED6400D7109C /* RocketRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketRepositoryType.swift; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 			isa = PBXGroup;
 			children = (
 				21C57D2329AFB94300C6F158 /* LocalizedStringTypeTests.swift */,
+				2105BB5C29B2511F00D4E924 /* IntExtensionTests.swift */,
 				21A7D0C429B14B81003C224E /* DateTests.swift */,
 			);
 			path = Common;
@@ -640,6 +643,7 @@
 				21E039E72976FD6C00C4E292 /* ImageRepositoryMock.swift in Sources */,
 				21A7D0C529B14B81003C224E /* DateTests.swift in Sources */,
 				21E039ED2976FE1A00C4E292 /* NetworkServiceTests.swift in Sources */,
+				2105BB5D29B2511F00D4E924 /* IntExtensionTests.swift in Sources */,
 				21E039EF2976FE3500C4E292 /* DataTransferServiceTests.swift in Sources */,
 				21E039E92976FDEC00C4E292 /* NetworkSessionManagerMock.swift in Sources */,
 			);
