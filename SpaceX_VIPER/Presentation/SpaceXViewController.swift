@@ -31,7 +31,10 @@ final class SpaceXViewController: UIViewController, Alertable {
     }
     private let presenter: SpaceXViewToPresenterProtocol
     private var viewTranslationY: CGFloat = 0.0
-    private var filterButton: UIBarButtonItem!
+    private lazy var filterButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: SpaceXViewString.filter.text, style: .plain, target: self, action: #selector(tapFilterButton))
+            return button
+    }()
     private var isShowFilter: Bool = false
 
     @IBOutlet weak private var backgroundColorView: UIView!
@@ -99,7 +102,6 @@ final class SpaceXViewController: UIViewController, Alertable {
 
     private func initNavigationBar() {
         title = SpaceXViewString.title.text
-        filterButton = UIBarButtonItem(title: SpaceXViewString.filter.text, style: .plain, target: self, action: #selector(tapFilterButton))
         navigationItem.rightBarButtonItem = filterButton
     }
     // Hide the filter dialog and change the title of filter button
