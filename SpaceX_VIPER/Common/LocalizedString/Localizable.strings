@@ -18,3 +18,8 @@
 
 "SpaceXInteractorString.sortAscending" = "Ascending";
 "SpaceXInteractorString.sortDescending" = "Descending";
+
+"LaunchCellModelString.name" = "Name: %@";
+"LaunchCellModelString.date" = "Date: %@ at %@";
+"LaunchCellModelString.from" = "From: %@ days";
+"LaunchCellModelString.since" = "Since: %@ days";

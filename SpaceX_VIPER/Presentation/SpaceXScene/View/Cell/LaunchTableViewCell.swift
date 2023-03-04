@@ -24,7 +24,7 @@ final class LaunchTableViewCell: UITableViewCell {
     }
 
     func fill(_ interactor: LaunchCellModel) {
-        missionLabel.text = interactor.mission
+        missionLabel.text = interactor.name
         dateLabel.text = interactor.date
         rocketLabel.text = interactor.rocket
         daysLabel.text = interactor.days

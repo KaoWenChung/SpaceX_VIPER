@@ -3,34 +3,37 @@
 //
 
 struct LaunchCellModel {
+    private enum LaunchCellModelString: LocalizedStringType {
+        case name
+        case date
+        case from
+        case since
+    }
     let imageRepository: LaunchImageRepositoryType
-    let mission: String
+    let name: String
     let date: String?
     let imageURL: String
     let days: String?
     let isSuccess: Bool?
-    let videoLink: String?
-    let wikiLink: String?
-    let articleLink: String?
     
     private(set) var rocket: String? = nil
     
     init(_ launchData: LaunchDocModel,
          imageRepository: LaunchImageRepositoryType) {
         self.imageRepository = imageRepository
-        mission = "Misson: \(launchData.name ?? "")"
+        name = String(format: LaunchCellModelString.name.text, launchData.name ?? "")
 
         if let dateUnix = launchData.dateUnix {
             let dateString = dateUnix.unixToDate.getDateString(format: "MM/dd")
             let timeString = dateUnix.unixToDate.getDateString(format: "HH:mm")
-            self.date = "Date: \(dateString) at \(timeString)"
+            self.date = String(format: LaunchCellModelString.date.text, dateString, timeString)
 
             let daysInt = dateUnix.unixToDate.getDaysGap()
             let absDaysInt = abs(daysInt)
             if daysInt > 0 {
-                days = "From: \(absDaysInt.description) days"
+                days = String(format: LaunchCellModelString.from.text, absDaysInt.description)
             } else {
-                days = "Since: \(absDaysInt.description) days"
+                days = String(format: LaunchCellModelString.since.text, absDaysInt.description)
             }
         } else {
             date = nil
@@ -38,9 +41,6 @@ struct LaunchCellModel {
         }
         imageURL = launchData.links?.patch?.small ?? ""
         isSuccess = launchData.success
-        articleLink = launchData.links?.article
-        wikiLink = launchData.links?.wikipedia
-        videoLink = launchData.links?.webcast
     }
     
     mutating func updateRocket(_ rocket: RocketResponseModel?) {
