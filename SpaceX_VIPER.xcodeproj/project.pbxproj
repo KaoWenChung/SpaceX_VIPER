@@ -60,6 +60,7 @@
 		21CFC4A42976EC8600A2C183 /* LaunchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4A32976EC8600A2C183 /* LaunchModel.swift */; };
 		21CFC4A62976ECBA00A2C183 /* RocketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4A52976ECBA00A2C183 /* RocketModel.swift */; };
 		21D5F6E329B55010005C5D9F /* SpaceXPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D5F6E229B55010005C5D9F /* SpaceXPresenterTests.swift */; };
+		21D5F6E729B5504D005C5D9F /* SpaceXInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D5F6E629B5504D005C5D9F /* SpaceXInteractorTests.swift */; };
 		21E039D42976F73F00C4E292 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E039D32976F73F00C4E292 /* UITableViewCell+.swift */; };
 		21E039E72976FD6C00C4E292 /* ImageRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E039E62976FD6C00C4E292 /* ImageRepositoryMock.swift */; };
 		21E039E92976FDEC00C4E292 /* NetworkSessionManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E039E82976FDEC00C4E292 /* NetworkSessionManagerMock.swift */; };
@@ -133,6 +134,7 @@
 		21CFC4A32976EC8600A2C183 /* LaunchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchModel.swift; sourceTree = "<group>"; };
 		21CFC4A52976ECBA00A2C183 /* RocketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketModel.swift; sourceTree = "<group>"; };
 		21D5F6E229B55010005C5D9F /* SpaceXPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXPresenterTests.swift; sourceTree = "<group>"; };
+		21D5F6E629B5504D005C5D9F /* SpaceXInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXInteractorTests.swift; sourceTree = "<group>"; };
 		21E039D32976F73F00C4E292 /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
 		21E039D92976FD2300C4E292 /* SpaceX_VIPERTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceX_VIPERTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21E039E62976FD6C00C4E292 /* ImageRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryMock.swift; sourceTree = "<group>"; };
@@ -438,6 +440,8 @@
 		21D5F6E029B54FBC005C5D9F /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				21D5F6E429B55036005C5D9F /* Router */,
+				21D5F6E529B5503C005C5D9F /* Interactor */,
 				21D5F6E129B54FCB005C5D9F /* Presenter */,
 			);
 			path = Presentation;
@@ -449,6 +453,21 @@
 				21D5F6E229B55010005C5D9F /* SpaceXPresenterTests.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		21D5F6E429B55036005C5D9F /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		21D5F6E529B5503C005C5D9F /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				21D5F6E629B5504D005C5D9F /* SpaceXInteractorTests.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		21E039DA2976FD2300C4E292 /* SpaceX_VIPERTests */ = {
@@ -660,6 +679,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21D5F6E729B5504D005C5D9F /* SpaceXInteractorTests.swift in Sources */,
 				21C57D2429AFB94300C6F158 /* LocalizedStringTypeTests.swift in Sources */,
 				21E039EB2976FE0600C4E292 /* NetworkConfigurableMock.swift in Sources */,
 				21D5F6E329B55010005C5D9F /* SpaceXPresenterTests.swift in Sources */,
