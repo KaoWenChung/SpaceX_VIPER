@@ -59,6 +59,7 @@
 		21CFC49F2976EC5200A2C183 /* RepositoryTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC49E2976EC5200A2C183 /* RepositoryTask.swift */; };
 		21CFC4A42976EC8600A2C183 /* LaunchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4A32976EC8600A2C183 /* LaunchModel.swift */; };
 		21CFC4A62976ECBA00A2C183 /* RocketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4A52976ECBA00A2C183 /* RocketModel.swift */; };
+		21D5F6E329B55010005C5D9F /* SpaceXPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D5F6E229B55010005C5D9F /* SpaceXPresenterTests.swift */; };
 		21E039D42976F73F00C4E292 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E039D32976F73F00C4E292 /* UITableViewCell+.swift */; };
 		21E039E72976FD6C00C4E292 /* ImageRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E039E62976FD6C00C4E292 /* ImageRepositoryMock.swift */; };
 		21E039E92976FDEC00C4E292 /* NetworkSessionManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E039E82976FDEC00C4E292 /* NetworkSessionManagerMock.swift */; };
@@ -131,6 +132,7 @@
 		21CFC49E2976EC5200A2C183 /* RepositoryTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTask.swift; sourceTree = "<group>"; };
 		21CFC4A32976EC8600A2C183 /* LaunchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchModel.swift; sourceTree = "<group>"; };
 		21CFC4A52976ECBA00A2C183 /* RocketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketModel.swift; sourceTree = "<group>"; };
+		21D5F6E229B55010005C5D9F /* SpaceXPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXPresenterTests.swift; sourceTree = "<group>"; };
 		21E039D32976F73F00C4E292 /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
 		21E039D92976FD2300C4E292 /* SpaceX_VIPERTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceX_VIPERTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21E039E62976FD6C00C4E292 /* ImageRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryMock.swift; sourceTree = "<group>"; };
@@ -433,9 +435,26 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		21D5F6E029B54FBC005C5D9F /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				21D5F6E129B54FCB005C5D9F /* Presenter */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		21D5F6E129B54FCB005C5D9F /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				21D5F6E229B55010005C5D9F /* SpaceXPresenterTests.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		21E039DA2976FD2300C4E292 /* SpaceX_VIPERTests */ = {
 			isa = PBXGroup;
 			children = (
+				21D5F6E029B54FBC005C5D9F /* Presentation */,
 				21E039E32976FD4B00C4E292 /* Infrastructure */,
 				21E039E22976FD3800C4E292 /* Common */,
 			);
@@ -643,6 +662,7 @@
 			files = (
 				21C57D2429AFB94300C6F158 /* LocalizedStringTypeTests.swift in Sources */,
 				21E039EB2976FE0600C4E292 /* NetworkConfigurableMock.swift in Sources */,
+				21D5F6E329B55010005C5D9F /* SpaceXPresenterTests.swift in Sources */,
 				21E039E72976FD6C00C4E292 /* ImageRepositoryMock.swift in Sources */,
 				21A7D0C529B14B81003C224E /* DateExtensionTests.swift in Sources */,
 				21E039ED2976FE1A00C4E292 /* NetworkServiceTests.swift in Sources */,
