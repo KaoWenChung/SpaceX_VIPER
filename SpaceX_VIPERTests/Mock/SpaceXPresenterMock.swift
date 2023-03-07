@@ -9,22 +9,20 @@ import XCTest
 @testable import SpaceX_VIPER
 
 class SpaceXPresenterMock: SpaceXListInteractorToPresenterProtocol {
-    var error: String?
-    var expectation: XCTestExpectation?
-    private(set) var isLoadLaunches: Bool = false
+    var error: Error?
+    var loadLaunchesExpectation: XCTestExpectation?
+    var loadLaunchesFailedExpectation: XCTestExpectation?
     private(set) var isSetFilter: Bool = false
     func didSetFilterModel(_ model: FilterDialogModel) {
         isSetFilter = true
-        expectation?.fulfill()
     }
     
     func didLoadLaunches() {
-        isLoadLaunches = true
-        expectation?.fulfill()
+        loadLaunchesExpectation?.fulfill()
     }
     
-    func didLoadLaunchesFailed(_ error: String) {
+    func didLoadLaunchesFailed(_ error: Error) {
         self.error = error
-        expectation?.fulfill()
+        loadLaunchesFailedExpectation?.fulfill()
     }
 }

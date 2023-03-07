@@ -7,12 +7,12 @@ import Foundation
 protocol SpaceXListInteractorToPresenterProtocol: AnyObject {
     func didSetFilterModel(_ model: FilterDialogModel)
     func didLoadLaunches()
-    func didLoadLaunchesFailed(_ error: String)
+    func didLoadLaunchesFailed(_ error: Error)
 }
 
 protocol SpaceXListInteractorInput {
-    func loadNextPage()
-    func didConfirmFilter(_ model: FilterDialogModel)
+    func loadNextPage() async
+    func didConfirmFilter(_ model: FilterDialogModel) async
 }
 
 protocol SpaceXListInteractorOutput {
@@ -124,17 +124,24 @@ final class SpaceXInteractor {
                                  minYear: minYear)
     }
 
-    private func loadLaunch() {
-        let loadTask = Task {
-            let sortString = filterModel?.sorting ?? Contents.isAscendingDefaultValue
-            let sort = LaunchSortRequestModel(sort: (sortString == SpaceXInteractorString.sortDescending.text) ? .desc : .asc)
-            let options = LaunchOptionRequestModel(sort: sort, page: nextPage, limit: Contents.limitPerPage)
-            let launches = try await getResult(options)
-            
-            await appendPage(launches)
-            presenter?.didLoadLaunches()
+    private func fetchNextLaunchPage() async {
+        let sortString = filterModel?.sorting ?? Contents.isAscendingDefaultValue
+        let sort = LaunchSortRequestModel(sort: (sortString == SpaceXInteractorString.sortDescending.text) ? .desc : .asc)
+        let options = LaunchOptionRequestModel(sort: sort, page: nextPage, limit: Contents.limitPerPage)
+        await withUnsafeContinuation { continuation in
+            let loadTask = Task {
+                do {
+                    let launches = try await getResult(options)
+                    await appendPage(launches)
+                    presenter?.didLoadLaunches()
+                    continuation.resume()
+                } catch let error {
+                    presenter?.didLoadLaunchesFailed(error)
+                    continuation.resume()
+                }
+            }
+            launchLoadTask = loadTask
         }
-        launchLoadTask = loadTask
     }
 
     private func getResult(_ options: LaunchOptionRequestModel) async throws -> LaunchResponseModel {
@@ -190,12 +197,12 @@ final class SpaceXInteractor {
 }
 
 extension SpaceXInteractor: SpaceXInteractorType {
-    func loadNextPage() {
+    func loadNextPage() async {
         guard hasMorePages else { return }
-        loadLaunch()
+        await fetchNextLaunchPage()
     }
 
-    func didConfirmFilter(_ model: FilterDialogModel) {
+    func didConfirmFilter(_ model: FilterDialogModel) async {
         resetPages()
         if model.sorting == Contents.isAscendingDefaultValue,
            model.isOnlySuccessfulLaunching == Contents.isOnlySuccessfulLaunchingDefaultValue,
@@ -212,6 +219,6 @@ extension SpaceXInteractor: SpaceXInteractorType {
             }
             filterModel = model
         }
-        loadLaunch()
+        await fetchNextLaunchPage()
     }
 }

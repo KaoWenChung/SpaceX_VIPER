@@ -42,8 +42,10 @@ extension SpaceXPresenter: SpaceXViewToPresenterProtocol {
     }
     
     func didConfirmFilter(_ model: FilterDialogModel) {
-        interactor.didConfirmFilter(model)
-        mainView?.didConfirmFilter()
+        Task.init {
+            await interactor.didConfirmFilter(model)
+            mainView?.didConfirmFilter()
+        }
     }
     
     func getLaunchesCount() -> Int {
@@ -55,7 +57,9 @@ extension SpaceXPresenter: SpaceXViewToPresenterProtocol {
     }
     
     func loadLaunches() {
-        interactor.loadNextPage()
+        Task.init {
+            await interactor.loadNextPage()
+        }
     }
     
     func selectItem(at index: Int) {
@@ -67,8 +71,8 @@ extension SpaceXPresenter: SpaceXListInteractorToPresenterProtocol {
         mainView?.showLaunches()
     }
 
-    func didLoadLaunchesFailed(_ error: String) {
-        mainView?.showError(error)
+    func didLoadLaunchesFailed(_ error: Error) {
+        mainView?.showError(error.localizedDescription)
     }
 
     func didSetFilterModel(_ model: FilterDialogModel) {
