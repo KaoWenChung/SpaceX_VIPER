@@ -39,7 +39,7 @@ final class SpaceXInteractorTests: XCTestCase {
         let launchRepo = LaunchRepositoryMock(error: MockError.someError, response: nil)
         let launchUseCase = ShowLaunchListUseCase(repository: launchRepo)
         let interactor = SpaceXInteractor(showRocketUseCase: rocketUseCase, showLaunchUseCase: launchUseCase, imageRepository: LaunchImageRepositoryMock())
-        let expectation = XCTestExpectation(description: "Should get launches data")
+        let expectation = XCTestExpectation(description: "Should get MockError.someError")
         let presenter = SpaceXPresenterMock()
         presenter.loadLaunchesFailedExpectation = expectation
         interactor.presenter = presenter
@@ -57,7 +57,7 @@ final class SpaceXInteractorTests: XCTestCase {
         let launchRepo = LaunchRepositoryMock(error: nil, response: launchResponse)
         let launchUseCase = ShowLaunchListUseCase(repository: launchRepo)
         let interactor = SpaceXInteractor(showRocketUseCase: rocketUseCase, showLaunchUseCase: launchUseCase, imageRepository: LaunchImageRepositoryMock())
-        let expectation = XCTestExpectation(description: "Should get launches data")
+        let expectation = XCTestExpectation(description: "Should get MockError.someError")
         let presenter = SpaceXPresenterMock()
         presenter.loadLaunchesFailedExpectation = expectation
         interactor.presenter = presenter
@@ -65,5 +65,23 @@ final class SpaceXInteractorTests: XCTestCase {
         await interactor.loadNextPage()
         // then
         wait(for: [expectation], timeout: 3.0)
+    }
+
+    func testDidConfirmFilter_shouldsetFilter () async {
+        // given
+        let response = RocketResponseModel(name: "MockName", type: "MockType")
+        let rocketRepo = RocketRepositoryMock(error: nil, response: response)
+        let rocketUseCase = ShowRocketUseCase(repository: rocketRepo)
+        let launchResponse = LaunchResponseModel.stub(docs: [LaunchDocModel.stub()])
+        let launchRepo = LaunchRepositoryMock(error: nil, response: launchResponse)
+        let launchUseCase = ShowLaunchListUseCase(repository: launchRepo)
+        let interactor = SpaceXInteractor(showRocketUseCase: rocketUseCase, showLaunchUseCase: launchUseCase, imageRepository: LaunchImageRepositoryMock())
+        let presenter = SpaceXPresenterMock()
+        interactor.presenter = presenter
+        // when
+        XCTAssertEqual(presenter.isSetFilter, false)
+        await interactor.didConfirmFilter(FilterDialogModel(isOnlySuccessfulLaunching: false, sorting: "Ascending", staticMaxYear: 2010, staticMinYear: 2000, maxYear: 2010, minYear: 2000))
+        // then
+        XCTAssertEqual(presenter.isSetFilter, true)
     }
 }
