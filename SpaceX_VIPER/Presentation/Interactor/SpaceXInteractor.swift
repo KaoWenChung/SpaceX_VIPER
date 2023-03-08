@@ -85,10 +85,14 @@ final class SpaceXInteractor {
         totalPageCount = launchResponse.totalPages ?? Contents.totalPageCountDefault
         for launch in launchResponse.docs ?? [] {
             var launchCellModel = LaunchCellModel(launch, imageRepository: imageRepository)
-            let rocket = try? await showRocketUseCase.execute(queryID: launch.rocket ?? "")
-            addYearToYearRange(launch)
-            launchCellModel.updateRocket(rocket)
-            launches.append(launchCellModel)
+            do {
+                let rocket = try await showRocketUseCase.execute(queryID: launch.rocket ?? "")
+                addYearToYearRange(launch)
+                launchCellModel.updateRocket(rocket)
+                launches.append(launchCellModel)
+            } catch let error {
+                presenter?.didLoadLaunchesFailed(error)
+            }
         }
         presenter?.didSetFilterModel(getDiaLogModelWith())
     }

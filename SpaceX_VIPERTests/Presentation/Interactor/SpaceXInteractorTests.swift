@@ -32,12 +32,29 @@ final class SpaceXInteractorTests: XCTestCase {
         wait(for: [expectation], timeout: 3.0)
     }
 
-    func testLoadNextPage_whenRocketAndLaunchesFetchFails_shouldNotifyPresenterOfError() async {
+    func testLoadNextPage_whenLaunchesFetchFails_shouldNotifyPresenterOfError() async {
+        // given
+        let rocketRepo = RocketRepositoryMock(error: nil, response: nil)
+        let rocketUseCase = ShowRocketUseCase(repository: rocketRepo)
+        let launchRepo = LaunchRepositoryMock(error: MockError.someError, response: nil)
+        let launchUseCase = ShowLaunchListUseCase(repository: launchRepo)
+        let interactor = SpaceXInteractor(showRocketUseCase: rocketUseCase, showLaunchUseCase: launchUseCase, imageRepository: LaunchImageRepositoryMock())
+        let expectation = XCTestExpectation(description: "Should get launches data")
+        let presenter = SpaceXPresenterMock()
+        presenter.loadLaunchesFailedExpectation = expectation
+        interactor.presenter = presenter
+        // when
+        await interactor.loadNextPage()
+        // then
+        wait(for: [expectation], timeout: 3.0)
+    }
+
+    func testLoadNextPage_whenRocketFetchFails_shouldNotifyPresenterOfError() async {
         // given
         let rocketRepo = RocketRepositoryMock(error: MockError.someError, response: nil)
         let rocketUseCase = ShowRocketUseCase(repository: rocketRepo)
-        let launchResponse = LaunchResponseModel.stub(docs: nil)
-        let launchRepo = LaunchRepositoryMock(error: MockError.someError, response: nil)
+        let launchResponse = LaunchResponseModel.stub(docs: [LaunchDocModel.stub()])
+        let launchRepo = LaunchRepositoryMock(error: nil, response: launchResponse)
         let launchUseCase = ShowLaunchListUseCase(repository: launchRepo)
         let interactor = SpaceXInteractor(showRocketUseCase: rocketUseCase, showLaunchUseCase: launchUseCase, imageRepository: LaunchImageRepositoryMock())
         let expectation = XCTestExpectation(description: "Should get launches data")
