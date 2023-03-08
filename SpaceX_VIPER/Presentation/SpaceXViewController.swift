@@ -32,7 +32,10 @@ final class SpaceXViewController: UIViewController, Alertable {
     private let presenter: SpaceXViewToPresenterProtocol
     private var viewTranslationY: CGFloat = 0.0
     private lazy var filterButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: SpaceXViewString.filter.text, style: .plain, target: self, action: #selector(tapFilterButton))
+        let button = UIBarButtonItem(title: SpaceXViewString.filter.text,
+                                     style: .plain,
+                                     target: self,
+                                     action: #selector(tapFilterButton))
             return button
     }()
     private var isShowFilter: Bool = false
@@ -40,16 +43,16 @@ final class SpaceXViewController: UIViewController, Alertable {
     @IBOutlet weak private var backgroundColorView: UIView!
     @IBOutlet weak private var tableView: UITableView!
     @IBOutlet weak private var dialogView: FilterDialogView!
-    
+
     init(presenter: SpaceXViewToPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigationBar()
@@ -61,17 +64,27 @@ final class SpaceXViewController: UIViewController, Alertable {
 
     // MARK: - Private functions
     // Set the range user can drag the dialogView/ dismissing the filter dialog view
-    @objc func gestureHandler(sender: UIPanGestureRecognizer){
+    @objc func gestureHandler(sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .changed:
             viewTranslationY = sender.translation(in: view).y
             guard viewTranslationY < Content.upperLimit else { return }
-            UIView.animate(withDuration: Content.changedDuration, delay: 0, usingSpringWithDamping: Content.springDamping, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: Content.changedDuration,
+                           delay: 0,
+                           usingSpringWithDamping: Content.springDamping,
+                           initialSpringVelocity: 1,
+                           options: .curveEaseOut,
+                           animations: {
                 self.dialogView.transform = CGAffineTransform(translationX: 0, y: self.viewTranslationY)
             })
         case .ended:
             if viewTranslationY > Content.lowerLimit {
-                UIView.animate(withDuration: Content.endedDuration, delay: 0, usingSpringWithDamping: Content.springDamping, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                UIView.animate(withDuration: Content.endedDuration,
+                               delay: 0,
+                               usingSpringWithDamping: Content.springDamping,
+                               initialSpringVelocity: 1,
+                               options: .curveEaseOut,
+                               animations: {
                     self.dialogView.transform = .identity
                 })
             } else {
@@ -91,7 +104,7 @@ final class SpaceXViewController: UIViewController, Alertable {
     }
 
     private func initTableView() {
-        tableView.register(UINib(nibName: LaunchTableViewCell.name, bundle: nil), forCellReuseIdentifier: LaunchTableViewCell.name)
+        tableView.register(LaunchTableViewCell.self)
     }
 
     private func initDialogView() {
@@ -136,9 +149,11 @@ extension SpaceXViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.getLaunchesCount()
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: LaunchTableViewCell.name, for: indexPath) as? LaunchTableViewCell else { return UITableViewCell() }
+        guard let cell: LaunchTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath) else {
+            return UITableViewCell()
+        }
 
         cell.fill(presenter.getLaunch(index: indexPath.row))
 
@@ -152,20 +167,23 @@ extension SpaceXViewController: UITableViewDataSource {
 extension SpaceXViewController: SpaceXPresenterToViewProtocol {
     func didSelectSort() {
         let buttons = presenter.getSortOptions()
-        showAlert(style: .actionSheet, title: SpaceXViewString.sortTitle.text, cancel: CommonString.cancel.text, others: buttons) { action in
+        showAlert(style: .actionSheet,
+                  title: SpaceXViewString.sortTitle.text,
+                  cancel: CommonString.cancel.text,
+                  others: buttons) { action in
             guard action.style == .default else { return }
             self.presenter.didSetSort(action.title)
         }
     }
-    
+
     func showLaunches() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
-    
+
     func showError(_ error: String) {
-        showAlert(style: .alert, title: CommonString.error.text, message: error, cancel: CommonString.ok.text)
+        showAlert(style: .alert, title: CommonString.error.text, message: error, cancel: CommonString.confirm.text)
     }
 
     func didConfirmFilter() {

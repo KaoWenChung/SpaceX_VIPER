@@ -24,8 +24,8 @@ struct LaunchCellModel {
         name = String(format: LaunchCellModelString.name.text, launchData.name ?? "")
 
         if let dateUnix = launchData.dateUnix {
-            let dateString = dateUnix.unixToDate.getDateString(format: "MM/dd")
-            let timeString = dateUnix.unixToDate.getDateString(format: "HH:mm")
+            let dateString = dateUnix.unixToDate.getDateString(dateFormat: "MM/dd")
+            let timeString = dateUnix.unixToDate.getDateString(dateFormat: "HH:mm")
             self.date = String(format: LaunchCellModelString.date.text, dateString, timeString)
 
             let daysInt = dateUnix.unixToDate.getDaysGap()

@@ -60,14 +60,12 @@ final class SpaceXInteractor {
 
     var hasMorePages: Bool { currentPage < totalPageCount }
     var nextPage: Int { hasMorePages ? currentPage + Contents.aPage : currentPage }
-    
     // MARK: Output
     private(set) var launches: [LaunchCellModel] = []
     let sortOptions: [AlertAction.Button] = [
         AlertAction.Button.default(SpaceXInteractorString.sortAscending.text),
         AlertAction.Button.default(SpaceXInteractorString.sortDescending.text)
     ]
-    
     weak var presenter: SpaceXListInteractorToPresenterProtocol?
 
     init(showRocketUseCase: ShowRocketUseCaseType,
@@ -109,7 +107,7 @@ final class SpaceXInteractor {
 
     private func addYearToYearRange(_ launchDoc: LaunchDocModel) {
         guard let date = launchDoc.dateUnix?.unixToDate,
-              let year = Int(date.getDateString(format: "yyyy")) else { return }
+              let year = Int(date.getDateString(dateFormat: "yyyy")) else { return }
         yearsRange.insert(year)
     }
 

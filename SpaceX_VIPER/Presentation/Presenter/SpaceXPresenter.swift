@@ -20,7 +20,7 @@ final class SpaceXPresenter {
     weak var filterView: SpaceXPresenterToFilterViewProtocol?
     private let interactor: SpaceXInteractorType
     private let router: SpaceXRouterType
-    
+
     init(interactor: SpaceXInteractorType,
          router: SpaceXRouterType) {
         self.interactor = interactor
@@ -32,36 +32,36 @@ extension SpaceXPresenter: SpaceXViewToPresenterProtocol {
     func didSetSort(_ option: String) {
         filterView?.updateSort(option)
     }
-    
+
     func getSortOptions() -> [AlertAction.Button] {
         interactor.sortOptions
     }
-    
+
     func didSelectSort() {
         mainView?.didSelectSort()
     }
-    
+
     func didConfirmFilter(_ model: FilterDialogModel) {
         Task.init {
             await interactor.didConfirmFilter(model)
             mainView?.didConfirmFilter()
         }
     }
-    
+
     func getLaunchesCount() -> Int {
         interactor.launches.count
     }
-    
+
     func getLaunch(index: Int) -> LaunchCellModel {
         interactor.launches[index]
     }
-    
+
     func loadLaunches() {
         Task.init {
             await interactor.loadNextPage()
         }
     }
-    
+
     func selectItem(at index: Int) {
     }
 }

@@ -14,7 +14,7 @@ final class AppDIContainer {
         let apiDataNetwork = NetworkService(config: config)
         return DataTransferService(networkService: apiDataNetwork)
     }()
-    
+
     lazy var imageDataTransferService = {
         let config = APIDataNetworkConfig()
         let imagesDataNetwork = NetworkService(config: config)
@@ -23,7 +23,9 @@ final class AppDIContainer {
 
     // MARK: - DIContainers of scenes
     func makeSpaceXSceneDIContainer() -> SpaceXDIContainer {
-        let dependencies = SpaceXDIContainer.Dependencies(dataTransferService: apiDataTransferService, imageDataTransferService: imageDataTransferService, imageCache: imageCache)
+        let dependencies = SpaceXDIContainer.Dependencies(dataTransferService: apiDataTransferService,
+                                                          imageDataTransferService: imageDataTransferService,
+                                                          imageCache: imageCache)
         return SpaceXDIContainer(dependencies: dependencies)
     }
 

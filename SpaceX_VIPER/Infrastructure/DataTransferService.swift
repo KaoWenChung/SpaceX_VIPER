@@ -36,7 +36,7 @@ public final class DataTransferService {
     private let networkService: NetworkServiceType
     private let errorResolver: DataTransferErrorResolverType
     private let errorLogger: DataTransferErrorLoggerType
-    
+
     public init(networkService: NetworkServiceType,
                 errorResolver: DataTransferErrorResolverType = DataTransferErrorResolver(),
                 errorLogger: DataTransferErrorLoggerType = DataTransferErrorLogger()) {
@@ -47,7 +47,9 @@ public final class DataTransferService {
 }
 
 extension DataTransferService: DataTransferServiceType {
-    public func request<T: Decodable, E: ResponseRequestableType>(with endpoint: E) async throws -> T where E.Response == T {
+    public func request<T: Decodable, E: ResponseRequestableType>(
+        with endpoint: E
+    ) async throws -> T where E.Response == T {
         do {
             let task = try networkService.request(endpoint: endpoint)
             let (data, _) = try await task.value
@@ -60,7 +62,9 @@ extension DataTransferService: DataTransferServiceType {
         }
     }
 
-    public func request<E>(with endpoint: E) async throws -> URLTask where E : ResponseRequestableType, E.Response == Void {
+    public func request<E>(
+        with endpoint: E
+    ) async throws -> URLTask where E: ResponseRequestableType, E.Response == Void {
         do {
             return try networkService.request(endpoint: endpoint)
         } catch let error as NetworkError {
@@ -80,7 +84,7 @@ extension DataTransferService: DataTransferServiceType {
             throw DataTransferError.parsing(error)
         }
     }
-    
+
     private func resolve(networkError error: NetworkError) -> DataTransferError {
         let resolvedError = self.errorResolver.resolve(error: error)
         return resolvedError is NetworkError ? .networkFailure(error) : .resolvedNetworkFailure(resolvedError)
@@ -90,7 +94,7 @@ extension DataTransferService: DataTransferServiceType {
 // MARK: - Logger
 public final class DataTransferErrorLogger: DataTransferErrorLoggerType {
     public init() { }
-    
+
     public func log(error: Error) {
         printIfDebug("-------------")
         printIfDebug("\(error)")
@@ -116,7 +120,6 @@ public class JSONResponseDecoder: ResponseDecoderType {
 
 public class RawDataResponseDecoder: ResponseDecoderType {
     public init() { }
-    
     enum CodingKeys: String, CodingKey {
         case `default` = ""
     }
@@ -124,7 +127,8 @@ public class RawDataResponseDecoder: ResponseDecoderType {
         if T.self is Data.Type, let data = data as? T {
             return data
         } else {
-            let context = DecodingError.Context(codingPath: [CodingKeys.default], debugDescription: "Expected Data type")
+            let context = DecodingError.Context(codingPath: [CodingKeys.default],
+                                                debugDescription: "Expected Data type")
             throw Swift.DecodingError.typeMismatch(T.self, context)
         }
     }

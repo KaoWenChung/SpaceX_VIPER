@@ -5,10 +5,9 @@
 import UIKit
 
 final class AppRouter {
-
     var navigationController: UINavigationController
     private let appDIContainer: AppDIContainer
-    
+
     init(navigationController: UINavigationController,
          appDIContainer: AppDIContainer) {
         self.navigationController = navigationController

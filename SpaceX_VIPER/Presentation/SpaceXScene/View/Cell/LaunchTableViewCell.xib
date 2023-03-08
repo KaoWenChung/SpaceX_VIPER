@@ -25,10 +25,16 @@
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="oHl-aS-Zbz">
                         <rect key="frame" x="70" y="10" width="95" height="163"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="95" placeholderIntrinsicHeight="93" text="Mission:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBR-2b-E10">
-                                <rect key="frame" x="0.0" y="0.0" width="95" height="93"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="95" placeholderIntrinsicHeight="74.333333333333329" text="Mission:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBR-2b-E10">
+                                <rect key="frame" x="0.0" y="0.0" width="95" height="74.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocL-se-Rsi">
+                                <rect key="frame" x="0.0" y="77.333333333333329" width="95" height="15.666666666666671"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date/ time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xP-eB-QMk">
@@ -51,29 +57,20 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="muK-RV-XdX">
-                        <rect key="frame" x="349" y="109" width="64" height="64"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="64" id="MCy-GM-7CJ"/>
-                            <constraint firstAttribute="height" constant="64" id="rnQ-xC-cpZ"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="oHl-aS-Zbz" firstAttribute="leading" secondItem="IY9-a3-IEC" secondAttribute="trailing" constant="10" id="3AJ-QP-DAR"/>
                     <constraint firstAttribute="bottom" secondItem="oHl-aS-Zbz" secondAttribute="bottom" constant="10" id="3Vi-Fj-ooO"/>
                     <constraint firstItem="IY9-a3-IEC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="D9A-PS-y3L"/>
-                    <constraint firstAttribute="bottom" secondItem="muK-RV-XdX" secondAttribute="bottom" constant="10" id="GSa-aE-WVx"/>
                     <constraint firstItem="oHl-aS-Zbz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="OUg-Sb-45D"/>
                     <constraint firstItem="oHl-aS-Zbz" firstAttribute="leading" secondItem="IY9-a3-IEC" secondAttribute="trailing" constant="10" id="ecg-1r-VU9"/>
                     <constraint firstItem="IY9-a3-IEC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="fkM-MG-WLW"/>
-                    <constraint firstAttribute="trailing" secondItem="muK-RV-XdX" secondAttribute="trailing" constant="10" id="iHf-mb-z3X"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="dateLabel" destination="5xP-eB-QMk" id="SKM-Du-KbX"/>
                 <outlet property="daysLabel" destination="kv9-Rl-lTb" id="hjq-bn-aJn"/>
-                <outlet property="isSuccessImage" destination="muK-RV-XdX" id="5uV-i7-D5F"/>
+                <outlet property="launchStatusLabel" destination="ocL-se-Rsi" id="Mjp-Cm-OMM"/>
                 <outlet property="missionImageView" destination="IY9-a3-IEC" id="yE2-Rv-hIV"/>
                 <outlet property="missionLabel" destination="PBR-2b-E10" id="4Zi-M6-nWh"/>
                 <outlet property="rocketLabel" destination="3cd-cN-YsX" id="LNt-ya-gRW"/>
@@ -81,7 +78,4 @@
             <point key="canvasLocation" x="196.15384615384616" y="45.142180094786731"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="check" width="24" height="24"/>
-    </resources>
 </document>

@@ -8,11 +8,11 @@ public protocol Alertable {}
 
 public extension Alertable where Self: UIViewController {
     func showAlert(style: UIAlertController.Style,
-                    title: String? = nil,
-                    message: String? = nil,
-                    cancel: String? = nil,
-                    others: [AlertAction.Button]? = nil,
-                    handler: ((AlertAction) -> Void)? = nil) {
+                   title: String? = nil,
+                   message: String? = nil,
+                   cancel: String? = nil,
+                   others: [AlertAction.Button]? = nil,
+                   handler: ((AlertAction) -> Void)? = nil) {
 
         let alertController: UIAlertController = UIAlertController(title: title,
                                                                     message: message,
@@ -24,7 +24,10 @@ public extension Alertable where Self: UIViewController {
 
         if let others = others {
             for (index, alertStyle) in others.enumerated() {
-                let otherAction: UIAlertAction = UIAlertAction(index: index + 1, title: alertStyle.title, style: alertStyle.style, handler: handler)
+                let otherAction: UIAlertAction = UIAlertAction(index: index + 1,
+                                                               title: alertStyle.title,
+                                                               style: alertStyle.style,
+                                                               handler: handler)
                 alertController.addAction(otherAction)
             }
         }

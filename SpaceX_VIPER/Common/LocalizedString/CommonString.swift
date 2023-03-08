@@ -6,7 +6,7 @@ enum CommonString: LocalizedStringType {
     /// Error
     case error
     case loading
-    case ok
+    case confirm
     case cancel
 }
 
@@ -16,4 +16,3 @@ enum ErrorString: LocalizedStringType {
     /// Failed loading
     case failedLoading
 }
-

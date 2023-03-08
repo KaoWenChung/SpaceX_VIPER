@@ -39,6 +39,7 @@
 		215B02B9297EF723008BF333 /* CommonString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215B02B8297EF723008BF333 /* CommonString.swift */; };
 		215B02BB297EF732008BF333 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 215B02BA297EF732008BF333 /* Localizable.strings */; };
 		21A7D0C529B14B81003C224E /* DateExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A7D0C429B14B81003C224E /* DateExtensionTests.swift */; };
+		21B9E73429B943350062D7F9 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B9E73329B943350062D7F9 /* UITableView+.swift */; };
 		21C57D2429AFB94300C6F158 /* LocalizedStringTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C57D2329AFB94300C6F158 /* LocalizedStringTypeTests.swift */; };
 		21CFC4652976E8D600A2C183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4642976E8D600A2C183 /* AppDelegate.swift */; };
 		21CFC4672976E8D600A2C183 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4662976E8D600A2C183 /* SceneDelegate.swift */; };
@@ -116,6 +117,7 @@
 		215B02B8297EF723008BF333 /* CommonString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonString.swift; sourceTree = "<group>"; };
 		215B02BA297EF732008BF333 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		21A7D0C429B14B81003C224E /* DateExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionTests.swift; sourceTree = "<group>"; };
+		21B9E73329B943350062D7F9 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
 		21C57D2329AFB94300C6F158 /* LocalizedStringTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringTypeTests.swift; sourceTree = "<group>"; };
 		21CFC4612976E8D600A2C183 /* SpaceX_VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX_VIPER.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CFC4642976E8D600A2C183 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 				21CFC4862976EAF500A2C183 /* Date+.swift */,
 				21CFC4882976EB0E00A2C183 /* Int+.swift */,
 				21E039D32976F73F00C4E292 /* UITableViewCell+.swift */,
+				21B9E73329B943350062D7F9 /* UITableView+.swift */,
 				2112342929A180F5007FB455 /* Alertable+.swift */,
 			);
 			path = Extension;
@@ -560,6 +563,7 @@
 				21CFC45D2976E8D600A2C183 /* Sources */,
 				21CFC45E2976E8D600A2C183 /* Frameworks */,
 				21CFC45F2976E8D600A2C183 /* Resources */,
+				21B9E73229B940990062D7F9 /* Swift Lint */,
 			);
 			buildRules = (
 			);
@@ -656,6 +660,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		21B9E73229B940990062D7F9 /* Swift Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Swift Lint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		21CFC45D2976E8D600A2C183 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -668,6 +694,7 @@
 				2126770F2976EE4300D7109C /* AccessibilityIdentifier.swift in Sources */,
 				212676FF2976EDB400D7109C /* ShowLaunchListUseCase.swift in Sources */,
 				212677112976EE5400D7109C /* BaseXibView.swift in Sources */,
+				21B9E73429B943350062D7F9 /* UITableView+.swift in Sources */,
 				21CFC4842976EA5E00A2C183 /* UIImageView+.swift in Sources */,
 				21CFC4A42976EC8600A2C183 /* LaunchModel.swift in Sources */,
 				215B02B9297EF723008BF333 /* CommonString.swift in Sources */,

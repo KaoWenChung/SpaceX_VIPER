@@ -15,10 +15,10 @@ final class DateExtensionTests: XCTestCase {
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         let januaryFirst = formatter.date(from: "2023/01/01 00:00")
         let januarySecond = formatter.date(from: "2023/01/02 00:00")
-        
+
         // When
         let daysGap = januaryFirst?.getDaysGap(to: januarySecond!)
-        
+
         // Then
         XCTAssertEqual(daysGap, 1)
     }
@@ -29,10 +29,10 @@ final class DateExtensionTests: XCTestCase {
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         let januaryFirst = formatter.date(from: "2023/01/01 00:00")
         let januarySecond = formatter.date(from: "2023/01/03 00:00")
-        
+
         // When
         let daysGap = januaryFirst?.getDaysGap(to: januarySecond!)
-        
+
         // Then
         XCTAssertEqual(daysGap, 2)
     }
@@ -44,7 +44,7 @@ final class DateExtensionTests: XCTestCase {
         let januaryFirst = formatter.date(from: "2023/01/01 00:00")
 
         // When
-        let dateString = januaryFirst?.getDateString(format: "yyyy/MM/dd")
+        let dateString = januaryFirst?.getDateString(dateFormat: "yyyy/MM/dd")
 
         // Then
         XCTAssertEqual(dateString, "2023/01/01")

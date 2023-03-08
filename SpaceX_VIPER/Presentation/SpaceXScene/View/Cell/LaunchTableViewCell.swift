@@ -5,12 +5,17 @@
 import UIKit
 
 final class LaunchTableViewCell: UITableViewCell {
+    enum LaunchTableViewCellString: LocalizedStringType {
+        case launchSuccess
+        case launchFail
+        case notLaunchYet
+    }
     @IBOutlet weak private(set) var missionImageView: UIImageView!
     @IBOutlet weak private(set) var missionLabel: UILabel!
     @IBOutlet weak private(set) var dateLabel: UILabel!
     @IBOutlet weak private(set) var rocketLabel: UILabel!
     @IBOutlet weak private(set) var daysLabel: UILabel!
-    @IBOutlet weak private(set) var isSuccessImage: UIImageView!
+    @IBOutlet weak private(set) var launchStatusLabel: UILabel!
     private var imageLoadTask: CancellableType?
 
     override func prepareForReuse() {
@@ -32,10 +37,15 @@ final class LaunchTableViewCell: UITableViewCell {
             await missionImageView.downloaded(imageLoader: interactor.imageRepository, from: interactor.imageURL)
         }
         imageLoadTask = task
-        if let isSuccess = interactor.isSuccess {
-            let image = isSuccess == true ? "check" : "cross"
-            isSuccessImage.image = UIImage(named: image)
+        let status: String
+        switch interactor.isSuccess {
+        case .some(true):
+            status = LaunchTableViewCellString.launchSuccess.text
+        case .some(false):
+            status = LaunchTableViewCellString.launchFail.text
+        case nil:
+            status = LaunchTableViewCellString.notLaunchYet.text
         }
-        isSuccessImage.isHidden = interactor.isSuccess == nil
+        launchStatusLabel.text = status
     }
 }

@@ -23,3 +23,7 @@
 "LaunchCellModelString.date" = "Date: %@ at %@";
 "LaunchCellModelString.from" = "From: %@ days";
 "LaunchCellModelString.since" = "Since: %@ days";
+
+"LaunchTableViewCellString.launchSuccess" = "Status: Success";
+"LaunchTableViewCellString.launchFail" = "Status: Failed";
+"LaunchTableViewCellString.notLaunchYet" = "Status: Not launch yet";

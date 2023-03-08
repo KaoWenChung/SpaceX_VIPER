@@ -31,7 +31,6 @@ final class FilterDialogView: BaseXibView {
         showSuccessfulLaunchingSwitch.isOn = model.isOnlySuccessfulLaunching
     }
     // MARK: - Private functions
-
     private func setMoney(lowYear: Int, topYear: Int) {
         lowLabel.text = lowYear.description
         topLabel.text = topYear.description

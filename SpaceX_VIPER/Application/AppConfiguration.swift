@@ -11,7 +11,7 @@ final class AppConfiguration {
 
     let current: Environment
     private(set) var baseURL: String!
-    
+
     init() {
         #if DEBUG
         current = .debug
@@ -29,4 +29,3 @@ final class AppConfiguration {
         #endif
     }
 }
-

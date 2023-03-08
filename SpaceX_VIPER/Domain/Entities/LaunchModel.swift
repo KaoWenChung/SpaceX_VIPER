@@ -116,7 +116,7 @@ struct LaunchDocModel: Decodable {
     let tbd: Bool?
     let upcoming: Bool?
     let window: Int?
-    
+
     enum CodingKeys: String, CodingKey {
         case autoUpdate = "auto_update"
         case capsules
@@ -147,11 +147,11 @@ struct LaunchDocModel: Decodable {
     }
 }
 
-struct LaunchFailureModel : Decodable {
+struct LaunchFailureModel: Decodable {
     let time: Int?
     let altitude: Int?
     let reason: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case time
         case altitude
@@ -159,7 +159,7 @@ struct LaunchFailureModel : Decodable {
     }
 }
 
-struct LaunchLinkModel : Decodable {
+struct LaunchLinkModel: Decodable {
     let article: String?
     let flickr: LaunchFlickrModel?
     let patch: LaunchPatchModel?
@@ -168,7 +168,7 @@ struct LaunchLinkModel : Decodable {
     let webcast: String?
     let wikipedia: String?
     let youtubeId: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case article
         case flickr
@@ -181,12 +181,12 @@ struct LaunchLinkModel : Decodable {
     }
 }
 
-struct LaunchRedditModel : Decodable {
+struct LaunchRedditModel: Decodable {
     let campaign: String?
     let launch: String?
     let media: String?
     let recovery: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case campaign
         case launch
@@ -195,32 +195,32 @@ struct LaunchRedditModel : Decodable {
     }
 }
 
-struct LaunchPatchModel : Decodable {
+struct LaunchPatchModel: Decodable {
     let large: String?
     let small: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case large
         case small
     }
 }
 
-struct LaunchFlickrModel : Decodable {
+struct LaunchFlickrModel: Decodable {
     let original: [String]?
     let small: [String]?
-    
+
     enum CodingKeys: String, CodingKey {
         case original
         case small
     }
 }
 
-struct LaunchFairingModel : Decodable {
+struct LaunchFairingModel: Decodable {
     let recovered: Bool?
     let recoveryAttempt: Bool?
     let reused: Bool?
     let ships: [String]?
-    
+
     enum CodingKeys: String, CodingKey {
         case recovered
         case recoveryAttempt = "recovery_attempt"
@@ -229,7 +229,7 @@ struct LaunchFairingModel : Decodable {
     }
 }
 
-struct LaunchCoreModel : Decodable {
+struct LaunchCoreModel: Decodable {
     let core: String?
     let flight: Int?
     let gridfins: Bool?
@@ -239,7 +239,7 @@ struct LaunchCoreModel : Decodable {
     let landpad: String?
     let legs: Bool?
     let reused: Bool?
-    
+
     enum CodingKeys: String, CodingKey {
         case core
         case flight
