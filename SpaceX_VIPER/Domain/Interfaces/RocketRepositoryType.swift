@@ -3,5 +3,5 @@
 //
 
 protocol RocketRepositoryType {
-    func fetchRocket(queryID: String) async throws -> RocketResponseModel
+    func fetchRocket(queryID: String) async throws -> RocketResponse
 }

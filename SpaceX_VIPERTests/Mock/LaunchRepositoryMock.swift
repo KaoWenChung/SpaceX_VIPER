@@ -10,13 +10,13 @@ import Foundation
 
 class LaunchRepositoryMock: LaunchListRepositoryType {
     let error: Error?
-    let response: LaunchResponseModel?
+    let response: LaunchResponse?
     init(error: Error?,
-         response: LaunchResponseModel?) {
+         response: LaunchResponse?) {
         self.error = error
         self.response = response
     }
-    func fetchLaunchData<T: QueryType>(request: LaunchRequestModel<T>) async throws -> LaunchResponseModel {
+    func fetchLaunchData<T: QueryType>(request: LaunchRequest<T>) async throws -> LaunchResponse {
         if let error { throw error }
         guard let response else { throw URLError(.badServerResponse) }
         return response

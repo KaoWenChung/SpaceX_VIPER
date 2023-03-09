@@ -10,4 +10,3 @@ extension LocalizedStringType {
     var prefix: String { String(describing: type(of: self)) }
     var text: String { NSLocalizedString(prefix + "." + String(describing: self), comment: "") }
 }
-

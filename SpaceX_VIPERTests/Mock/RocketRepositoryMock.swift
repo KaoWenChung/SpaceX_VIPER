@@ -10,13 +10,13 @@ import Foundation
 
 class RocketRepositoryMock: RocketRepositoryType {
     let error: Error?
-    let response: RocketResponseModel?
+    let response: RocketResponse?
     init(error: Error?,
-         response: RocketResponseModel?) {
+         response: RocketResponse?) {
         self.error = error
         self.response = response
     }
-    func fetchRocket(queryID: String) async throws -> RocketResponseModel {
+    func fetchRocket(queryID: String) async throws -> RocketResponse {
         if let error { throw error }
         guard let response else { throw URLError(.badServerResponse) }
         return response

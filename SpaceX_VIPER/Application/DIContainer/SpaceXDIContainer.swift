@@ -25,7 +25,6 @@ final class SpaceXDIContainer {
         return ShowRocketUseCase(repository: makeRocketRepository())
     }
 
-
     // MARK: - Repositories
     func makeLaunchListRepository() -> LaunchListRepositoryType {
         return LaunchListRepository(dataTransferService: dependencies.dataTransferService)
@@ -36,7 +35,8 @@ final class SpaceXDIContainer {
     }
 
     func makeLaunchImagesRepository() -> LaunchImageRepositoryType {
-        return LaunchImageRepository(dataTransferService: dependencies.imageDataTransferService, imageCache: dependencies.imageCache)
+        return LaunchImageRepository(dataTransferService: dependencies.imageDataTransferService,
+                                     imageCache: dependencies.imageCache)
     }
 
     // MARK: - SpaceX
@@ -56,7 +56,9 @@ final class SpaceXDIContainer {
     }
 
     func makeSpaceXInteractor() -> SpaceXInteractor {
-        SpaceXInteractor(showRocketUseCase: makeShowRocketUseCase(), showLaunchUseCase: makeShowLaunchListUseCase(), imageRepository: makeLaunchImagesRepository())
+        SpaceXInteractor(showRocketUseCase: makeShowRocketUseCase(),
+                         showLaunchUseCase: makeShowLaunchListUseCase(),
+                         imageRepository: makeLaunchImagesRepository())
     }
 
     func makeSpaceXRouter() -> SpaceXRouterType {

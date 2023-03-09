@@ -10,7 +10,7 @@ protocol SpaceXPresenterToViewProtocol: AnyObject {
 }
 
 protocol SpaceXPresenterToFilterViewProtocol: AnyObject {
-    func updateFilterView(_ model: FilterDialogModel)
+    func updateFilterView(_ model: FilterDialog)
     func updateSort(_ option: String)
 }
 
@@ -41,7 +41,7 @@ extension SpaceXPresenter: SpaceXViewToPresenterProtocol {
         mainView?.didSelectSort()
     }
 
-    func didConfirmFilter(_ model: FilterDialogModel) {
+    func didConfirmFilter(_ model: FilterDialog) {
         Task.init {
             await interactor.didConfirmFilter(model)
             mainView?.didConfirmFilter()
@@ -52,7 +52,7 @@ extension SpaceXPresenter: SpaceXViewToPresenterProtocol {
         interactor.launches.count
     }
 
-    func getLaunch(index: Int) -> LaunchCellModel {
+    func getLaunch(index: Int) -> LaunchCell {
         interactor.launches[index]
     }
 
@@ -75,7 +75,7 @@ extension SpaceXPresenter: SpaceXListInteractorToPresenterProtocol {
         mainView?.showError(error.localizedDescription)
     }
 
-    func didSetFilterModel(_ model: FilterDialogModel) {
+    func didSetFilterModel(_ model: FilterDialog) {
         filterView?.updateFilterView(model)
     }
 }

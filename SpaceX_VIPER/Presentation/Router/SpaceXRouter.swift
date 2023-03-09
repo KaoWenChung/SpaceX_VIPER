@@ -4,7 +4,7 @@
 
 import UIKit
 
-protocol SpaceXRouterDependencies  {
+protocol SpaceXRouterDependencies {
     func makeSpaceXViewController() -> SpaceXViewController
 }
 
@@ -23,9 +23,9 @@ final class SpaceXRouter: SpaceXRouterType {
     }
 
     func start(navigationController: UINavigationController) {
-        let vc = dependencies.makeSpaceXViewController()
+        let spaceXVC = dependencies.makeSpaceXViewController()
 
-        navigationController.pushViewController(vc, animated: false)
-        spaceXViewController = vc
+        navigationController.pushViewController(spaceXVC, animated: false)
+        spaceXViewController = spaceXVC
     }
 }

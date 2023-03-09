@@ -5,18 +5,18 @@
 import Foundation
 
 protocol SpaceXListInteractorToPresenterProtocol: AnyObject {
-    func didSetFilterModel(_ model: FilterDialogModel)
+    func didSetFilterModel(_ model: FilterDialog)
     func didLoadLaunches()
     func didLoadLaunchesFailed(_ error: Error)
 }
 
 protocol SpaceXListInteractorInput {
     func loadNextPage() async
-    func didConfirmFilter(_ model: FilterDialogModel) async
+    func didConfirmFilter(_ model: FilterDialog) async
 }
 
 protocol SpaceXListInteractorOutput {
-    var launches: [LaunchCellModel] { get }
+    var launches: [LaunchCell] { get }
     var sortOptions: [AlertAction.Button] { get }
     var presenter: SpaceXListInteractorToPresenterProtocol? { get set }
 }
@@ -34,8 +34,8 @@ final class SpaceXInteractor {
         case notSet
     }
     enum Contents {
-        static let isAscendingDefaultValue = SpaceXInteractorString.sortAscending.text
-        static let isOnlySuccessfulLaunchingDefaultValue = false
+        static let isAscendingDefault = SpaceXInteractorString.sortAscending.text
+        static let isSuccessLaunchOnlyDefault = false
         static let currentPageDefault = 0
         static let totalPageCountDefault = 1
         static let aPage = 1
@@ -46,22 +46,22 @@ final class SpaceXInteractor {
     // MARK: UseCases
     private let showRocketUseCase: ShowRocketUseCaseType
     private let showLaunchUseCase: ShowLaunchListUseCaseType
-    
+
     // MARK: Repository
     private let imageRepository: LaunchImageRepositoryType
-    
+
     // Properties
     private var yearsRange = Set<Int>()
     private var currentPage: Int = Contents.currentPageDefault
     private var totalPageCount: Int = Contents.totalPageCountDefault
     private var launchLoadTask: CancellableType? { willSet { launchLoadTask?.cancel() } }
-    private var filterModel: FilterDialogModel?
+    private var filterModel: FilterDialog?
     private var filterStatus: FilterStatus = .notSet
 
     var hasMorePages: Bool { currentPage < totalPageCount }
     var nextPage: Int { hasMorePages ? currentPage + Contents.aPage : currentPage }
     // MARK: Output
-    private(set) var launches: [LaunchCellModel] = []
+    private(set) var launches: [LaunchCell] = []
     let sortOptions: [AlertAction.Button] = [
         AlertAction.Button.default(SpaceXInteractorString.sortAscending.text),
         AlertAction.Button.default(SpaceXInteractorString.sortDescending.text)
@@ -78,11 +78,11 @@ final class SpaceXInteractor {
 
     // MARK: - Private
     // Deal with the list of launch including set filter dialog by years range
-    private func appendPage(_ launchResponse: LaunchResponseModel) async {
+    private func appendPage(_ launchResponse: LaunchResponse) async {
         currentPage = launchResponse.page ?? Contents.currentPageDefault
         totalPageCount = launchResponse.totalPages ?? Contents.totalPageCountDefault
         for launch in launchResponse.docs ?? [] {
-            var launchCellModel = LaunchCellModel(launch, imageRepository: imageRepository)
+            var launchCellModel = LaunchCell(launch, imageRepository: imageRepository)
             do {
                 let rocket = try await showRocketUseCase.execute(queryID: launch.rocket ?? "")
                 addYearToYearRange(launch)
@@ -95,9 +95,9 @@ final class SpaceXInteractor {
         presenter?.didSetFilterModel(getDiaLogModelWith())
     }
 
-    private func dealWithDocs(_ docs: [LaunchDocModel]) async {
+    private func dealWithDocs(_ docs: [LaunchDoc]) async {
         for doc in docs {
-            var cellModel = LaunchCellModel(doc, imageRepository: imageRepository)
+            var cellModel = LaunchCell(doc, imageRepository: imageRepository)
             let rocket = try? await showRocketUseCase.execute(queryID: doc.rocket ?? "")
             addYearToYearRange(doc)
             cellModel.updateRocket(rocket)
@@ -105,20 +105,22 @@ final class SpaceXInteractor {
         }
     }
 
-    private func addYearToYearRange(_ launchDoc: LaunchDocModel) {
+    private func addYearToYearRange(_ launchDoc: LaunchDoc) {
         guard let date = launchDoc.dateUnix?.unixToDate,
               let year = Int(date.getDateString(dateFormat: "yyyy")) else { return }
         yearsRange.insert(year)
     }
 
-    private func getDiaLogModelWith() -> FilterDialogModel {
+    private func getDiaLogModelWith() -> FilterDialog {
         let staticMaxYear = yearsRange.max() ?? 0
         let staticMinYear = yearsRange.min() ?? 0
         let maxYear = filterStatus == .didSetWithYear ? filterModel?.maxYear ?? staticMaxYear : staticMaxYear
         let minYear = filterStatus == .didSetWithYear ? filterModel?.minYear ?? staticMinYear : staticMinYear
-        let isOnlySuccessfulLaunching = filterStatus == .didSetWithoutYear ? filterModel?.isOnlySuccessfulLaunching : Contents.isOnlySuccessfulLaunchingDefaultValue
-        let sorting = filterStatus == .didSetWithoutYear ? filterModel?.sorting : Contents.isAscendingDefaultValue
-        return FilterDialogModel(isOnlySuccessfulLaunching: isOnlySuccessfulLaunching ?? Contents.isOnlySuccessfulLaunchingDefaultValue,
+        let isSuccessLaunchOnly = filterStatus == .didSetWithoutYear
+        ? filterModel?.isSuccessLaunchOnly
+        : Contents.isSuccessLaunchOnlyDefault
+        let sorting = filterStatus == .didSetWithoutYear ? filterModel?.sorting : Contents.isAscendingDefault
+        return FilterDialog(isSuccessLaunchOnly: isSuccessLaunchOnly ?? Contents.isSuccessLaunchOnlyDefault,
                                  sorting: sorting,
                                  staticMaxYear: staticMaxYear,
                                  staticMinYear: staticMinYear,
@@ -127,9 +129,9 @@ final class SpaceXInteractor {
     }
 
     private func fetchNextLaunchPage() async {
-        let sortString = filterModel?.sorting ?? Contents.isAscendingDefaultValue
-        let sort = LaunchSortRequestModel(sort: (sortString == SpaceXInteractorString.sortDescending.text) ? .desc : .asc)
-        let options = LaunchOptionRequestModel(sort: sort, page: nextPage, limit: Contents.limitPerPage)
+        let sortString = filterModel?.sorting ?? Contents.isAscendingDefault
+        let sort = LaunchSortRequest(sort: (sortString == SpaceXInteractorString.sortDescending.text) ? .desc : .asc)
+        let options = LaunchOptionRequest(sort: sort, page: nextPage, limit: Contents.limitPerPage)
         await withUnsafeContinuation { continuation in
             let loadTask = Task {
                 do {
@@ -146,47 +148,48 @@ final class SpaceXInteractor {
         }
     }
 
-    private func getResult(_ options: LaunchOptionRequestModel) async throws -> LaunchResponseModel {
-        if filterModel?.isOnlySuccessfulLaunching == true {
-            return try await getLaunchResultWithSuccessQuery(options)
+    private func getResult(_ options: LaunchOptionRequest) async throws -> LaunchResponse {
+        if filterModel?.isSuccessLaunchOnly == true {
+            return try await launchResultWithSuccessQuery(options)
         } else {
-            return try await getLaunchResultWithoutSuccessQuery(options)
+            return try await launchResultWithoutSuccessQuery(options)
         }
     }
 
-    private func getLaunchResultWithoutSuccessQuery(_ options: LaunchOptionRequestModel) async throws -> LaunchResponseModel {
+    private func launchResultWithoutSuccessQuery(_ options: LaunchOptionRequest) async throws -> LaunchResponse {
         let query = getDateQuery()
-        let request: LaunchRequestModel = LaunchRequestModel(query: query, options: options)
+        let request: LaunchRequest = LaunchRequest(query: query, options: options)
         let result = try await showLaunchUseCase.execute(request: request)
         return result
     }
 
-    private func getLaunchResultWithSuccessQuery(_ options: LaunchOptionRequestModel) async throws -> LaunchResponseModel {
+    private func launchResultWithSuccessQuery(_ options: LaunchOptionRequest) async throws -> LaunchResponse {
         let query = getSuccessDateQuery()
-        let request: LaunchRequestModel = LaunchRequestModel(query: query, options: options)
+        let request: LaunchRequest = LaunchRequest(query: query, options: options)
         let result = try await showLaunchUseCase.execute(request: request)
         return result
     }
 
-    private func getDateUTCRequestModel(dialogInteractor: FilterDialogModel) -> LaunchQueryDateUTCRequestModel? {
+    private func getDateUTCRequestModel(dialogInteractor: FilterDialog) -> LaunchQueryDateUTCRequest? {
         if dialogInteractor.isYearDidChange {
-            return LaunchQueryDateUTCRequestModel(gte: dialogInteractor.minYear.description + Contents.startOfYear, lte: dialogInteractor.maxYear.description + Contents.endOfYear)
+            return LaunchQueryDateUTCRequest(gte: dialogInteractor.minYear.description + Contents.startOfYear,
+                                             lte: dialogInteractor.maxYear.description + Contents.endOfYear)
         }
         return nil
     }
 
-    private func getDateQuery() -> LaunchQueryDateRequestModel? {
+    private func getDateQuery() -> LaunchQueryDateRequest? {
         if let dialogInteractor = filterModel {
             let dateQuery = getDateUTCRequestModel(dialogInteractor: dialogInteractor)
-            return LaunchQueryDateRequestModel(dateUtc: dateQuery)
+            return LaunchQueryDateRequest(dateUtc: dateQuery)
         }
         return nil
     }
 
-    private func getSuccessDateQuery() -> LaunchQuerySuccessDateRequestModel? {
+    private func getSuccessDateQuery() -> LaunchQuerySuccessDateRequest? {
         if let dialogInteractor = filterModel {
             let dateQuery = getDateUTCRequestModel(dialogInteractor: dialogInteractor)
-            return LaunchQuerySuccessDateRequestModel(dateUtc: dateQuery)
+            return LaunchQuerySuccessDateRequest(dateUtc: dateQuery)
         }
         return nil
     }
@@ -204,10 +207,10 @@ extension SpaceXInteractor: SpaceXInteractorType {
         await fetchNextLaunchPage()
     }
 
-    func didConfirmFilter(_ model: FilterDialogModel) async {
+    func didConfirmFilter(_ model: FilterDialog) async {
         resetPages()
-        if model.sorting == Contents.isAscendingDefaultValue,
-           model.isOnlySuccessfulLaunching == Contents.isOnlySuccessfulLaunchingDefaultValue,
+        if model.sorting == Contents.isAscendingDefault,
+           model.isSuccessLaunchOnly == Contents.isSuccessLaunchOnlyDefault,
            model.staticMinYear == model.minYear,
            model.staticMaxYear == model.maxYear {
             filterStatus = .notSet

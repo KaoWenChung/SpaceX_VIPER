@@ -3,5 +3,5 @@
 //
 
 protocol LaunchListRepositoryType {
-    func fetchLaunchData<T>(request: LaunchRequestModel<T>) async throws -> LaunchResponseModel
+    func fetchLaunchData<T>(request: LaunchRequest<T>) async throws -> LaunchResponse
 }

@@ -13,14 +13,14 @@ class SpaceXPresenterMock: SpaceXListInteractorToPresenterProtocol {
     var loadLaunchesExpectation: XCTestExpectation?
     var loadLaunchesFailedExpectation: XCTestExpectation?
     private(set) var isSetFilter: Bool = false
-    func didSetFilterModel(_ model: FilterDialogModel) {
+    func didSetFilterModel(_ model: FilterDialog) {
         isSetFilter = true
     }
-    
+
     func didLoadLaunches() {
         loadLaunchesExpectation?.fulfill()
     }
-    
+
     func didLoadLaunchesFailed(_ error: Error) {
         self.error = error
         loadLaunchesFailedExpectation?.fulfill()

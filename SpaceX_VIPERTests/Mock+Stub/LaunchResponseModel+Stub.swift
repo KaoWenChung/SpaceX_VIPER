@@ -8,9 +8,9 @@
 import Foundation
 @testable import SpaceX_VIPER
 
-extension LaunchResponseModel {
-    static func stub(docs: [LaunchDocModel]?) -> Self {
-        LaunchResponseModel(docs: docs,
+extension LaunchResponse {
+    static func stub(docs: [LaunchDoc]?) -> Self {
+        LaunchResponse(docs: docs,
                             hasNextPage: nil,
                             hasPrevPage: nil,
                             limit: nil,
@@ -24,10 +24,10 @@ extension LaunchResponseModel {
     }
 }
 
-extension LaunchDocModel {
+extension LaunchDoc {
     static func stub(id: String = "1",
                      success: Bool? = nil) -> Self {
-        LaunchDocModel(autoUpdate: nil,
+        LaunchDoc(autoUpdate: nil,
                        capsules: nil,
                        cores: nil,
                        dateLocal: nil,

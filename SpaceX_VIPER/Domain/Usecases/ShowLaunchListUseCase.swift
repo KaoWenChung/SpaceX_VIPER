@@ -3,7 +3,7 @@
 //
 
 protocol ShowLaunchListUseCaseType {
-    func execute<T>(request: LaunchRequestModel<T>) async throws -> LaunchResponseModel
+    func execute<T>(request: LaunchRequest<T>) async throws -> LaunchResponse
 }
 
 final class ShowLaunchListUseCase: ShowLaunchListUseCaseType {
@@ -14,7 +14,7 @@ final class ShowLaunchListUseCase: ShowLaunchListUseCaseType {
         self.repository = repository
     }
 
-    func execute<T>(request: LaunchRequestModel<T>) async throws -> LaunchResponseModel {
+    func execute<T>(request: LaunchRequest<T>) async throws -> LaunchResponse {
         return try await repository.fetchLaunchData(request: request)
     }
 }

@@ -3,7 +3,7 @@
 //
 
 protocol ShowRocketUseCaseType {
-    func execute(queryID: String) async throws -> RocketResponseModel
+    func execute(queryID: String) async throws -> RocketResponse
 }
 
 final class ShowRocketUseCase: ShowRocketUseCaseType {
@@ -13,7 +13,7 @@ final class ShowRocketUseCase: ShowRocketUseCaseType {
         self.repository = repository
     }
 
-    func execute(queryID: String) async throws -> RocketResponseModel {
+    func execute(queryID: String) async throws -> RocketResponse {
         return try await repository.fetchRocket(queryID: queryID)
     }
 }

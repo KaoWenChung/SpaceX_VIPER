@@ -4,28 +4,28 @@
 
 protocol QueryType: Encodable {}
 
-struct LaunchRequestModel<T: QueryType>: Encodable {
+struct LaunchRequest<T: QueryType>: Encodable {
     let query: T?
-    let options: LaunchOptionRequestModel
+    let options: LaunchOptionRequest
 }
 
-struct LaunchQuerySuccessDateRequestModel: QueryType {
+struct LaunchQuerySuccessDateRequest: QueryType {
     let success: Bool = true
-    let dateUtc: LaunchQueryDateUTCRequestModel?
+    let dateUtc: LaunchQueryDateUTCRequest?
     enum CodingKeys: String, CodingKey {
         case success
         case dateUtc = "date_utc"
     }
 }
 
-struct LaunchQueryDateRequestModel: QueryType {
-    let dateUtc: LaunchQueryDateUTCRequestModel?
+struct LaunchQueryDateRequest: QueryType {
+    let dateUtc: LaunchQueryDateUTCRequest?
     enum CodingKeys: String, CodingKey {
         case dateUtc = "date_utc"
     }
 }
 
-struct LaunchQueryDateUTCRequestModel: Encodable {
+struct LaunchQueryDateUTCRequest: Encodable {
     let gte: String
     let lte: String
     enum CodingKeys: String, CodingKey {
@@ -34,11 +34,11 @@ struct LaunchQueryDateUTCRequestModel: Encodable {
     }
 }
 
-struct LaunchOptionRequestModel: Encodable {
-    let sort: LaunchSortRequestModel?
+struct LaunchOptionRequest: Encodable {
+    let sort: LaunchSortRequest?
     let page: Int?
     let limit: Int?
-    init(sort: LaunchSortRequestModel? = nil,
+    init(sort: LaunchSortRequest? = nil,
          page: Int? = nil,
          limit: Int? = nil) {
         self.sort = sort
@@ -47,7 +47,7 @@ struct LaunchOptionRequestModel: Encodable {
     }
 }
 
-struct LaunchSortRequestModel: Encodable {
+struct LaunchSortRequest: Encodable {
     enum LaunchSortType: String {
         case desc
         case asc
@@ -61,8 +61,8 @@ struct LaunchSortRequestModel: Encodable {
     }
 }
 
-struct LaunchResponseModel: Decodable {
-    let docs: [LaunchDocModel]?
+struct LaunchResponse: Decodable {
+    let docs: [LaunchDoc]?
     let hasNextPage: Bool?
     let hasPrevPage: Bool?
     let limit: Int?
@@ -89,22 +89,22 @@ struct LaunchResponseModel: Decodable {
     }
 }
 
-struct LaunchDocModel: Decodable {
+struct LaunchDoc: Decodable {
     let autoUpdate: Bool?
     let capsules: [String]?
-    let cores: [LaunchCoreModel]?
+    let cores: [LaunchCore]?
     let dateLocal: String?
     let datePrecision: String?
     let dateUnix: Int?
     let dateUtc: String?
     let details: String?
-    let failures: [LaunchFailureModel]?
-    let fairings: LaunchFairingModel?
+    let failures: [LaunchFailure]?
+    let fairings: LaunchFairing?
     let flightNumber: Int?
     let id: String?
     let launchLibraryId: String?
     let launchpad: String?
-    let links: LaunchLinkModel?
+    let links: LaunchLink?
     let name: String?
     let net: Bool?
     let payloads: [String]?
@@ -147,7 +147,7 @@ struct LaunchDocModel: Decodable {
     }
 }
 
-struct LaunchFailureModel: Decodable {
+struct LaunchFailure: Decodable {
     let time: Int?
     let altitude: Int?
     let reason: String?
@@ -159,12 +159,12 @@ struct LaunchFailureModel: Decodable {
     }
 }
 
-struct LaunchLinkModel: Decodable {
+struct LaunchLink: Decodable {
     let article: String?
-    let flickr: LaunchFlickrModel?
-    let patch: LaunchPatchModel?
+    let flickr: LaunchFlickr?
+    let patch: LaunchPatch?
     let presskit: String?
-    let reddit: LaunchRedditModel?
+    let reddit: LaunchReddit?
     let webcast: String?
     let wikipedia: String?
     let youtubeId: String?
@@ -181,7 +181,7 @@ struct LaunchLinkModel: Decodable {
     }
 }
 
-struct LaunchRedditModel: Decodable {
+struct LaunchReddit: Decodable {
     let campaign: String?
     let launch: String?
     let media: String?
@@ -195,7 +195,7 @@ struct LaunchRedditModel: Decodable {
     }
 }
 
-struct LaunchPatchModel: Decodable {
+struct LaunchPatch: Decodable {
     let large: String?
     let small: String?
 
@@ -205,7 +205,7 @@ struct LaunchPatchModel: Decodable {
     }
 }
 
-struct LaunchFlickrModel: Decodable {
+struct LaunchFlickr: Decodable {
     let original: [String]?
     let small: [String]?
 
@@ -215,7 +215,7 @@ struct LaunchFlickrModel: Decodable {
     }
 }
 
-struct LaunchFairingModel: Decodable {
+struct LaunchFairing: Decodable {
     let recovered: Bool?
     let recoveryAttempt: Bool?
     let reused: Bool?
@@ -229,7 +229,7 @@ struct LaunchFairingModel: Decodable {
     }
 }
 
-struct LaunchCoreModel: Decodable {
+struct LaunchCore: Decodable {
     let core: String?
     let flight: Int?
     let gridfins: Bool?

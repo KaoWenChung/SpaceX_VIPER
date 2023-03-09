@@ -6,7 +6,7 @@ import MultiSlider
 import UIKit
 
 protocol FilterDialogViewToPresenterProtocol: AnyObject {
-    func didConfirmFilter(_ model: FilterDialogModel)
+    func didConfirmFilter(_ model: FilterDialog)
     func didSelectSort()
 }
 
@@ -17,8 +17,8 @@ final class FilterDialogView: BaseXibView {
     @IBOutlet weak private(set) var sortButton: UIButton!
     @IBOutlet weak private(set) var showSuccessfulLaunchingSwitch: UISwitch!
     weak var presenter: FilterDialogViewToPresenterProtocol?
-    
-    private func fillView(_ model: FilterDialogModel) {
+
+    private func fillView(_ model: FilterDialog) {
         accessibilityIdentifier = AccessibilityIdentifier.filterDialogView
         let maxValue = CGFloat(model.staticMaxYear)
         let minValue = CGFloat(model.staticMinYear)
@@ -28,7 +28,7 @@ final class FilterDialogView: BaseXibView {
         sliderBar.minimumValue = minValue
         sliderBar.maximumValue = maxValue
         sliderBar.value = [CGFloat(lowValue), CGFloat(topValue)]
-        showSuccessfulLaunchingSwitch.isOn = model.isOnlySuccessfulLaunching
+        showSuccessfulLaunchingSwitch.isOn = model.isSuccessLaunchOnly
     }
     // MARK: - Private functions
     private func setMoney(lowYear: Int, topYear: Int) {
@@ -50,7 +50,7 @@ final class FilterDialogView: BaseXibView {
         }
         setMoney(lowYear: lowValue, topYear: topValue)
     }
-    
+
     @IBAction private func tapSortButton(_ sender: UIButton) {
         presenter?.didSelectSort()
     }
@@ -60,7 +60,7 @@ final class FilterDialogView: BaseXibView {
         let minValue = Int(sliderBar.minimumValue)
         let lowValue = Int(sliderBar.value.first ?? 0)
         let topValue = Int(sliderBar.value.last ?? 0)
-        let model = FilterDialogModel(isOnlySuccessfulLaunching: showSuccessfulLaunchingSwitch.isOn,
+        let model = FilterDialog(isSuccessLaunchOnly: showSuccessfulLaunchingSwitch.isOn,
                                       sorting: sortButton.title(for: .normal),
                                       staticMaxYear: maxValue,
                                       staticMinYear: minValue,
@@ -74,8 +74,8 @@ extension FilterDialogView: SpaceXPresenterToFilterViewProtocol {
     func updateSort(_ option: String) {
         sortButton.setTitle(option, for: .normal)
     }
-    
-    func updateFilterView(_ model: FilterDialogModel) {
+
+    func updateFilterView(_ model: FilterDialog) {
         DispatchQueue.main.async {
             self.fillView(model)
         }

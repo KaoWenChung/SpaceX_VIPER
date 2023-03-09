@@ -21,7 +21,7 @@ public protocol NetworkServiceType {
 
 public protocol NetworkSessionManagerType {
     typealias DataResponse = (Data, URLResponse)
-    
+
     func request(_ request: URLRequest) async throws -> DataResponse
 }
 
@@ -34,11 +34,11 @@ public protocol NetworkErrorLoggerType {
 // MARK: - Implementation
 
 public struct NetworkService {
-    
+
     private let config: NetworkConfigurableType
     private let sessionManager: NetworkSessionManagerType
     private let logger: NetworkErrorLoggerType
-    
+
     public init(config: NetworkConfigurableType,
                 sessionManager: NetworkSessionManagerType = NetworkSessionManager(),
                 logger: NetworkErrorLoggerType = NetworkErrorLogger()) {
@@ -46,7 +46,7 @@ public struct NetworkService {
         self.sessionManager = sessionManager
         self.logger = logger
     }
-    
+
     private func request(request: URLRequest) -> URLTask {
         let task = Task {
             do {
@@ -65,7 +65,7 @@ public struct NetworkService {
         }
         return task
     }
-    
+
     private func resolve(error: Error) -> NetworkError {
         let code = URLError.Code(rawValue: (error as NSError).code)
         switch code {
@@ -106,7 +106,9 @@ public final class NetworkErrorLogger: NetworkErrorLoggerType {
         print("request: \(request.url!)")
         print("headers: \(request.allHTTPHeaderFields!)")
         print("method: \(request.httpMethod!)")
-        if let httpBody = request.httpBody, let result = ((try? JSONSerialization.jsonObject(with: httpBody, options: []) as? [String: AnyObject]) as [String: AnyObject]??) {
+        if let httpBody = request.httpBody,
+            let result = ((try? JSONSerialization.jsonObject(with: httpBody,
+                                                             options: []) as? [String: AnyObject])) {
             printIfDebug("body: \(String(describing: result))")
         } else if let httpBody = request.httpBody, let resultString = String(data: httpBody, encoding: .utf8) {
             printIfDebug("body: \(String(describing: resultString))")

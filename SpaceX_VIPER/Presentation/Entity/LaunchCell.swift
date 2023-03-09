@@ -2,7 +2,7 @@
 //  Created by wyn on 2023/1/17.
 //
 
-struct LaunchCellModel {
+struct LaunchCell {
     private enum LaunchCellModelString: LocalizedStringType {
         case name
         case date
@@ -15,10 +15,10 @@ struct LaunchCellModel {
     let imageURL: String
     let days: String?
     let isSuccess: Bool?
-    
-    private(set) var rocket: String? = nil
-    
-    init(_ launchData: LaunchDocModel,
+
+    private(set) var rocket: String?
+
+    init(_ launchData: LaunchDoc,
          imageRepository: LaunchImageRepositoryType) {
         self.imageRepository = imageRepository
         name = String(format: LaunchCellModelString.name.text, launchData.name ?? "")
@@ -42,8 +42,8 @@ struct LaunchCellModel {
         imageURL = launchData.links?.patch?.small ?? ""
         isSuccess = launchData.success
     }
-    
-    mutating func updateRocket(_ rocket: RocketResponseModel?) {
+
+    mutating func updateRocket(_ rocket: RocketResponse?) {
         if let name = rocket?.name, let type = rocket?.type {
             self.rocket = "\(name)/ \(type)"
         }

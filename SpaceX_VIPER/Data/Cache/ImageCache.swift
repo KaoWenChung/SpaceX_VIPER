@@ -22,7 +22,7 @@ final class ImageCache {
             cache.totalCostLimit = config.memoryLimit
             return cache
         }()
-    
+
     private let config: Config
 
         struct Config {

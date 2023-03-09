@@ -10,7 +10,7 @@ protocol SpaceXViewToPresenterProtocol: FilterDialogViewToPresenterProtocol {
     func loadLaunches()
     func selectItem(at index: Int)
     func getLaunchesCount() -> Int
-    func getLaunch(index: Int) -> LaunchCellModel
+    func getLaunch(index: Int) -> LaunchCell
     func getSortOptions() -> [AlertAction.Button]
     func didSetSort(_ option: String)
 }
