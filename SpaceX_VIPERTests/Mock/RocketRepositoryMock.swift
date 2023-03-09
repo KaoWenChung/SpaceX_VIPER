@@ -8,7 +8,7 @@
 import Foundation
 @testable import SpaceX_VIPER
 
-class RocketRepositoryMock: RocketRepositoryType {
+final class RocketRepositoryMock: RocketRepositoryType {
     let error: Error?
     let response: RocketResponse?
     init(error: Error?,

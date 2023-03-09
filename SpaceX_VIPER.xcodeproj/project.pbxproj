@@ -39,6 +39,10 @@
 		215B02B9297EF723008BF333 /* CommonString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215B02B8297EF723008BF333 /* CommonString.swift */; };
 		215B02BB297EF732008BF333 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 215B02BA297EF732008BF333 /* Localizable.strings */; };
 		21A7D0C529B14B81003C224E /* DateExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A7D0C429B14B81003C224E /* DateExtensionTests.swift */; };
+		21B03DCB29BA399900C58190 /* SpaceXViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B03DCA29BA399900C58190 /* SpaceXViewMock.swift */; };
+		21B03DCD29BA39DC00C58190 /* SpaceXInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B03DCC29BA39DC00C58190 /* SpaceXInteractorMock.swift */; };
+		21B03DCF29BA39F900C58190 /* FilterViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B03DCE29BA39F900C58190 /* FilterViewMock.swift */; };
+		21B03DD129BA3A5600C58190 /* LaunchCell+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B03DD029BA3A5600C58190 /* LaunchCell+Stub.swift */; };
 		21B9E73429B943350062D7F9 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B9E73329B943350062D7F9 /* UITableView+.swift */; };
 		21C57D2429AFB94300C6F158 /* LocalizedStringTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C57D2329AFB94300C6F158 /* LocalizedStringTypeTests.swift */; };
 		21CFC4652976E8D600A2C183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4642976E8D600A2C183 /* AppDelegate.swift */; };
@@ -117,6 +121,10 @@
 		215B02B8297EF723008BF333 /* CommonString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonString.swift; sourceTree = "<group>"; };
 		215B02BA297EF732008BF333 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		21A7D0C429B14B81003C224E /* DateExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionTests.swift; sourceTree = "<group>"; };
+		21B03DCA29BA399900C58190 /* SpaceXViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXViewMock.swift; sourceTree = "<group>"; };
+		21B03DCC29BA39DC00C58190 /* SpaceXInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXInteractorMock.swift; sourceTree = "<group>"; };
+		21B03DCE29BA39F900C58190 /* FilterViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewMock.swift; sourceTree = "<group>"; };
+		21B03DD029BA3A5600C58190 /* LaunchCell+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LaunchCell+Stub.swift"; sourceTree = "<group>"; };
 		21B9E73329B943350062D7F9 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
 		21C57D2329AFB94300C6F158 /* LocalizedStringTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringTypeTests.swift; sourceTree = "<group>"; };
 		21CFC4612976E8D600A2C183 /* SpaceX_VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX_VIPER.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -454,6 +462,7 @@
 			isa = PBXGroup;
 			children = (
 				21D1B64529B79FFF00DBBC59 /* LaunchResponseModel+Stub.swift */,
+				21B03DD029BA3A5600C58190 /* LaunchCell+Stub.swift */,
 			);
 			path = "Mock+Stub";
 			sourceTree = "<group>";
@@ -465,6 +474,9 @@
 				21D1B64C29B7A24900DBBC59 /* RocketRepositoryMock.swift */,
 				21D1B64A29B7A22400DBBC59 /* LaunchRepositoryMock.swift */,
 				21D1B64E29B7A39300DBBC59 /* SpaceXPresenterMock.swift */,
+				21B03DCA29BA399900C58190 /* SpaceXViewMock.swift */,
+				21B03DCC29BA39DC00C58190 /* SpaceXInteractorMock.swift */,
+				21B03DCE29BA39F900C58190 /* FilterViewMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -737,19 +749,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21B03DD129BA3A5600C58190 /* LaunchCell+Stub.swift in Sources */,
 				21D1B64B29B7A22400DBBC59 /* LaunchRepositoryMock.swift in Sources */,
 				21D1B64929B7A1FE00DBBC59 /* LaunchImageRepositoryMock.swift in Sources */,
 				21D1B64D29B7A24900DBBC59 /* RocketRepositoryMock.swift in Sources */,
 				21D5F6E729B5504D005C5D9F /* SpaceXInteractorTests.swift in Sources */,
 				21C57D2429AFB94300C6F158 /* LocalizedStringTypeTests.swift in Sources */,
 				21E039EB2976FE0600C4E292 /* NetworkConfigurableMock.swift in Sources */,
+				21B03DCB29BA399900C58190 /* SpaceXViewMock.swift in Sources */,
 				21D5F6E329B55010005C5D9F /* SpaceXPresenterTests.swift in Sources */,
 				21E039E72976FD6C00C4E292 /* ImageRepositoryMock.swift in Sources */,
 				21D1B64629B79FFF00DBBC59 /* LaunchResponseModel+Stub.swift in Sources */,
+				21B03DCF29BA39F900C58190 /* FilterViewMock.swift in Sources */,
 				21A7D0C529B14B81003C224E /* DateExtensionTests.swift in Sources */,
 				21D1B64F29B7A39300DBBC59 /* SpaceXPresenterMock.swift in Sources */,
 				21E039ED2976FE1A00C4E292 /* NetworkServiceTests.swift in Sources */,
 				2105BB5D29B2511F00D4E924 /* IntExtensionTests.swift in Sources */,
+				21B03DCD29BA39DC00C58190 /* SpaceXInteractorMock.swift in Sources */,
 				21E039EF2976FE3500C4E292 /* DataTransferServiceTests.swift in Sources */,
 				2105BB5F29B2532D00D4E924 /* UITableViewCellTests.swift in Sources */,
 				21E039E92976FDEC00C4E292 /* NetworkSessionManagerMock.swift in Sources */,

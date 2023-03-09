@@ -88,7 +88,7 @@ final class SpaceXInteractorTests: XCTestCase {
         interactor.presenter = presenter
         // when
         XCTAssertEqual(presenter.isSetFilter, false)
-        await interactor.didConfirmFilter(FilterDialog(isOnlySuccessfulLaunching: false,
+        await interactor.didConfirmFilter(FilterDialog(isSuccessLaunchOnly: false,
                                                        sorting: "Ascending",
                                                        staticMaxYear: 2010,
                                                        staticMinYear: 2000,

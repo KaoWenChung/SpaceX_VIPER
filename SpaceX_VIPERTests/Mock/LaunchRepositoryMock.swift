@@ -8,7 +8,7 @@
 import Foundation
 @testable import SpaceX_VIPER
 
-class LaunchRepositoryMock: LaunchListRepositoryType {
+final class LaunchRepositoryMock: LaunchListRepositoryType {
     let error: Error?
     let response: LaunchResponse?
     init(error: Error?,

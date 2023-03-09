@@ -8,7 +8,7 @@
 @testable import SpaceX_VIPER
 import UIKit
 
-class LaunchImageRepositoryMock: LaunchImageRepositoryType {
+final class LaunchImageRepositoryMock: LaunchImageRepositoryType {
     let error: Error?
     let response: UIImage?
     init(error: Error? = nil,

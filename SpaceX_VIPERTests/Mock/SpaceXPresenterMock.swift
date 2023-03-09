@@ -8,7 +8,7 @@
 import XCTest
 @testable import SpaceX_VIPER
 
-class SpaceXPresenterMock: SpaceXListInteractorToPresenterProtocol {
+final class SpaceXPresenterMock: SpaceXListInteractorToPresenterProtocol {
     var error: Error?
     var loadLaunchesExpectation: XCTestExpectation?
     var loadLaunchesFailedExpectation: XCTestExpectation?
