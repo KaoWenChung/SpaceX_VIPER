@@ -19,11 +19,25 @@ final class SpaceXPresenterTests: XCTestCase {
         let presenter = SpaceXPresenter(interactor: interactor, router: SpaceXRouterMock())
         let view = SpaceXViewMock()
         presenter.mainView = view
-        
+
         // when
         presenter.didLoadLaunches()
-        
+
         // then
         XCTAssertEqual(view.isShowLaunching, true)
+    }
+
+    func testPresenterShowsError_whenLoadingLaunchesFails() {
+        // given
+        let interactor = MockSpaceXInteractor(launches: [LaunchCell.stub()], sortOptions: [])
+        let presenter = SpaceXPresenter(interactor: interactor, router: SpaceXRouterMock())
+        let view = SpaceXViewMock()
+        presenter.mainView = view
+
+        // when
+        presenter.didLoadLaunchesFailed(ErrorMock.someError)
+
+        // then
+        XCTAssertEqual(view.isError, true)
     }
 }

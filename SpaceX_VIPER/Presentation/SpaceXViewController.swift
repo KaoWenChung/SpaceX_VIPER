@@ -182,8 +182,11 @@ extension SpaceXViewController: SpaceXPresenterToViewProtocol {
         }
     }
 
-    func showError(_ error: String) {
-        showAlert(style: .alert, title: CommonString.error.text, message: error, cancel: CommonString.confirm.text)
+    func showError(_ error: Error) {
+        showAlert(style: .alert,
+                  title: CommonString.error.text,
+                  message: error.localizedDescription,
+                  cancel: CommonString.confirm.text)
     }
 
     func didConfirmFilter() {

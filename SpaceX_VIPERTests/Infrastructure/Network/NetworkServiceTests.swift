@@ -34,10 +34,6 @@ final class NetworkServiceTests: XCTestCase {
         func log(error: Error) { loggedErrors.append(error) }
     }
 
-    private enum NetworkErrorMock: Error {
-        case someError
-    }
-
     func test_whenMockDataPassed_shouldReturnProperResponse() async {
         // given
         let config = NetworkConfigurableMock()
@@ -99,7 +95,7 @@ final class NetworkServiceTests: XCTestCase {
         let sut = NetworkService(config: config, sessionManager:
                                     NetworkSessionManagerMock(response: response,
                                                               data: data,
-                                                              error: NetworkErrorMock.someError,
+                                                              error: ErrorMock.someError,
                                                               expectation: nil))
         // when
         do {

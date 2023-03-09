@@ -9,16 +9,22 @@
 
 final class SpaceXViewMock: SpaceXPresenterToViewProtocol {
     private(set) var isShowLaunching: Bool = false
+    private(set) var isConfirmFilter: Bool = false
+    private(set) var isSelectSort: Bool = false
+    private(set) var isError: Bool = false
     func showLaunches() {
         isShowLaunching = true
     }
 
     func didConfirmFilter() {
+        isConfirmFilter = true
     }
 
     func didSelectSort() {
+        isSelectSort = true
     }
 
-    func showError(_ error: String) {
+    func showError(_ error: Error) {
+        isError = true
     }
 }

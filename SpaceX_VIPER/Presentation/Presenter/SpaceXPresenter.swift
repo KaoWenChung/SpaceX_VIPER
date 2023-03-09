@@ -6,7 +6,7 @@ protocol SpaceXPresenterToViewProtocol: AnyObject {
     func showLaunches()
     func didConfirmFilter()
     func didSelectSort()
-    func showError(_ error: String)
+    func showError(_ error: Error)
 }
 
 protocol SpaceXPresenterToFilterViewProtocol: AnyObject {
@@ -72,7 +72,7 @@ extension SpaceXPresenter: SpaceXListInteractorToPresenterProtocol {
     }
 
     func didLoadLaunchesFailed(_ error: Error) {
-        mainView?.showError(error.localizedDescription)
+        mainView?.showError(error)
     }
 
     func didSetFilterModel(_ model: FilterDialog) {
