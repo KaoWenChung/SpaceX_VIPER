@@ -40,4 +40,22 @@ final class SpaceXPresenterTests: XCTestCase {
         // then
         XCTAssertEqual(view.isError, true)
     }
+
+    func testPresenterDidSetFilter_updateFilterView() {
+        // given
+        let interactor = MockSpaceXInteractor(launches: [LaunchCell.stub()], sortOptions: [])
+        let presenter = SpaceXPresenter(interactor: interactor, router: SpaceXRouterMock())
+        let filterView = FilterViewMock()
+        presenter.filterView = filterView
+
+        // when
+        presenter.didSetFilterModel(FilterDialog.stub())
+
+        // then
+        XCTAssertEqual(filterView.model?.isSuccessLaunchOnly, false)
+        XCTAssertEqual(filterView.model?.staticMaxYear, 2020)
+        XCTAssertEqual(filterView.model?.staticMinYear, 2000)
+        XCTAssertEqual(filterView.model?.maxYear, 2020)
+        XCTAssertEqual(filterView.model?.minYear, 2000)
+    }
 }

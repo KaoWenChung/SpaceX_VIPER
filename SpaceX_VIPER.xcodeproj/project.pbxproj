@@ -65,6 +65,7 @@
 		21CFC49F2976EC5200A2C183 /* RepositoryTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC49E2976EC5200A2C183 /* RepositoryTask.swift */; };
 		21CFC4A42976EC8600A2C183 /* LaunchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4A32976EC8600A2C183 /* LaunchModel.swift */; };
 		21CFC4A62976ECBA00A2C183 /* RocketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CFC4A52976ECBA00A2C183 /* RocketModel.swift */; };
+		21D022B829BB717C0003D4F3 /* FilterDialog+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D022B729BB717C0003D4F3 /* FilterDialog+Stub.swift */; };
 		21D1B64629B79FFF00DBBC59 /* LaunchResponseModel+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D1B64529B79FFF00DBBC59 /* LaunchResponseModel+Stub.swift */; };
 		21D1B64929B7A1FE00DBBC59 /* LaunchImageRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D1B64829B7A1FE00DBBC59 /* LaunchImageRepositoryMock.swift */; };
 		21D1B64B29B7A22400DBBC59 /* LaunchRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D1B64A29B7A22400DBBC59 /* LaunchRepositoryMock.swift */; };
@@ -150,6 +151,7 @@
 		21CFC49E2976EC5200A2C183 /* RepositoryTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTask.swift; sourceTree = "<group>"; };
 		21CFC4A32976EC8600A2C183 /* LaunchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchModel.swift; sourceTree = "<group>"; };
 		21CFC4A52976ECBA00A2C183 /* RocketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketModel.swift; sourceTree = "<group>"; };
+		21D022B729BB717C0003D4F3 /* FilterDialog+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilterDialog+Stub.swift"; sourceTree = "<group>"; };
 		21D1B64529B79FFF00DBBC59 /* LaunchResponseModel+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LaunchResponseModel+Stub.swift"; sourceTree = "<group>"; };
 		21D1B64829B7A1FE00DBBC59 /* LaunchImageRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchImageRepositoryMock.swift; sourceTree = "<group>"; };
 		21D1B64A29B7A22400DBBC59 /* LaunchRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRepositoryMock.swift; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 			children = (
 				21D1B64529B79FFF00DBBC59 /* LaunchResponseModel+Stub.swift */,
 				21B03DD029BA3A5600C58190 /* LaunchCell+Stub.swift */,
+				21D022B729BB717C0003D4F3 /* FilterDialog+Stub.swift */,
 			);
 			path = "Mock+Stub";
 			sourceTree = "<group>";
@@ -763,6 +766,7 @@
 				21B03DCB29BA399900C58190 /* SpaceXViewMock.swift in Sources */,
 				21D5F6E329B55010005C5D9F /* SpaceXPresenterTests.swift in Sources */,
 				21E039E72976FD6C00C4E292 /* ImageRepositoryMock.swift in Sources */,
+				21D022B829BB717C0003D4F3 /* FilterDialog+Stub.swift in Sources */,
 				21D1B64629B79FFF00DBBC59 /* LaunchResponseModel+Stub.swift in Sources */,
 				21B03DCF29BA39F900C58190 /* FilterViewMock.swift in Sources */,
 				21A7D0C529B14B81003C224E /* DateExtensionTests.swift in Sources */,
