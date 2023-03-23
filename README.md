@@ -1,6 +1,6 @@
 # SpaceX_VIPER
 * With a third library MultiSlider (Swift Package Manager) using for filter dialog view (filter years)
-
+![Screen Shot](Resources/ScreenShot.png)
 ## Requirements
 - iOS 13.5+.
 
