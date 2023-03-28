@@ -15,11 +15,7 @@ final class NetworkServiceTests: XCTestCase {
         var isFullPath: Bool = false
         var method: HTTPMethod
         var headerParameters: [String: String] = [:]
-        var queryParametersEncodable: Encodable?
-        var queryParameters: [String: Any] = [:]
         var bodyParametersEncodable: Encodable?
-        var bodyParameters: [String: Any] = [:]
-        var bodyEncoding: BodyEncoding = .stringEncodingAscii
 
         init(path: String, method: HTTPMethod) {
             self.path = path
